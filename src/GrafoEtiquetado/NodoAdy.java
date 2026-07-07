@@ -5,6 +5,7 @@ public class NodoAdy {
     // atributos
     private NodoVert vertice;
     private NodoAdy sigAdyacente;
+    private Object etiqueta;
 
     public NodoAdy(NodoVert vert, NodoAdy ady){
         this.vertice = vert;
@@ -25,5 +26,13 @@ public class NodoAdy {
 
     public void setSigAdyacente(NodoAdy ady){
         this.sigAdyacente = ady;
+    }
+
+    public Object getEtiqueta(){
+        return this.etiqueta;
+    }
+
+    public void setEtiqueta(Object nuevaEtiqueta){
+        this.etiqueta = nuevaEtiqueta;
     }
 }
