@@ -7,9 +7,10 @@ public class NodoAdy {
     private NodoAdy sigAdyacente;
     private Object etiqueta;
 
-    public NodoAdy(NodoVert vert, NodoAdy ady){
+    public NodoAdy(NodoVert vert, NodoAdy ady, Object etiq){
         this.vertice = vert;
         this.sigAdyacente = ady;
+        this.etiqueta = etiq;
     }
 
     public NodoVert getVertice(){
