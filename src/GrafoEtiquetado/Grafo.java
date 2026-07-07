@@ -23,8 +23,10 @@ public class Grafo {
         NodoVert aux = this.ubicarVertice(nuevoVertice);
         if (aux == null) {
             // si no esta repetido lo inserta
-            this.inicio = new NodoVert(nuevoVertice, aux, null); // no conozco como se unen asique null
+            this.inicio = new NodoVert(nuevoVertice, this.inicio, null); // no conozco como se unen asique null
+            exito = true;
         }
+
 
         return exito;
     }
@@ -49,6 +51,7 @@ public class Grafo {
             NodoAdy nuevoArco = new NodoAdy(destinoVertice, null, etiqueta); // creo el arco
             NodoAdy ultimo = ubicarEtiqueta(etiqueta, origenVertice); //busco el ultimo arco del origen
             ultimo.setSigAdyacente(nuevoArco);  //al ultimo arco lo enlazo con el nuevo arco
+            exito = true;
 
         }
         return exito;
