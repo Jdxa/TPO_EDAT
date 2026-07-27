@@ -1,4 +1,7 @@
 package GrafoEtiquetado;
+
+import EstructurasAux.lineales.Lista;
+
 public class Grafo {
     
     // atributos
@@ -26,8 +29,6 @@ public class Grafo {
             this.inicio = new NodoVert(nuevoVertice, this.inicio, null); // no conozco como se unen asique null
             exito = true;
         }
-
-
         return exito;
     }
     
@@ -56,5 +57,90 @@ public class Grafo {
         }
         return exito;
     }
+    public boolean eliminarArco(Object origen, Object destino){
+        boolean exito = false;
+        NodoVert origenVertice = ubicarVertice(origen);   //busco el vertice origen
+        NodoVert destinoVertice = ubicarVertice(destino);  //busco el vertice destino
+        if (origenVertice != null && destinoVertice != null) {  //busco que existan los vertices
+            NodoAdy aux = origenVertice.getPrimerAdy();  //busco el primer arco del vertice origen
+            NodoAdy anterior = null;
+            while (aux != null && !exito) {     //corta cuando encuentra el arco o cuando no hay mas arcos
+                if (aux.getVertice().getElem().equals(destino)) {
+                    if (anterior == null) {
+                        origenVertice.setPrimerAdy(aux.getSigAdyacente());
+                    } else {
+                        anterior.setSigAdyacente(aux.getSigAdyacente());
+                    }
+                    exito = true;
+                }
+                anterior = aux;
+                aux = aux.getSigAdyacente();
+            }
+        }
+        return exito;
+    }
+    public boolean existeArco(Object origen, Object destino){
+        boolean exito = false;
+        NodoVert origenVertice = ubicarVertice(origen);   //busco el vertice origen
+        NodoVert destinoVertice = ubicarVertice(destino);  //busco el vertice destino
+        if (origenVertice != null && destinoVertice != null) {  //busco que existan los vertices
+            NodoAdy aux = origenVertice.getPrimerAdy();  //busco el primer arco del vertice origen
+            while (aux != null && !exito) {     //corta cuando encuentra el arco o cuando no hay mas arcos
+                if (aux.getVertice().getElem().equals(destino)) {
+                    exito = true;
+                }
+                aux = aux.getSigAdyacente();
+            }
+        }
+        return exito;
+    }
 
+    public boolean existeVertice(Object buscado){
+        boolean exito = false;
+        NodoVert aux = this.inicio;
+        while (aux != null && !exito) {
+            if (aux.getElem().equals(buscado)) {
+                exito = true;
+            }
+            aux = aux.getSigVertice();
+        }
+        return exito;
+    }
+    public boolean existeCamino(Object origen, Object destino){
+        boolean exito = false;
+        NodoVert auxO = null;
+        NodoVert auxD = null;
+        NodoVert aux = this.inicio;
+        while ((auxO == null || auxD == null)&& aux != null) {
+            if (aux.getElem().equals(origen)) auxO = aux;
+            if (aux.getElem().equals(destino)) auxD = aux;
+            aux = aux.getSigVertice();
+        }
+        if (auxO != null && auxD != null) {
+            Lista visitados = new Lista();
+            exito = existeCaminoAux(auxO, destino, visitados);
+        }
+
+        return exito;
+    }
+
+    private boolean existeCaminoAux(NodoVert n, Object dest, Lista vis){
+        boolean exito = false;
+        if (n != null) {
+            if (n.getElem().equals(dest)) {
+                exito = true;
+            }else{
+                vis.insertar(n.getElem(), vis.longitud()+1);
+                NodoAdy ady = n.getPrimerAdy();
+                while (!exito && ady != null) {
+                    if (vis.localizar(ady.getVertice().getElem()) < 0) {
+                        exito = existeCaminoAux(ady.getVertice(), dest, vis);
+                    }
+                    ady = ady.getSigAdyacente();
+                }
+
+            }
+        }
+        return exito;
+    }
 }
