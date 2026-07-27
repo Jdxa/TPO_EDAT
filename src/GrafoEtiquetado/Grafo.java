@@ -57,6 +57,35 @@ public class Grafo {
         }
         return exito;
     }
+    //eliminarVertice
+    public boolean eliminarVertice(Object vertice ){
+        boolean exito = false;
+        NodoVert anterior = null;
+        NodoVert aux = this.inicio;
+        while (aux != null && !aux.getElem().equals(vertice)) {
+            anterior = aux;
+            aux = aux.getSigVertice();
+        }
+        if (aux != null) {
+            // elimino arcos q vayan a aux
+            NodoVert v = this.inicio;
+            while (v != null) {
+                if (v != aux) {
+                    this.eliminarArco(v.getElem(), aux.getElem());
+                }
+                v = v.getSigVertice();
+            }   
+            //desenlaza aux de la lista de vertices
+            if (anterior == null) {
+                this.inicio = aux.getSigVertice();
+            }else{
+                anterior.setSigVertice(aux.getSigVertice());
+            }
+            exito = true;
+        }
+
+        return exito;
+    }
     public boolean eliminarArco(Object origen, Object destino){
         boolean exito = false;
         NodoVert origenVertice = ubicarVertice(origen);   //busco el vertice origen
@@ -79,6 +108,19 @@ public class Grafo {
         }
         return exito;
     }
+
+    public boolean existeVertice(Object buscado){
+        boolean exito = false;
+        NodoVert aux = this.inicio;
+        while (aux != null && !exito) {
+            if (aux.getElem().equals(buscado)) {
+                exito = true;
+            }
+            aux = aux.getSigVertice();
+        }
+        return exito;
+    }
+
     public boolean existeArco(Object origen, Object destino){
         boolean exito = false;
         NodoVert origenVertice = ubicarVertice(origen);   //busco el vertice origen
@@ -95,17 +137,7 @@ public class Grafo {
         return exito;
     }
 
-    public boolean existeVertice(Object buscado){
-        boolean exito = false;
-        NodoVert aux = this.inicio;
-        while (aux != null && !exito) {
-            if (aux.getElem().equals(buscado)) {
-                exito = true;
-            }
-            aux = aux.getSigVertice();
-        }
-        return exito;
-    }
+    
     public boolean existeCamino(Object origen, Object destino){
         boolean exito = false;
         NodoVert auxO = null;
