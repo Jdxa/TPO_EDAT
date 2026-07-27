@@ -175,4 +175,17 @@ public class Grafo {
         }
         return exito;
     }
+    /*
+    caminoMasCorto
+    caminoMasLargo
+    listarEnProfundidad
+    listarEnAnchura
+    esVacio                 X 
+    clone
+    */
+   public boolean esVacio(){
+        boolean exito= false;
+        if (this.inicio == null) exito = true;
+        return exito;
+   }
 }
