@@ -1,4 +1,4 @@
-package GrafoEtiquetado;
+package Estructuras.GrafoEtiquetado;
 public class NodoVert {
     
     // atributos

@@ -1,4 +1,4 @@
-package EstructurasAux.lineales;
+package Estructuras.EstructurasAux;
 public class Nodo {
         /************* Autores ***********
     Joaquin Aguilera, Legajo FAI-4550

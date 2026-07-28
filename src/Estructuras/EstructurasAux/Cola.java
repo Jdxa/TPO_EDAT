@@ -1,4 +1,4 @@
-package EstructurasAux.lineales;
+package Estructuras.EstructurasAux;
 
 public class Cola {
         /************* Autores ***********

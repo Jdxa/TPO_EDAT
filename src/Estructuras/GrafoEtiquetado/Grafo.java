@@ -1,7 +1,7 @@
-package GrafoEtiquetado;
+package Estructuras.GrafoEtiquetado;
 
-import EstructurasAux.lineales.Cola;
-import EstructurasAux.lineales.Lista;
+import Estructuras.EstructurasAux.Cola;
+import Estructuras.EstructurasAux.Lista;
 
 public class Grafo {
     
