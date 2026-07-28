@@ -1,5 +1,6 @@
 package GrafoEtiquetado;
 
+import EstructurasAux.lineales.Cola;
 import EstructurasAux.lineales.Lista;
 
 public class Grafo {
@@ -175,17 +176,174 @@ public class Grafo {
         }
         return exito;
     }
-    /*
-    caminoMasCorto
-    caminoMasLargo
-    listarEnProfundidad
-    listarEnAnchura
-    esVacio                 X 
-    clone
-    */
+
    public boolean esVacio(){
         boolean exito= false;
         if (this.inicio == null) exito = true;
         return exito;
    }
+   public Lista caminoMasCorto(Object origen, Object destino) {
+        Lista caminoCorto = new Lista();
+        NodoVert nodoO = ubicarVertice(origen);
+        NodoVert nodoD = ubicarVertice(destino);
+        
+        if (nodoO != null && nodoD != null) {
+            Lista actual = new Lista();
+            caminoCorto = caminoMasCortoAux(nodoO, destino, actual, caminoCorto);
+        }
+        return caminoCorto;
+    }
+
+    private Lista caminoMasCortoAux(NodoVert n, Object dest, Lista actual, Lista menor) {
+        actual.insertar(n.getElem(), actual.longitud() + 1); 
+        
+        if (n.getElem().equals(dest)) {
+            if (menor.esVacia() || actual.longitud() < menor.longitud()) {
+                menor = actual.clone();
+            }
+        } else {
+            NodoAdy ady = n.getPrimerAdy();
+            while (ady != null) {
+                // Si el vértice no está en la lista actual (localizar retorna -1)
+                if (actual.localizar(ady.getVertice().getElem()) < 0) {
+                    // Poda: solo sigo buscando si el camino actual es menor que el más corto encontrado
+                    if (menor.esVacia() || actual.longitud() < menor.longitud()) {
+                        menor = caminoMasCortoAux(ady.getVertice(), dest, actual, menor);
+                    }
+                }
+                ady = ady.getSigAdyacente();
+            }
+        }
+        // Backtracking: saco el último nodo insertado
+        actual.eliminar(actual.longitud()); 
+        return menor;
+    }
+
+    public Lista caminoMasLargo(Object origen, Object destino) {
+        Lista caminoLargo = new Lista();
+        NodoVert nodoO = ubicarVertice(origen);
+        NodoVert nodoD = ubicarVertice(destino);
+        
+        if (nodoO != null && nodoD != null) {
+            Lista actual = new Lista();
+            caminoLargo = caminoMasLargoAux(nodoO, destino, actual, caminoLargo);
+        }
+        return caminoLargo;
+    }
+
+    private Lista caminoMasLargoAux(NodoVert n, Object dest, Lista actual, Lista mayor) {
+        actual.insertar(n.getElem(), actual.longitud() + 1);
+        
+        if (n.getElem().equals(dest)) {
+            if (mayor.esVacia() || actual.longitud() > mayor.longitud()) {
+                mayor = actual.clone();
+            }
+        } else {
+            NodoAdy ady = n.getPrimerAdy();
+            while (ady != null) {
+                if (actual.localizar(ady.getVertice().getElem()) < 0) {
+                    mayor = caminoMasLargoAux(ady.getVertice(), dest, actual, mayor);
+                }
+                ady = ady.getSigAdyacente();
+            }
+        }
+        actual.eliminar(actual.longitud());
+        return mayor;
+    }
+
+    public Lista listarEnProfundidad() {
+        Lista visitados = new Lista();
+        NodoVert aux = this.inicio;
+        while (aux != null) {
+            if (visitados.localizar(aux.getElem()) < 0) {
+                listarEnProfundidadAux(aux, visitados);
+            }
+            aux = aux.getSigVertice();
+        }
+        return visitados;
+    }
+
+    private void listarEnProfundidadAux(NodoVert n, Lista visitados) {
+        if (n != null) {
+            visitados.insertar(n.getElem(), visitados.longitud() + 1);
+            NodoAdy ady = n.getPrimerAdy();
+            while (ady != null) {
+                if (visitados.localizar(ady.getVertice().getElem()) < 0) {
+                    listarEnProfundidadAux(ady.getVertice(), visitados);
+                }
+                ady = ady.getSigAdyacente();
+            }
+        }
+    }
+
+    public Lista listarEnAnchura() {
+        Lista visitados = new Lista();
+        NodoVert aux = this.inicio;
+        while (aux != null) {
+            if (visitados.localizar(aux.getElem()) < 0) {
+                anchuraDesde(aux, visitados);
+            }
+            aux = aux.getSigVertice();
+        }
+        return visitados;
+    }
+
+    private void anchuraDesde(NodoVert n, Lista visitados) {
+        Cola q = new Cola();
+        visitados.insertar(n.getElem(), visitados.longitud() + 1);
+        q.poner(n);
+        
+        while (!q.esVacia()) {
+            NodoVert u = (NodoVert) q.obtenerFrente();
+            q.sacar();
+            NodoAdy ady = u.getPrimerAdy();
+            while (ady != null) {
+                if (visitados.localizar(ady.getVertice().getElem()) < 0) {
+                    visitados.insertar(ady.getVertice().getElem(), visitados.longitud() + 1);
+                    q.poner(ady.getVertice());
+                }
+                ady = ady.getSigAdyacente();
+            }
+        }
+    }
+
+    public Grafo clone() {
+        Grafo clon = new Grafo();
+        if (this.inicio != null) {
+            // 1. Clonar todos los vértices primero manteniendo el orden
+            clon.inicio = new NodoVert(this.inicio.getElem(), null, null);
+            NodoVert aux = this.inicio.getSigVertice();
+            NodoVert auxClon = clon.inicio;
+            
+            while (aux != null) {
+                auxClon.setSigVertice(new NodoVert(aux.getElem(), null, null));
+                auxClon = auxClon.getSigVertice();
+                aux = aux.getSigVertice();
+            }
+            
+            // 2. Clonar todos los arcos
+            aux = this.inicio;
+            auxClon = clon.inicio;
+            while (aux != null) {
+                NodoAdy ady = aux.getPrimerAdy();
+                if (ady != null) {
+                    NodoVert destinoClon = clon.ubicarVertice(ady.getVertice().getElem());
+                    auxClon.setPrimerAdy(new NodoAdy(destinoClon, null, ady.getEtiqueta()));
+                    
+                    NodoAdy adyClon = auxClon.getPrimerAdy();
+                    ady = ady.getSigAdyacente();
+                    
+                    while (ady != null) {
+                        destinoClon = clon.ubicarVertice(ady.getVertice().getElem());
+                        adyClon.setSigAdyacente(new NodoAdy(destinoClon, null, ady.getEtiqueta()));
+                        adyClon = adyClon.getSigAdyacente();
+                        ady = ady.getSigAdyacente();
+                    }
+                }
+                aux = aux.getSigVertice();
+                auxClon = auxClon.getSigVertice();
+            }
+        }
+        return clon;
+    }
 }
