@@ -9,7 +9,7 @@ public class Grafo {
     private NodoVert inicio = null;
     public Grafo(){
         this.inicio = null;
-    }        
+    }
     
 
     private NodoVert ubicarVertice(Object buscado){

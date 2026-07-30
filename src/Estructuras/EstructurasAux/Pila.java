@@ -3,8 +3,7 @@ public class Pila {
         /************* Autores ***********
     Joaquin Aguilera, Legajo FAI-4550
     Lucas Peroni, Legajo FAI-5499
-    Miguel Mudarra Sucre, Legajo FAI-5172
-    Santiago Lencina, Legajo FAI-5789
+   
 */
     private Nodo tope;
 
