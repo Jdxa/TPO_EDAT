@@ -1,15 +1,26 @@
 package Menu;
+import java.util.HashMap;
 import java.util.Scanner;
+
+import Estructuras.GrafoEtiquetado.Grafo;
+import Estructuras.TablaAVL.ArbolAVL;
+import Modelo.Equipo;
 
 public class main {
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
         int numMenu,numMenuHabitacion,numMenuDesafio;
+        Grafo planoCasa= new Grafo();
+        ArbolAVL habitaciones=new ArbolAVL();
+        HashMap<String, Equipo> equipo = new HashMap<>();
+
         
         do {
             mostrarMenu();
 			numMenu=sc.nextInt();
             numMenu=scanner.nextInt();
+
 
             switch (numMenu) {
                 case 1:
@@ -43,8 +54,7 @@ public class main {
                             System.out.println("-> Ejecutando: sinPasarPor...");
                             break;
                         default:
-                            System.out.println("Opción de habitación no válida.");
-                            break;
+                            System.out.println("Opción de habitación no válida.");break;
                     }
                     break;
                     
@@ -108,7 +118,7 @@ public class main {
                     System.out.println("3. verificarDesafíoResuelto");
                     System.out.println("4. mostrarDesafíosTipo");
                     System.out.print("Introduce un número para elegir una consulta: ");
-        }   
+        }
     }
 
 
