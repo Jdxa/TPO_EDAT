@@ -346,4 +346,20 @@ public class Grafo {
         }
         return clon;
     }
+    public Lista listarAdyacentes(Object elem){
+        NodoVert nodoVert = ubicarVertice(elem);
+        Lista adyacentes = new Lista(); 
+        if (nodoVert != null) {
+            NodoAdy nodoAdy = nodoVert.getPrimerAdy();
+            while (nodoAdy != null) {
+                adyacentes.insertar(nodoAdy.toString(), 1);
+                nodoAdy = nodoAdy.getSigAdyacente();
+            }
+        }
+        return adyacentes;
+    }
+
+    // public String toString(){
+        
+    // }
 }

@@ -2,9 +2,10 @@ package Menu;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import Estructuras.EstructurasAux.Lista;
 import Estructuras.GrafoEtiquetado.Grafo;
 import Estructuras.TablaAVL.ArbolAVL;
-import Modelo.Equipo;
+import Modelo.*;
 
 public class main {
     public static void main(String[] args) {
@@ -14,18 +15,17 @@ public class main {
         Grafo planoCasa= new Grafo();
         ArbolAVL habitaciones=new ArbolAVL();
         HashMap<String, Equipo> equipo = new HashMap<>();
-
+        
         
         do {
             mostrarMenu();
-			numMenu=sc.nextInt();
             numMenu=scanner.nextInt();
 
 
             switch (numMenu) {
                 case 1:
                     System.out.println("Seleccionaste: Carga inicial del sistema (desde archivo de texto).");
-                    cargarDatos();
+                    // cargarDatos();
                     break;
                     
                 case 2:
@@ -34,15 +34,21 @@ public class main {
                     break;
                     
                 case 3:
-                    
+                    mostrarMenuHabitacion();
                     numMenuHabitacion = scanner.nextInt();
                     
                     switch (numMenuHabitacion) {
                         case 1:
                             System.out.println("-> Ejecutando: mostrarHabitación...");
+                            System.out.println("Ingrese un numero de habitacion:");
+                            numMenuHabitacion = scanner.nextInt();
+                            mostrarHabitaciones(numMenuHabitacion, habitaciones);
                             break;
                         case 2:
                             System.out.println("-> Ejecutando: habitacionesContiguas...");
+                            System.out.println("Ingrese un numero de habitacion:");
+                            numMenuHabitacion = scanner.nextInt();
+                            habitacionesContiguas(numMenuHabitacion, planoCasa);
                             break;
                         case 3:
                             System.out.println("-> Ejecutando: esPosibleLlegar...");
@@ -59,6 +65,7 @@ public class main {
                     break;
                     
                 case 4:
+                    mostrarMenuDesafio();
                     numMenuDesafio = scanner.nextInt();
                     
                     switch (numMenuDesafio) {
@@ -94,7 +101,7 @@ public class main {
 
     }
         public static void mostrarMenu(){
-            System.out.println("========== MENÚ PRINCIPAL ==========");
+            System.out.println("========== MENU PRINCIPAL ==========");
             System.out.println("1. Carga inicial del sistema");
             System.out.println("2. Altas, Bajas y Modificaciones (ABM)");
             System.out.println("3. Consulta sobre habitaciones");
@@ -119,7 +126,34 @@ public class main {
                     System.out.println("4. mostrarDesafíosTipo");
                     System.out.print("Introduce un número para elegir una consulta: ");
         }
+    //punto 3
+    
+    private static String mostrarHabitaciones(int codigo, ArbolAVL habitaciones){
+        String datos= "No existe";
+        Object habitacion = habitaciones.recuperar(codigo);
+        if (habitacion != null) {
+            datos = habitacion.toString();
+        }
+        return datos;
     }
+
+    private static String habitacionesContiguas(int codigo, Grafo plano){
+        String datos = "";
+        if (!plano.esVacio()) {
+            Lista l = plano.listarAdyacentes(codigo);
+            datos = l.toString();
+        }
+        return datos;
+    }
+        
+        //punto 4
+
+
+
+        //punto 5 consultas sobre habitaciones
+
+    
+}
 
 
 
