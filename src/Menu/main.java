@@ -71,14 +71,14 @@ public class main {
                     break;
                     
                 case 0:
-                    System.out.println("\nSaliendo del sistema... ¡Nos vemos!");
+                    System.out.println("Saliendo del sistema... ¡Nos vemos!");
                     break;
                     
                 default:
-                    System.out.println("\nNúmero no reconocido. Por favor, introduce una opción válida.");
+                    System.out.println("Número no reconocido. Por favor, introduce una opción válida.");
                     break;
             }
-        } while (opcionPrincipal != 0);
+        } while (numMenu != 0);
 
         scanner.close();
 
