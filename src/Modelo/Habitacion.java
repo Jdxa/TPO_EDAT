@@ -7,7 +7,7 @@ public class Habitacion {
     private int metrosCuadrados;
     private boolean tieneSalida;
 
-    public Habitacion(unCodigo,unNombre,unaPlanta,unaMedida,unTieneSalida){
+    public Habitacion(int unCodigo, String unNombre,int unaPlanta,int unaMedida,boolean unTieneSalida){
         this.codigo = unCodigo;
         this.nombre = unNombre;
         this.planta = unaPlanta;
