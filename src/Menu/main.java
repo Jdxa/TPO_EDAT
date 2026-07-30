@@ -14,7 +14,7 @@ public class main {
             switch (numMenu) {
                 case 1:
                     System.out.println("Seleccionaste: Carga inicial del sistema (desde archivo de texto).");
-                    
+                    cargarDatos();
                     break;
                     
                 case 2:

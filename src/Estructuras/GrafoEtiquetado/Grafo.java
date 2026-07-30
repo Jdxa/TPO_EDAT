@@ -75,7 +75,7 @@ public class Grafo {
                     this.eliminarArco(v.getElem(), aux.getElem());
                 }
                 v = v.getSigVertice();
-            }   
+            }
             //desenlaza aux de la lista de vertices
             if (anterior == null) {
                 this.inicio = aux.getSigVertice();

@@ -6,8 +6,10 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class CargarDatos {
+      public void cargarDatos(ArbolAVL unArbol,Grafo unGrafo, ){
 
-      public void cargarHabitaciones(ArbolAVL unArbol) {
+      }
+      private void cargarHabitaciones(ArbolAVL unArbol) {
       String linea,unNombre;
       int unCodigo,unaPlanta,unaMedida;
       boolean unTieneSalida;
