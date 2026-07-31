@@ -44,4 +44,8 @@ public class Desafio {
     public void setTipo(String unTipo){
         this.tipo = unTipo;
     }
+
+    public String toString(){
+        return "puntaje: "+this.puntajeOtorga+", codHabitacion: "+this.codHabitacion+", nombre: "+this.nombre+", tipo: "+this.tipo;
+    }
 }

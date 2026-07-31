@@ -11,7 +11,7 @@ public class main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        int numMenu,numMenuHabitacion,numMenuDesafio;
+        int numMenu,numMenuHabitacion,numMenuDesafio,codigo;
         Grafo planoCasa= new Grafo();
         ArbolAVL habitaciones=new ArbolAVL();
         HashMap<String, Equipo> equipo = new HashMap<>();
@@ -41,14 +41,16 @@ public class main {
                         case 1:
                             System.out.println("-> Ejecutando: mostrarHabitación...");
                             System.out.println("Ingrese un numero de habitacion:");
-                            numMenuHabitacion = scanner.nextInt();
-                            mostrarHabitaciones(numMenuHabitacion, habitaciones);
+                            codigo = scanner.nextInt();
+                            //Llamo a metodo de AVL que me da un String de los datos de la habitacion encontrada
+                            System.out.println(habitaciones.mostrarHabitacion(numMenuHabitacion));
                             break;
                         case 2:
                             System.out.println("-> Ejecutando: habitacionesContiguas...");
                             System.out.println("Ingrese un numero de habitacion:");
-                            numMenuHabitacion = scanner.nextInt();
-                            habitacionesContiguas(numMenuHabitacion, planoCasa);
+                            codigo = scanner.nextInt();
+                            //llamo metodo de Grafo que me da un String de las habitaciones contiguas
+                            System.out.println(planoCasa.habitacionesContiguas(codigo));
                             break;
                         case 3:
                             System.out.println("-> Ejecutando: esPosibleLlegar...");
@@ -128,23 +130,8 @@ public class main {
         }
     //punto 3
     
-    private static String mostrarHabitaciones(int codigo, ArbolAVL habitaciones){
-        String datos= "No existe";
-        Object habitacion = habitaciones.recuperar(codigo);
-        if (habitacion != null) {
-            datos = habitacion.toString();
-        }
-        return datos;
-    }
+    
 
-    private static String habitacionesContiguas(int codigo, Grafo plano){
-        String datos = "";
-        if (!plano.esVacio()) {
-            Lista l = plano.listarAdyacentes(codigo);
-            datos = l.toString();
-        }
-        return datos;
-    }
         
         //punto 4
 

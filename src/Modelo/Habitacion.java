@@ -60,4 +60,10 @@ public class Habitacion {
     public boolean cargarDesafio(Desafio unDesafio){
         return desafios.insertar(unDesafio.getPuntaje(),unDesafio);
     }
+
+    public String toString(){
+        String str= "";
+        str = "codigo: "+this.codigo+", nombre: "+this.nombre+", planta: "+this.planta+", metrosCuadrados: "+this.metrosCuadrados+", tieneSalida: "+this.tieneSalida+", desafios: "+this.desafios.toString();
+        return str;
+    }
 }
