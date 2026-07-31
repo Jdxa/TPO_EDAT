@@ -21,7 +21,7 @@ public class Habitacion {
     public int getCodigo(){
         return this.codigo;
     }
-    public void setDesafio(unDesafio desafio){
-        this.desafios.listar()
+    public void setDesafio(Desafio unDesafio){
+        this.desafios.listar(unDesafio);
     }
 }
