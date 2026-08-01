@@ -155,18 +155,6 @@ public class main {
                     System.out.print("Introduce un numero para elegir una consulta: ");
         }
         
-    //punto 3
-    
-    
-
-        
-        //punto 4
-
-
-
-        //punto 5 consultas sobre habitaciones
-
-    
 }
 
 
