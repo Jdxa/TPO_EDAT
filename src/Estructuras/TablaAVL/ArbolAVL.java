@@ -91,7 +91,7 @@ public class ArbolAVL {
             } else if (comparacion > 0) {
                 nodoActual.setDerecho(insertarPrivado(nodoActual.getDerecho(), clave, dato, exito));
             } else {
-                exito[0] = false; 
+                exito[0] = false;
             }
 
             if (exito[0]) {
@@ -155,7 +155,7 @@ public class ArbolAVL {
             listarPrivado(nodoActual.getIzquierdo(), lista);
             lista.insertar(nodoActual.getElem(), lista.longitud() + 1);
             listarPrivado(nodoActual.getDerecho(), lista);
-        }   
+        }
     }
 
     private void listarRangoPrivado(NodoAVL nodoActual, Comparable min, Comparable max, Lista lista) {
@@ -264,8 +264,10 @@ public class ArbolAVL {
     public String mostrarHabitacion(int codigo){
         String str= "No existe";
         if (this.raiz != null) {
-            Object dato = this.recuperar(codigo); 
-            if(dato != null) str = dato.toString();
+            Object dato = this.recuperar(codigo);
+            if(dato != null){
+            str = dato.toString();
+           }
         }
         return str;
     }

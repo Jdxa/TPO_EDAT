@@ -1,4 +1,5 @@
 package Modelo;
+import Estructuras.EstructurasAux.Lista;
 
 public class Equipo {
     private String nombre;
@@ -6,6 +7,7 @@ public class Equipo {
     private int puntajeAcumulado;
     private Habitacion habitacionActual;
     private int puntajeActual;
+    private Lista desafiosPorHabitacion;
 
 
     public Equipo(String unNombre, int unPuntExigido, int unPuntAcumulado, Habitacion unaHabActual, int unPuntActual){

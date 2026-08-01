@@ -17,7 +17,7 @@ public class CargarDatos {
     public void cargarDato(ArbolAVL unArbol, Grafo unGrafo, HashMap<String, Equipo> unHash) {
         String linea;
         try {
-            BufferedReader bufferLectura = new BufferedReader(new FileReader("archivos\\"));
+            BufferedReader bufferLectura = new BufferedReader(new FileReader("archivoTxt\\setCargaEscapeRoom.txt"));
             
             while ((linea = bufferLectura.readLine()) != null) {
 
@@ -55,7 +55,7 @@ public class CargarDatos {
         unNombre= partes[2];
         unaPlanta=Integer.parseInt(partes[3]);
         unaMedida=Integer.parseInt(partes[4]);
-        tieneSalida=(partes[5].equals("true")); 
+        tieneSalida=(partes[5].equals("true"));
         carga= new Habitacion(unCodigo,unNombre,unaPlanta,unaMedida,tieneSalida);
 
         unArbol.insertar(unCodigo, carga);
@@ -76,10 +76,10 @@ public class CargarDatos {
         carga = new Desafio(unPuntaje,unCodHab,unNombre,unTipo);
         
         habitacion=(Habitacion)unArbol.recuperar(unCodHab);
-        habitacion.setDesafio(carga);
+        habitacion.cargarDesafio(carga);
     }
 
-    private void cargarEquipos(String Linea,ArbolAVL unArbol,HashMap<String, Equipo> unHash){
+    private void cargarEquipos(String linea,ArbolAVL unArbol,HashMap<String, Equipo> unHash){
         String unNombre;
         int unPuntajeExig,unPuntajeAcum,unPuntajeAct,unCodHab;
         Habitacion unaHab;
