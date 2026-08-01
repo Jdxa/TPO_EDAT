@@ -260,4 +260,13 @@ public class ArbolAVL {
         }
         return resultado;
     }
+    //
+    public String mostrarHabitacion(int codigo){
+        String str= "No existe";
+        if (this.raiz != null) {
+            Object dato = this.recuperar(codigo); 
+            if(dato != null) str = dato.toString();
+        }
+        return str;
+    }
 }

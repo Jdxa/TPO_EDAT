@@ -36,4 +36,8 @@ public class NodoAdy {
     public void setEtiqueta(Object nuevaEtiqueta){
         this.etiqueta = nuevaEtiqueta;
     }
+
+    public String toString(){
+        return "["+ this.getVertice()+","+this.etiqueta+"]";
+    }
 }
