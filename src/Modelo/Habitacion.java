@@ -9,7 +9,7 @@ public class Habitacion {
     private boolean tieneSalida;
     private ArbolAVL desafios;
 
-    public Habitacion(int unCodigo,String unNombre,int unaPlanta,int unaMedida,boolean unTieneSalida){
+    public Habitacion(int unCodigo, String unNombre,int unaPlanta,int unaMedida,boolean unTieneSalida){
         this.codigo = unCodigo;
         this.nombre = unNombre;
         this.planta = unaPlanta;
