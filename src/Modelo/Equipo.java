@@ -57,7 +57,7 @@ public class Equipo {
         this.puntajeActual = unPuntajeActual;
     }
 
-    public void cargarDesafiosRealizados(Integer codigo, Desafio unDesafio){
+    public void cargarDesafiosRealizados(Integer codigo, Integer unDesafio){
        Lista l = this.desafiosCompletados.computeIfAbsent(codigo, k -> new Lista());
        l.insertar(unDesafio, 1);
     }
