@@ -365,9 +365,46 @@ public class Grafo {
         
 
     }
-
-
-    // public String toString(){
+    public boolean esPosibleLlegar(Object origen, Object destino, int k) {
+        boolean exito= false;
+        NodoVert nodoO = ubicarVertice(origen);
+        NodoVert nodoD = ubicarVertice(destino);
+        //mientras existan esas habitaciones puedo averiguar el coste del camino
+        if (nodoO != null && nodoD != null) {
+            Lista visitados = new Lista(); 
+            exito = esPosibleLlegarAux(nodoO, destino,k,0, visitados);
+        }
         
-    // }
+        return exito;        
+    }
+
+    private boolean esPosibleLlegarAux(NodoVert n, Object dest,int k,int sumaActual, Lista visitados ) {
+        boolean exito = false;
+        if (n != null) {
+            if (n.getElem().equals(dest)) {
+                //se llega aqui mientras k sea 
+                exito = true;
+            }else{
+                //marco nodo como visitado
+                visitados.insertar(n.getElem(),visitados.longitud()+1);
+                NodoAdy ady = n.getPrimerAdy();
+                while (!exito && ady != null) {
+                    //comprueba q no este visitado el nodo a visitar
+                    if (visitados.localizar(ady.getVertice().getElem()) < 0) {
+                        int costo = (int)ady.getEtiqueta();
+                        //entra si k me alcanza para llegar al nodo a visitar, en caso contrario corta el programa y no es posible llegar
+                        if (sumaActual + costo <= k) {
+                            exito = esPosibleLlegarAux(ady.getVertice(), dest, k, sumaActual+costo, visitados);
+                        }
+
+                    }
+                    ady = ady.getSigAdyacente();
+                }
+                //backtracking
+                visitados.eliminar(visitados.longitud());
+
+            }
+        }
+        return exito;
+    }
 }
