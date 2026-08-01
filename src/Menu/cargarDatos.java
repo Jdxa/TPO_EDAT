@@ -44,7 +44,7 @@ public class CargarDatos {
         }
     }
 
-    private void cargarHabitaciones(String linea,ArbolAVL unArbol) {
+    public void cargarHabitaciones(String linea,ArbolAVL unArbol) {
         int unCodigo,unaPlanta,unaMedida;
         String unNombre;
         boolean tieneSalida;

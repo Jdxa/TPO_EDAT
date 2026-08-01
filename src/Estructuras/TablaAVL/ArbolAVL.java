@@ -1,5 +1,6 @@
 package Estructuras.TablaAVL;
 import Estructuras.EstructurasAux.*;
+import Modelo.Desafio;
 import Modelo.Habitacion;
 
 public class ArbolAVL {
@@ -22,6 +23,14 @@ public class ArbolAVL {
         this.raiz = eliminarPrivado(this.raiz, clave, exito);
         return exito[0];
     }
+    public boolean pertenece(Comparable elem) {
+        boolean exito = false;
+        if (this.raiz != null) {
+            exito = perteneceaux(this.raiz, elem);
+        }
+        return exito;
+    }
+
 
     public Object recuperar(Comparable clave) {
         return recuperarPrivado(this.raiz, clave);
@@ -135,7 +144,24 @@ public class ArbolAVL {
         }
         return resultado;
     }
-
+    private boolean perteneceaux(NodoABB nodo, Comparable elem) {
+        boolean esta = false;
+        int comp = elem.compareTo(nodo.getElem());
+        if (comp == 0) {
+            esta = true;
+        } else if (comp < 0) {
+            // comparo si voy por izquierda o derecha
+            if (nodo.getIZquierdo() != null) {
+                esta = perteneceaux(nodo.getIZquierdo(), elem);
+            }
+        } else if (comp > 0) {
+            // voy por rama derecha
+            if (nodo.getDerecho() != null) {
+                esta = perteneceaux(nodo.getDerecho(), elem);
+            }
+        }
+        return esta;
+    }
     private Object recuperarPrivado(NodoAVL nodoActual, Comparable clave) {
         Object encontrado = null;
         if (nodoActual != null) {
@@ -306,6 +332,39 @@ public class ArbolAVL {
                     desafio.setTipo(nuevoTipo);
                     exito = true;
                 }
+            }
+        }
+        return exito;
+    }
+    public boolean modificarNombreHabitacion(int codigo, String nuevoNombre){
+        boolean exito = false;
+        if (this.raiz != null) {
+            Habitacion habitacion = (Habitacion) this.recuperar(codigo);
+            if (habitacion != null) {
+                habitacion.setNombre(nuevoNombre);
+                exito = true;
+            }
+        }
+        return exito;
+    }
+    public boolean modificarPlantaHabitacion(int[] datos){
+        boolean exito = false;
+        if (this.raiz != null) {
+            Habitacion habitacion = (Habitacion) this.recuperar(datos[0]);
+            if (habitacion != null) {
+                habitacion.setPlanta(datos[1]);
+                exito = true;
+            }
+        }
+        return exito;
+    }
+    public boolean modificarMedidaHabitacion(int[] datos){
+        boolean exito = false;
+        if (this.raiz != null) {
+            Habitacion habitacion = (Habitacion) this.recuperar(datos[0]);
+            if (habitacion != null) {
+                habitacion.setMedida(datos[1]);
+                exito = true;
             }
         }
         return exito;
