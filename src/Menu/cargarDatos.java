@@ -79,24 +79,47 @@ public class CargarDatos {
         habitacion.cargarDesafio(carga);
     }
 
-    private void cargarEquipos(String linea,ArbolAVL unArbol,HashMap<String, Equipo> unHash){
+    private void cargarEquipos(String linea,ArbolAVL habitaciones,HashMap<String, Equipo> hashEquipos){
         String unNombre;
         int unPuntajeExig,unPuntajeAcum,unPuntajeAct,unCodHab;
-        Habitacion unaHab;
+        Habitacion unaHabitacionActual, habAux;
+        Equipo nuevoEquipo;
+        //separo la linea en segmentos
         String[] partes = linea.split(";");
-        Equipo carga;
+        
 
+        //obtengo los primeros valores
         unNombre=partes[1];
         unPuntajeExig= Integer.parseInt(partes[2]);
         unPuntajeAcum=Integer.parseInt(partes[3]);
         unCodHab=Integer.parseInt(partes[4]);
         unPuntajeAct=Integer.parseInt(partes[5]);
+        unaHabitacionActual=(Habitacion)habitaciones.recuperar(unCodHab);
 
-        unaHab=(Habitacion)unArbol.recuperar(unCodHab);
+        nuevoEquipo=new Equipo(unNombre,unPuntajeExig,unPuntajeAcum,unaHabitacionActual,unPuntajeAct);
+        //para la lista de desafios resueltos, de forma (codigoHabitacion, puntajeDesafio)
+        for(int i = 6; i < partes.length; i++ ){
+            String texto = partes[i];
+            texto = texto.replace("(", "").replace(")", "");
+            String [] separados = texto.split(","); 
+            Integer codigoHabitacion = Integer.parseInt(separados[0].trim());
+            Integer puntajeDesafio = Integer.parseInt(separados[1].trim());
 
-        carga=new Equipo(unNombre,unPuntajeExig,unPuntajeAcum,unaHab,unPuntajeAct);
-        
-        unHash.put(unNombre, carga);
+            //necesito obtener el desafio y cargarlo al hash
+            habAux = (Habitacion)habitaciones.recuperar(codigoHabitacion); 
+            //si no existe la habitacion no carga nada
+            if (habAux != null) {
+                ArbolAVL desafios = habAux.getDesafios(); //obtengo el AVL q guarda los desafios en la habitacion
+                // si no hay desafios en esa habitacion no existe ese desafio a cargar
+                if (desafios != null) {
+                    Desafio desafioCompletado = (Desafio)desafios.recuperar(puntajeDesafio); // tengo el desafio para cargarlo
+                    nuevoEquipo.cargarDesafiosRealizados(codigoHabitacion, desafioCompletado); //cargo al HASH de desafios compleatdos el nuevo desafio
+                }
+            }
+            
+        }   
+        //guardo el equipo en el hash de equipos
+        hashEquipos.put(unNombre, nuevoEquipo);
     }
 
     private void cargarPlano(String linea,Grafo unGrafo){

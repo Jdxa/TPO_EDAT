@@ -60,6 +60,9 @@ public class Habitacion {
     public boolean cargarDesafio(Desafio unDesafio){
         return desafios.insertar(unDesafio.getPuntaje(),unDesafio);
     }
+    public ArbolAVL getDesafios(){
+        return this.desafios;
+    }
 
     public String toString(){
         String str= "";

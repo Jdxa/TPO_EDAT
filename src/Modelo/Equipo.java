@@ -1,4 +1,6 @@
 package Modelo;
+import java.util.HashMap;
+
 import Estructuras.EstructurasAux.Lista;
 
 public class Equipo {
@@ -7,7 +9,7 @@ public class Equipo {
     private int puntajeAcumulado;
     private Habitacion habitacionActual;
     private int puntajeActual;
-    private Lista desafiosPorHabitacion;
+    private HashMap<Integer, Lista> desafiosCompletados;
 
 
     public Equipo(String unNombre, int unPuntExigido, int unPuntAcumulado, Habitacion unaHabActual, int unPuntActual){
@@ -16,6 +18,8 @@ public class Equipo {
         this.puntajeAcumulado = unPuntAcumulado;
         this.habitacionActual = unaHabActual;
         this.puntajeActual = unPuntActual;
+        desafiosCompletados = new HashMap<>();
+
     }
     //Nombre desafio
     public String getNombre(){
@@ -51,6 +55,14 @@ public class Equipo {
     }
     public void setPuntajeActual(int unPuntajeActual){
         this.puntajeActual = unPuntajeActual;
+    }
+
+    public void cargarDesafiosRealizados(Integer codigo, Desafio unDesafio){
+       Lista l = this.desafiosCompletados.computeIfAbsent(codigo, k -> new Lista());
+       l.insertar(unDesafio, 1);
+    }
+    public HashMap<Integer,Lista> getDesafiosCompletados(){
+        return this.desafiosCompletados;
     }
 
 
