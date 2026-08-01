@@ -117,7 +117,7 @@ public class CargarDatos {
                 }
             }
             
-        }   
+        } 
         //guardo el equipo en el hash de equipos
         hashEquipos.put(unNombre, nuevoEquipo);
     }
