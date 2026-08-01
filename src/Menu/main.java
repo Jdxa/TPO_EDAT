@@ -10,39 +10,57 @@ public class main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        int numMenu,numMenuHabitacion,numMenuDesafio;
+        int numMenu;
+        CargarDatos archivo = new CargarDatos();
         Grafo planoCasa= new Grafo();
         ArbolAVL habitaciones=new ArbolAVL();
         HashMap<String, Equipo> equipo = new HashMap<>();
-
+        
+        Boolean estaCargado = false;
         
         do {
             mostrarMenu();
-			numMenu=sc.nextInt();
             numMenu=scanner.nextInt();
 
 
             switch (numMenu) {
                 case 1:
                     System.out.println("Seleccionaste: Carga inicial del sistema (desde archivo de texto).");
-                    cargarDatos();
+                    if(estaCargado){
+                        System.out.println("Los datos ya fueron cargados previamente. No se puede cargar nuevamente.");
+                        break;
+                    }else{
+                        archivo.cargarDato(habitaciones,planoCasa,equipo);
+                        System.out.println(habitaciones.toString());
+                        estaCargado = true;
+                    }
+                    
                     break;
                     
                 case 2:
                     System.out.println("Seleccionaste: Altas, Bajas y Modificaciones (ABM) de habitaciones, desafíos y equipos.");
-                    
+                    mostrarMenu2();
+                    numMenu=scanner.nextInt();
                     break;
                     
                 case 3:
+                    mostrarMenuHabitacion();
+                    numMenu = scanner.nextInt();
                     
-                    numMenuHabitacion = scanner.nextInt();
-                    
-                    switch (numMenuHabitacion) {
+                    switch (numMenu) {
                         case 1:
                             System.out.println("-> Ejecutando: mostrarHabitación...");
+                            System.out.println("Ingrese un numero de habitacion:");
+                            numMenu = scanner.nextInt();
+                            //Llamo a metodo de AVL que me da un String de los datos de la habitacion encontrada
+                            System.out.println(habitaciones.mostrarHabitacion(numMenu));
                             break;
                         case 2:
                             System.out.println("-> Ejecutando: habitacionesContiguas...");
+                            System.out.println("Ingrese un numero de habitacion:");
+                            numMenu = scanner.nextInt();
+                            //llamo metodo de Grafo que me da un String de las habitaciones contiguas
+                            System.out.println(planoCasa.habitacionesContiguas(numMenu));
                             break;
                         case 3:
                             System.out.println("-> Ejecutando: esPosibleLlegar...");
@@ -59,9 +77,10 @@ public class main {
                     break;
                     
                 case 4:
-                    numMenuDesafio = scanner.nextInt();
+                    mostrarMenuDesafio();
+                    numMenu = scanner.nextInt();
                     
-                    switch (numMenuDesafio) {
+                    switch (numMenu) {
                         case 1:
                             System.out.println("-> Ejecutando: mostrarDesafío...");
                             break;
@@ -94,7 +113,7 @@ public class main {
 
     }
         public static void mostrarMenu(){
-            System.out.println("========== MENÚ PRINCIPAL ==========");
+            System.out.println("========== MENU PRINCIPAL ==========");
             System.out.println("1. Carga inicial del sistema");
             System.out.println("2. Altas, Bajas y Modificaciones (ABM)");
             System.out.println("3. Consulta sobre habitaciones");
@@ -102,24 +121,57 @@ public class main {
             System.out.println("0. Salir");
             System.out.print("Introduce un número para avanzar: ");
         }
+        public static void mostrarMenu2(){
+            System.out.println("========== MENU DE ABM ==========");
+            System.out.println("1. crear de habitacion");
+            System.out.println("2. Baja de habitacion");
+            System.out.println("3. Modificación de habitación");
+            System.out.println("4. Alta de desafío");
+            System.out.println("5. Baja de desafío");
+            System.out.println("6. Modificacion de desafío");
+            System.out.println("7. Alta de equipo");
+            System.out.println("8. Baja de equipo");
+            System.out.println("9. Modificacion de equipo");
+            System.out.println("10. Salir");
+            System.out.print("Introduce un numero para avanzar: ");
+        }
         public static void mostrarMenuHabitacion(){
             System.out.println("3. CONSULTA SOBRE HABITACIONES");
-                    System.out.println("1. mostrarHabitación");
-                    System.out.println("2. habitacionesContiguas");
-                    System.out.println("3. esPosibleLlegar");
-                    System.out.println("4. minimoPuntaje");
-                    System.out.println("5. sinPasarPor");
-                    System.out.print("Introduce un número para elegir una consulta: ");
+                    System.out.println("1. mostrar habitacion");
+                    System.out.println("2. mostrar habitaciones contiguas");
+                    System.out.println("3. es posible llegar de habitacion A a habitacion B");
+                    System.out.println("4. cual es el minimo puntaje para ir de habitacion A a habitacion B");
+                    System.out.println("5. cuales son las formas de ir a de habitacion A a habitacion B sin pasar por la habitacion C");
+                    System.out.println("6. Salir");
+                    System.out.print("Introduce un numero para elegir una consulta: ");
         }
         public static void mostrarMenuDesafio(){
                     System.out.println("--- 4. CONSULTAS SOBRE DESAFÍOS ---");
-                    System.out.println("1. mostrarDesafío");
-                    System.out.println("2. mostrarDesafíosResueltos");
-                    System.out.println("3. verificarDesafíoResuelto");
-                    System.out.println("4. mostrarDesafíosTipo");
-                    System.out.print("Introduce un número para elegir una consulta: ");
+                    System.out.println("1. mostrarDesafio");
+                    System.out.println("2. mostrarDesafiosResueltos");
+                    System.out.println("3. verificarDesafioResuelto");
+                    System.out.println("4. mostrarDesafiosTipo");
+                    System.out.println("5. Salir");
+                    System.out.print("Introduce un numero para elegir una consulta: ");
         }
-    }
+        
+    //punto 3
+    
+    
+
+        
+        //punto 4
+
+
+
+        //punto 5 consultas sobre habitaciones
+
+    
+}
+
+
+
+
 
 
 

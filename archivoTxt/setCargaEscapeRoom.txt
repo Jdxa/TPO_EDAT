@@ -1,0 +1,106 @@
+H;10;Dormitorio principal;1;30;false
+H;5;Cochera;0;25;true
+H;2;Baño;0;10;false
+H;15;Invernadero;0;40;true
+H;20;Recibidor;0;15;true
+H;12;Escalera;0;10;false
+H;13;Escritorio;1;15;false
+H;7;Comedor;0;20;false
+H;6;Cocina;0;15;false
+H;8;Depósito;-1;15;false
+H;9;Despensa;0;10;false
+H;1;Altillo;2;20;false
+H;3;Biblioteca;1;25;false
+H;4;Bodega;-1;20;false
+H;11;Dormitorio de huéspedes;1;20;false
+H;14;Gimnasio;0;30;false
+H;16;Lavadero;0;12;false
+H;17;Natatorio;0;50;true
+H;18;Pasillo;0;10;false
+H;19;Quincho;0;35;true
+H;21;Sala de Estar;0;25;false
+H;22;Sala de Juegos;1;30;false
+H;23;Sala de Música;1;20;false
+H;24;Sótano;-1;40;false
+D;20;10;Acertijo del Cuadro;Lógico
+D;30;5;Llave del Auto;Búsqueda
+D;40;2;Fuga de Agua;Destreza
+D;50;15;Planta Carnívora;Ingenio
+D;30;20;Clave de Entrada;Matemático
+D;25;12;Peldaño Roto;Destreza
+D;35;13;Código del Diario;Letras
+D;40;7;Cena Envenenada;Lógico
+D;20;6;Receta Secreta;Búsqueda
+D;45;8;Cajas Pesadas;Destreza
+D;30;9;Ingrediente Faltante;Búsqueda
+D;50;1;Fantasma del Tejado;Ingenio
+D;40;3;Libro Antiguo;Letras
+D;35;4;Vino Correcto;Lógico
+D;25;11;Cama Deshecha;Búsqueda
+D;50;14;Pesas Equilibradas;Matemático
+D;20;16;Mancha Rebelde;Ingenio
+D;60;17;Buceo Profundo;Destreza
+D;15;18;Luz Parpadeante;Lógico
+D;40;19;Fuego Perfecto;Ingenio
+D;30;21;Control Remoto;Búsqueda
+D;50;22;Rompecabezas;Matemático
+D;40;23;Nota Musical;Letras
+D;60;24;Caja Fuerte;Lógico
+E;Los Valientes;400;100;10;20;(10,20);(5,30);(15,50)
+E;Los Locos Adams;450;120;2;40;(2,40);(7,40);(6,20);(1,20)
+E;Cazafantasmas;300;60;13;35;(12,25);(13,35)
+E;Misterio Inc;500;200;17;60;(20,30);(19,40);(18,15);(16,20);(14,50);(17,45)
+E;Sherlocks;400;140;3;40;(21,30);(22,50);(23,40);(3,20)
+E;Exploradores;350;90;24;60;(4,35);(8,45);(24,10)
+E;Escapistas;420;110;1;50;(1,50);(11,25);(10,35)
+E;Invencibles;600;150;14;50;(14,50);(17,60);(15,40)
+E;Detectives;380;80;6;20;(20,30);(7,30);(6,20)
+E;Geniuses;450;130;22;50;(13,35);(3,40);(22,55)
+P;20;18;5
+P;18;20;5
+P;20;21;10
+P;21;20;10
+P;18;7;8
+P;7;18;8
+P;7;6;5
+P;6;7;5
+P;6;9;3
+P;9;6;3
+P;6;16;6
+P;16;6;6
+P;18;12;15
+P;12;18;15
+P;12;10;10
+P;10;12;10
+P;12;11;10
+P;11;12;10
+P;10;2;4
+P;2;10;4
+P;11;2;6
+P;2;11;6
+P;12;1;20
+P;1;12;20
+P;18;13;8
+P;13;18;8
+P;13;3;5
+P;3;13;5
+P;21;22;7
+P;22;21;7
+P;21;23;7
+P;23;21;7
+P;6;8;10
+P;8;6;10
+P;8;24;12
+P;24;8;12
+P;24;4;8
+P;4;24;8
+P;21;19;15
+P;19;21;15
+P;19;17;10
+P;17;19;10
+P;19;15;12
+P;15;19;12
+P;20;5;20
+P;5;20;20
+P;5;14;10
+P;14;5;10

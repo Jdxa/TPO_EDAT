@@ -346,4 +346,28 @@ public class Grafo {
         }
         return clon;
     }
+    public String habitacionesContiguas(Object elem){
+        NodoVert nodoVert = ubicarVertice(elem);
+        String str = "No existe";
+          Lista adyacentes = new Lista(); 
+        if (this.inicio != null) {
+            if (nodoVert != null) {
+              
+                NodoAdy nodoAdy = nodoVert.getPrimerAdy();
+                while (nodoAdy != null) {
+                    adyacentes.insertar(nodoAdy.toString(), 1);
+                    nodoAdy = nodoAdy.getSigAdyacente();
+                }
+            }
+        }
+        str = adyacentes.toString();
+        return  str;
+        
+
+    }
+
+
+    // public String toString(){
+        
+    // }
 }
