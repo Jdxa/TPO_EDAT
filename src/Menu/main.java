@@ -2,20 +2,19 @@ package Menu;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import Estructuras.EstructurasAux.Lista;
 import Estructuras.GrafoEtiquetado.Grafo;
 import Estructuras.TablaAVL.ArbolAVL;
-import Modelo.*;
+
 
 public class main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        int numMenu,numMenuHabitacion,numMenuDesafio,codigo;
+
         Grafo planoCasa= new Grafo();
         ArbolAVL habitaciones=new ArbolAVL();
         HashMap<String, Equipo> equipo = new HashMap<>();
-        
+
         
         do {
             mostrarMenu();
@@ -25,7 +24,7 @@ public class main {
             switch (numMenu) {
                 case 1:
                     System.out.println("Seleccionaste: Carga inicial del sistema (desde archivo de texto).");
-                    // cargarDatos();
+
                     break;
                     
                 case 2:
@@ -34,23 +33,14 @@ public class main {
                     break;
                     
                 case 3:
-                    mostrarMenuHabitacion();
                     numMenuHabitacion = scanner.nextInt();
                     
                     switch (numMenuHabitacion) {
                         case 1:
                             System.out.println("-> Ejecutando: mostrarHabitación...");
-                            System.out.println("Ingrese un numero de habitacion:");
-                            codigo = scanner.nextInt();
-                            //Llamo a metodo de AVL que me da un String de los datos de la habitacion encontrada
-                            System.out.println(habitaciones.mostrarHabitacion(numMenuHabitacion));
                             break;
                         case 2:
                             System.out.println("-> Ejecutando: habitacionesContiguas...");
-                            System.out.println("Ingrese un numero de habitacion:");
-                            codigo = scanner.nextInt();
-                            //llamo metodo de Grafo que me da un String de las habitaciones contiguas
-                            System.out.println(planoCasa.habitacionesContiguas(codigo));
                             break;
                         case 3:
                             System.out.println("-> Ejecutando: esPosibleLlegar...");
@@ -67,7 +57,6 @@ public class main {
                     break;
                     
                 case 4:
-                    mostrarMenuDesafio();
                     numMenuDesafio = scanner.nextInt();
                     
                     switch (numMenuDesafio) {
@@ -103,7 +92,6 @@ public class main {
 
     }
         public static void mostrarMenu(){
-            System.out.println("========== MENU PRINCIPAL ==========");
             System.out.println("1. Carga inicial del sistema");
             System.out.println("2. Altas, Bajas y Modificaciones (ABM)");
             System.out.println("3. Consulta sobre habitaciones");
@@ -128,19 +116,7 @@ public class main {
                     System.out.println("4. mostrarDesafíosTipo");
                     System.out.print("Introduce un número para elegir una consulta: ");
         }
-    //punto 3
-    
-    
-
-        
-        //punto 4
-
-
-
-        //punto 5 consultas sobre habitaciones
-
-    
-}
+    }
 
 
 
