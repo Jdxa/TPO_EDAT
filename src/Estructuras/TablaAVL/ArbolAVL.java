@@ -1,5 +1,7 @@
 package Estructuras.TablaAVL;
 import Estructuras.EstructurasAux.*;
+import Modelo.Desafio;
+import Modelo.Habitacion;
 
 public class ArbolAVL {
     private NodoAVL raiz;
@@ -21,6 +23,14 @@ public class ArbolAVL {
         this.raiz = eliminarPrivado(this.raiz, clave, exito);
         return exito[0];
     }
+    public boolean pertenece(Comparable elem) {
+        boolean exito = false;
+        if (this.raiz != null) {
+            exito = perteneceaux(this.raiz, elem);
+        }
+        return exito;
+    }
+
 
     public Object recuperar(Comparable clave) {
         return recuperarPrivado(this.raiz, clave);
@@ -134,7 +144,24 @@ public class ArbolAVL {
         }
         return resultado;
     }
-
+    private boolean perteneceaux(NodoABB nodo, Comparable elem) {
+        boolean esta = false;
+        int comp = elem.compareTo(nodo.getElem());
+        if (comp == 0) {
+            esta = true;
+        } else if (comp < 0) {
+            // comparo si voy por izquierda o derecha
+            if (nodo.getIZquierdo() != null) {
+                esta = perteneceaux(nodo.getIZquierdo(), elem);
+            }
+        } else if (comp > 0) {
+            // voy por rama derecha
+            if (nodo.getDerecho() != null) {
+                esta = perteneceaux(nodo.getDerecho(), elem);
+            }
+        }
+        return esta;
+    }
     private Object recuperarPrivado(NodoAVL nodoActual, Comparable clave) {
         Object encontrado = null;
         if (nodoActual != null) {
