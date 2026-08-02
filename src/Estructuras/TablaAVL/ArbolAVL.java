@@ -389,4 +389,32 @@ public class ArbolAVL {
         }
         return exito;
     }
+    public boolean modificarNombreDesafio(int codigo, int puntaje, String nuevoNombre){
+        boolean exito = false;
+        if (this.raiz != null) {
+            Habitacion habitacion = (Habitacion) this.recuperar(codigo);
+            if (habitacion != null) {
+                Desafio desafio = (Desafio) habitacion.getDesafios().recuperar(puntaje);
+                if (desafio != null) {
+                    desafio.setNombre(nuevoNombre);
+                    exito = true;
+                }
+            }
+        }
+        return exito;
+    }
+    public boolean modificarTipoDesafio(int codigo, int puntaje, String nuevoTipo){
+        boolean exito = false;
+        if (this.raiz != null) {
+            Habitacion habitacion = (Habitacion) this.recuperar(codigo);
+            if (habitacion != null) {
+                Desafio desafio = (Desafio) habitacion.getDesafios().recuperar(puntaje);
+                if (desafio != null) {
+                    desafio.setTipo(nuevoTipo);
+                    exito = true;
+                }
+            }
+        }
+        return exito;
+    }
 }

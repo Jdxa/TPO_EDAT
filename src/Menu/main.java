@@ -4,9 +4,7 @@ import java.util.Scanner;
 
 import Estructuras.GrafoEtiquetado.Grafo;
 import Estructuras.TablaAVL.ArbolAVL;
-import Modelo.Desafio;
 import Modelo.Equipo;
-import Modelo.Habitacion;
 
 public class main {
     public static void main(String[] args) {
@@ -39,7 +37,6 @@ public class main {
                     break;
                     
                 case 2:
-                    System.out.println("Seleccionaste: Altas, Bajas y Modificaciones (ABM) de habitaciones, desafíos y equipos.");
                     gestionABM(scanner, habitaciones, archivo);
                     break;
                 case 3:
@@ -136,8 +133,9 @@ public class main {
     }
     public static void habitacionesABM(Scanner scanner,ArbolAVL habitaciones, CargarDatos archivo){
         int opcionABM;
+        mostrarMenuABMhabitacion();
         opcionABM = scanner.nextInt();
-        System.out.println("Seleccionaste: Altas, Bajas y Modificaciones de habitaciones.");
+        
         switch (opcionABM) {
             case 1:
                 agregarHabitacion(scanner, habitaciones, archivo);
@@ -158,14 +156,15 @@ public class main {
     }
     public static void desafiosABM(Scanner scanner,ArbolAVL habitaciones, CargarDatos archivo){
         int opcionABM;
+        mostrarMenuABMdesafio();
         opcionABM = scanner.nextInt();
-        System.out.println("Seleccionaste: Altas, Bajas y Modificaciones de desafíos.");
+        
         switch (opcionABM) {
             case 1:
                 agregarDesafio(scanner, habitaciones, archivo);
                 break;
             case 2:
-                //modificarDesafio(scanner, habitaciones);
+                modificarDesafio(scanner, habitaciones);
                 break;
             case 3:
                 eliminarDesafio(scanner, habitaciones);
@@ -178,81 +177,7 @@ public class main {
                 break;
         }
     }
-    public static void agregarDesafio(Scanner scanner, ArbolAVL habitaciones,CargarDatos archivo) {
-        int codigoHabitacion, puntaje;
-        String linea,palabra;
-        System.out.println("--> Crear de desafío");
-        System.out.println("Ingrese el código de la habitación a la que pertenece el desafío:");
-        codigoHabitacion = scanner.nextInt();
-        if (!habitaciones.pertenece(codigoHabitacion)) {
-            System.out.println("No se encontró la habitación con el código ingresado. Por favor, ingrese un código válido.");
-            return;
-        }
-        System.out.println("Ingrese el puntaje del desafío:");
-        puntaje = scanner.nextInt();
-        while(habitaciones.perteneceDesafio(codigoHabitacion, puntaje)){
-        System.out.println("El puntaje ingresado ya existe. Por favor, ingrese un puntaje diferente:");
-        puntaje = scanner.nextInt();
-        }
-        linea = "D;" + puntaje+";"+codigoHabitacion;
-        System.out.println("Ingrese el nombre del desafio:");
-        palabra = scanner.next();
-        linea += ";" + palabra;
-        System.out.println("Ingrese el tipo del desafio:");
-        palabra = scanner.next();
-        linea += ";" + palabra;
-        archivo.cargarDesafios(linea, habitaciones);
-    }
-    public static void modificarDesafio(Scanner scanner, ArbolAVL habitaciones) {
-        int codigoHabitacion, puntaje;
-        String nuevoNombre, nuevoTipo;
-        System.out.println("--> Modificación de desafío");
-        System.out.println("Ingrese el código de la habitación del desafío a modificar:");
-        codigoHabitacion = scanner.nextInt();
-        if (!habitaciones.pertenece(codigoHabitacion)) {
-            System.out.println("No se encontró la habitación con el código ingresado. Por favor, ingrese un código válido.");
-            return;
-        }
-        System.out.println("Ingrese el puntaje del desafío a modificar:");
-        puntaje = scanner.nextInt();
-        
-
-        Habitacion habitacion = (Habitacion) habitaciones.recuperar(codigoHabitacion);
-        Desafio desafio = (Desafio) habitacion.getDesafios().recuperar(puntaje);
-        if (desafio == null) {
-            System.out.println("No se encontró el desafío con los datos ingresados.");
-            return;
-        }
-
-        System.out.println("Ingrese el nuevo nombre del desafío:");
-        nuevoNombre = scanner.next();
-        System.out.println("Ingrese el nuevo tipo del desafío:");
-        nuevoTipo = scanner.next();
-
-        desafio.setNombre(nuevoNombre);
-        desafio.setTipo(nuevoTipo);
-        System.out.println("Desafío modificado correctamente.");
-    }
-    public static void eliminarDesafio(Scanner scanner, ArbolAVL habitaciones) {
-        int codigoHabitacion, puntaje;
-
-        System.out.println("--> Baja de desafío");
-        System.out.println("Ingrese el código de la habitación del desafío a eliminar:");
-        codigoHabitacion = scanner.nextInt();
-        if (!habitaciones.pertenece(codigoHabitacion)) {
-            System.out.println("No se encontró la habitación con el código ingresado. Por favor, ingrese un código válido.");
-        }else{
-        System.out.println("Ingrese el puntaje del desafío a eliminar:");
-        puntaje = scanner.nextInt();
-
-        if(habitaciones.eliminarDesafio(codigoHabitacion, puntaje)){
-            System.out.println("Desafío eliminado correctamente.");
-        } else {
-            System.out.println("No se encontró el desafío con los datos ingresados.");
-        }
-    }
-    }
-    public static void equiposABM(Scanner scanner,ArbolAVL habitaciones){
+     public static void equiposABM(Scanner scanner,ArbolAVL habitaciones){
         int opcionABM;
         opcionABM = scanner.nextInt();
         System.out.println("Seleccionaste: Altas, Bajas y Modificaciones de equipos.");
@@ -274,7 +199,6 @@ public class main {
                 break;
         }
     }
-
     public static void agregarHabitacion(Scanner scanner, ArbolAVL habitaciones, CargarDatos archivo) {
         int numero;
         String palabra,linea;
@@ -295,7 +219,7 @@ public class main {
         System.out.println("Ingrese la medida de la habitación:");
         numero= scanner.nextInt();
         linea += ";" + numero+"false";
-        archivo.cargarHabitaciones(linea, habitaciones);
+        archivo.cargarDatoLinea(linea, habitaciones, null, null);
 
         System.out.println("Habitación creada exitosamente.");
     }
@@ -305,10 +229,7 @@ public class main {
         System.out.println("--> Modificación de habitación");
         System.out.println("Ingrese el código de la habitación a modificar:");
         codigo = scanner.nextInt();
-        if(!habitaciones.pertenece(codigo)){
-        System.out.println("No se encontró la habitación con el código ingresado. Por favor, ingrese un código válido:");
-        }else{
-        mostrarMenu2_3();
+        mostrarMenuModificarHabitacion();
         numMenu=scanner.nextInt();
         switch (numMenu) {
             case 1:
@@ -326,7 +247,6 @@ public class main {
             default:
             System.out.println("Opción no válida. Saliendo de la modificación de habitación...");
             break;
-            }
             }
         }
     public static void cambiarNombreHabitacion(Scanner scanner, ArbolAVL habitaciones, int codigo) {
@@ -366,6 +286,7 @@ public class main {
 
     private static void eliminarHabitacion(Scanner scanner, ArbolAVL habitaciones) {
         int codigo;
+        System.out.println("inserte el codigo de la habitacion a eliminar.");
         codigo = scanner.nextInt();
         // Llamo a metodo AVL que elimina si existe habitacion y devuelve boolean
         if (habitaciones.eliminar(codigo)) {
@@ -374,6 +295,106 @@ public class main {
             System.out.println("No se encontró la habitación con el código ingresado.");
         }
     }
+
+    public static void agregarDesafio(Scanner scanner, ArbolAVL habitaciones,CargarDatos archivo) {
+        int codigoHabitacion, puntaje;
+        String linea,palabra;
+        System.out.println("--> Crear de desafío");
+        System.out.println("Ingrese el código de la habitación a la que pertenece el desafío:");
+        codigoHabitacion = scanner.nextInt();
+        if (!habitaciones.pertenece(codigoHabitacion)) {
+            System.out.println("No se encontró la habitación con el código ingresado. Por favor, ingrese un código válido.");
+        }else{}
+        System.out.println("Ingrese el puntaje del desafío:");
+        puntaje = scanner.nextInt();
+        while(habitaciones.perteneceDesafio(codigoHabitacion, puntaje)){
+        System.out.println("El puntaje ingresado ya existe. Por favor, ingrese un puntaje diferente:");
+        puntaje = scanner.nextInt();
+        }
+        linea = "D;" + puntaje+";"+codigoHabitacion;
+        System.out.println("Ingrese el nombre del desafio:");
+        palabra = scanner.next();
+        linea += ";" + palabra;
+        System.out.println("Ingrese el tipo del desafio:");
+        palabra = scanner.next();
+        linea += ";" + palabra;
+        archivo.cargarDatoLinea(linea, habitaciones, null, null);
+    }
+
+    public static void modificarDesafio(Scanner scanner, ArbolAVL habitaciones) {
+        int codigo,numMenu,puntaje;
+        System.out.println("--> Modificación de habitación");
+        System.out.println("Ingrese el código de la habitación a modificar:");
+        codigo = scanner.nextInt();
+        if(!habitaciones.pertenece(codigo)){
+        System.out.println("No se encontró la habitación con el código ingresado.");
+        }else{
+        System.out.println("Ingrese el puntaje del desafio a modificar:");
+        puntaje = scanner.nextInt();
+        if(!habitaciones.perteneceDesafio(codigo,puntaje)){
+            System.out.println("No se encontró el desafío con el puntaje ingresado.");
+        }else{
+        mostrarMenuModificardesafio();
+        numMenu=scanner.nextInt();
+        switch (numMenu) {
+            case 1:
+                cambiarNombreDesafio(scanner, habitaciones, codigo,puntaje);
+                break;
+            case 2:
+                cambiarTipoDesafio(scanner, habitaciones, codigo,puntaje);
+                break;
+            case 4:
+                System.out.println("Saliendo de la modificación de habitación...");
+            break;
+            default:
+            System.out.println("Opción no válida. Saliendo de la modificación de habitación...");
+            break;
+            }
+            }
+        }
+    }
+    public static void cambiarNombreDesafio(Scanner scanner, ArbolAVL habitaciones, int codigo, int puntaje) {
+        String nombre;
+        System.out.println("Ingrese el nuevo nombre del desafío:");
+        nombre = scanner.next();
+        // Llamo a método de AVL que modifica el nombre del desafío y me devuelve un boolean
+        if (habitaciones.modificarNombreDesafio(codigo, puntaje, nombre)) {
+            System.out.println("Nombre del desafío modificado correctamente.");
+        } else {
+            System.out.println("No se encontró el desafío con el código ingresado.");
+        }
+    }
+    public static void cambiarTipoDesafio(Scanner scanner, ArbolAVL habitaciones, int codigo,int puntaje) {
+        String tipo;
+        System.out.println("Ingrese el nuevo tipo del desafío:");
+        tipo = scanner.next();
+        // Llamo a método de AVL que modifica el tipo del desafío y me devuelve un boolean
+        if (habitaciones.modificarTipoDesafio(codigo, puntaje, tipo)) {
+            System.out.println("Tipo del desafío modificado correctamente.");
+        } else {
+            System.out.println("No se encontró el desafío con el código ingresado.");
+        }
+    }
+    public static void eliminarDesafio(Scanner scanner, ArbolAVL habitaciones) {
+        int codigoHabitacion, puntaje;
+
+        System.out.println("--> Baja de desafío");
+        System.out.println("Ingrese el código de la habitación del desafío a eliminar:");
+        codigoHabitacion = scanner.nextInt();
+        if (!habitaciones.pertenece(codigoHabitacion)) {
+            System.out.println("No se encontró la habitación con el código ingresado. Por favor, ingrese un código válido.");
+        }else{
+        System.out.println("Ingrese el puntaje del desafío a eliminar:");
+        puntaje = scanner.nextInt();
+
+        if(habitaciones.eliminarDesafio(codigoHabitacion, puntaje)){
+            System.out.println("Desafío eliminado correctamente.");
+        } else {
+            System.out.println("No se encontró el desafío con los datos ingresados.");
+        }
+    }
+    }
+
 
 
 
@@ -395,15 +416,15 @@ public class main {
             System.out.println("10. Salir");
             System.out.print("Introduce un numero para avanzar: ");
         }
-        public static void mostrarMenu2habitacion(){
+        public static void mostrarMenuABMhabitacion(){
             System.out.println("2. MENU DE ABM Habitacion");
             System.out.println("1. crear de habitacion");
-            System.out.println("2. Baja de habitacion");
-            System.out.println("3. Modificación de habitación");
+            System.out.println("2. modificacion de habitacion");
+            System.out.println("3. eliminacion de habitación");
             System.out.println("4. Salir");
             System.out.print("Introduce un numero para avanzar: ");
         }
-        public static void mostrarMenu2desafio(){
+        public static void mostrarMenuABMdesafio(){
             System.out.println("2. MENU DE ABM desafio");
             System.out.println("1. crear de desafío");
             System.out.println("2. Baja de desafío");
@@ -438,16 +459,18 @@ public class main {
                     System.out.println("5. Salir");
                     System.out.print("Introduce un numero para elegir una consulta: ");
         }
-        public static void mostrarMenu2_3(){
-            System.out.println("2_3. MODIFICACION DE HABITACIÓN");
+        public static void mostrarMenuModificarHabitacion(){
+            System.out.println("Seleccionaste: Altas, Bajas y Modificaciones de habitaciones.");
+            System.out.println(". MODIFICACION DE HABITACIÓN");
             System.out.println("1. Modificar nombre de la habitación");
             System.out.println("2. Modificar planta de la habitación");
             System.out.println("3. Modificar medida de la habitación");
             System.out.println("4. Salir");
             System.out.print("Introduce un numero para elegir una modificación: ");
         }
-        public static void mostrarMenu2_6(){
-            System.out.println("2_6. MODIFICACION DE DESAFÍO");
+        public static void mostrarMenuModificardesafio(){
+            System.out.println("Seleccionaste: Altas, Bajas y Modificaciones de desafíos.");
+            System.out.println(". MODIFICACION DE DESAFÍO");
             System.out.println("1. Modificar nombre del desafío");
             System.out.println("2. Modificar tipo del desafío");
             System.out.println("3. Salir");

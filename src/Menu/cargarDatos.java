@@ -43,8 +43,24 @@ public class CargarDatos {
             System.out.println("Error al leer el archivo: " + error.getMessage());
         }
     }
+    public void cargarDatoLinea(String linea, ArbolAVL unArbol, Grafo unGrafo, HashMap<String, Equipo> unHash) {
+        switch (linea.charAt(0)) {
+                    case 'P':
+                        cargarPlano(linea,unGrafo);
+                        break;
+                    case 'H':
+                        cargarHabitaciones(linea,unArbol);
+                        break;
+                    case 'D':
+                        cargarDesafios(linea,unArbol);
+                        break;
+                    case 'E':
+                        cargarEquipos(linea,unArbol,unHash);
+                        break;
+                }
+            }
 
-    public void cargarDesafios(String linea,ArbolAVL unArbol) {
+    private void cargarDesafios(String linea,ArbolAVL unArbol) {
         int unPuntaje,unCodHab;
         String unNombre,unTipo;
         String[] partes = linea.split(";");
@@ -62,7 +78,7 @@ public class CargarDatos {
         habitacion.cargarDesafio(carga);
     }
 
-    public void cargarHabitaciones(String linea,ArbolAVL unArbol) {
+    private void cargarHabitaciones(String linea,ArbolAVL unArbol) {
         int unCodigo,unaPlanta,unaMedida;
         String unNombre;
         boolean tieneSalida;
@@ -123,5 +139,8 @@ public class CargarDatos {
         unPuntaje=Integer.parseInt(partes[3]);
 
         unGrafo.insertarArco(unInicio, unDestino, unPuntaje);
+    }
+    public static void hola(){
+        System.out.println("hola");
     }
 }
