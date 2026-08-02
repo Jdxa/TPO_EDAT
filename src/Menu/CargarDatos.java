@@ -12,7 +12,7 @@ import Modelo.Equipo;
 import Modelo.Habitacion;
 import Modelo.Desafio;
 
-public class GestorArchivos {
+public class CargarDatos {
 
     public void cargarDato(ArbolAVL unArbol, Grafo unGrafo, HashMap<String, Equipo> unHash) {
         String linea;
@@ -29,7 +29,7 @@ public class GestorArchivos {
                         cargarHabitaciones(linea,unArbol);
                         break;
                     case 'D':
-                        cargarDesafios(linea,unArbol);
+                        cargarDesafio(linea,unArbol);
                         break;
                     case 'E':
                         cargarEquipos(linea,unArbol,unHash);
@@ -61,7 +61,7 @@ public class GestorArchivos {
         unArbol.insertar(unCodigo, carga);
     }
 
-    private void cargarDesafios(String linea,ArbolAVL unArbol){
+    public void cargarDesafio(String linea,ArbolAVL unArbol){
         int unPuntaje,unCodHab;
         String unNombre,unTipo;
         String[] partes = linea.split(";");
