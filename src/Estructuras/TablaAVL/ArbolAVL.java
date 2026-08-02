@@ -402,4 +402,14 @@ public class ArbolAVL {
         }
         return exito;
     }
+
+    public String mostrarDesafio(Comparable codigoDesafio, Comparable numeroHabitacion) {
+        String des = "";
+        if (this.raiz != null) {
+            Habitacion hab = (Habitacion) recuperar(numeroHabitacion);
+            ArbolAVL desafios = hab.getDesafios();
+            des = desafios.recuperar(codigoDesafio).toString();
+        }
+        return des;
+    }
 }

@@ -2,7 +2,7 @@ package Menu;
 
 import java.util.HashMap;
 import java.util.Scanner;
-
+import Estructuras.EstructurasAux.*;
 import Estructuras.GrafoEtiquetado.Grafo;
 import Estructuras.TablaAVL.ArbolAVL;
 import Modelo.Desafio;
@@ -81,13 +81,25 @@ public class Principal {
                 case 4:
                     mostrarMenuDesafio();
                     numMenu = scanner.nextInt();
-
+                    Scanner sc = new Scanner(System.in);
                     switch (numMenu) {
                         case 1:
                             System.out.println("-> Ejecutando: mostrarDesafío...");
+                            sc = new Scanner(System.in);
+                            System.out.println("Ingrese el codigo de desafio: ");
+                            int codigoDesafio = sc.nextInt();
+                            System.out.println("Ingrese el numero de habitacion ");
+                            int numeroHabitacion = sc.nextInt();
+                            String strDes = habitaciones.mostrarDesafio(codigoDesafio, numeroHabitacion);
+                            System.out.println(strDes);
                             break;
                         case 2:
                             System.out.println("-> Ejecutando: mostrarDesafíosResueltos...");
+                            System.out.println("Ingrese el nombre del equipo: ");
+                            String des = sc.nextLine();
+                            des = mostrarDesafiosResueltos(des, equipo);
+                            System.out.println(des);
+                            
                             break;
                         case 3:
                             System.out.println("-> Ejecutando: verificarDesafíoResuelto...");
@@ -482,7 +494,19 @@ public class Principal {
     // punto 3
 
     // punto 4
+    private static String mostrarDesafiosResueltos(String eq, HashMap<String, Equipo> mapaEquipos) {
+        // Simplemente muestra la clave de los desafios
+        String desafios = "Error";
+        Equipo equipo = mapaEquipos.get(eq);
 
+        if (equipo != null) {
+            HashMap<Integer, Lista> desafiosCompletados = equipo.getDesafiosCompletados();
+            if (desafiosCompletados!= null) {
+                desafios = desafiosCompletados.toString();
+            }
+        }
+        return desafios;
+    }
     // punto 5 consultas sobre habitaciones
 
 }
