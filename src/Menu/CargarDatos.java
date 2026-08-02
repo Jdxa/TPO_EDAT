@@ -29,7 +29,7 @@ public class CargarDatos {
                         cargarHabitaciones(linea,unArbol);
                         break;
                     case 'D':
-                        cargarDesafios(linea,unArbol);
+                        cargarDesafio(linea,unArbol);
                         break;
                     case 'E':
                         cargarEquipos(linea,unArbol,unHash);

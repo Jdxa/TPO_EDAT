@@ -26,11 +26,11 @@ public class main {
                 case 1:
                     System.out.println("Seleccionaste: Carga inicial del sistema (desde archivo de texto).");
                     if(estaCargado){
+                        System.out.println(habitaciones.mostrarHabitacionPreorder());
                         System.out.println("Los datos ya fueron cargados previamente. No se puede cargar nuevamente.");
                         break;
                     }else{
                         archivo.cargarDato(habitaciones,planoCasa,equipo);
-                        System.out.println(habitaciones.toString());
                         estaCargado = true;
                     }
                     
@@ -211,6 +211,7 @@ public class main {
         }
         linea = "H;" + numero;
         System.out.println("Ingrese el nombre de la habitación:");
+
         palabra = scanner.next();
         linea += ";" + palabra;
         System.out.println("Ingrese la planta de la habitación:");
@@ -432,11 +433,11 @@ public class main {
             System.out.println("4. Salir");
             System.out.print("Introduce un numero para avanzar: ");
         }
-        public static void mostrarMenu2equipo(){
+        public static void mostrarMenuABMequipo(){
             System.out.println("2. MENU DE ABM equipo");
             System.out.println("1. crear de equipo");
             System.out.println("2. Baja de equipo");
-            System.out.println("3. Modificación de equipo");
+            System.out.println("3. Modificacgión de equipo");
             System.out.println("4. Salir");
             System.out.print("Introduce un numero para avanzar: ");
         }
