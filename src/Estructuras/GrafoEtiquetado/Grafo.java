@@ -461,7 +461,7 @@ public class Grafo {
         NodoVert nodoO = ubicarVertice(hab1);
         NodoVert nodoD = ubicarVertice(hab2);
         // si hab3 es nula me va a dar todos los caminos posibles de hab1 a hab2
-        if (nodoO != null  && nodoD != null) {
+        if (nodoO != null && nodoD != null) {
             Lista caminoActual = new Lista();
             sinPasarPorAux(nodoO, hab2, hab3, p, 0, caminoActual, caminosExitosos);
         }
@@ -470,7 +470,7 @@ public class Grafo {
 
     private void sinPasarPorAux(NodoVert n, Object dest, Object hab3, int p, int sumaActual, Lista caminoActual,
             Lista caminosExitosos) {
-            //si hab3 es nula nunca va a dar falso
+        // si hab3 es nula nunca va a dar falso
         if (!n.getElem().equals(hab3)) {
             // marco nodo en caminoactual
             caminoActual.insertar(n.getElem(), caminoActual.longitud() + 1);
