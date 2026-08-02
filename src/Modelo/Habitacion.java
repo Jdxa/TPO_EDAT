@@ -60,6 +60,11 @@ public class Habitacion {
     public boolean cargarDesafio(Desafio unDesafio){
         return desafios.insertar(unDesafio.getPuntaje(),unDesafio);
     }
+
+    public boolean eliminarDesafio(int puntaje){
+        return desafios.eliminar(puntaje);
+    }
+
     public ArbolAVL getDesafios(){
         return this.desafios;
     }

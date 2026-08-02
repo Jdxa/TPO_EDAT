@@ -12,7 +12,7 @@ import Modelo.Equipo;
 import Modelo.Habitacion;
 import Modelo.Desafio;
 
-public class CargarDatos {
+public class GestorArchivos {
 
     public void cargarDato(ArbolAVL unArbol, Grafo unGrafo, HashMap<String, Equipo> unHash) {
         String linea;
@@ -44,7 +44,7 @@ public class CargarDatos {
         }
     }
 
-    private void cargarHabitaciones(String linea,ArbolAVL unArbol) {
+    public void cargarHabitaciones(String linea,ArbolAVL unArbol) {
         int unCodigo,unaPlanta,unaMedida;
         String unNombre;
         boolean tieneSalida;
@@ -82,7 +82,7 @@ public class CargarDatos {
     private void cargarEquipos(String linea,ArbolAVL habitaciones,HashMap<String, Equipo> hashEquipos){
         String unNombre;
         int unPuntajeExig,unPuntajeAcum,unPuntajeAct,unCodHab;
-        Habitacion unaHabitacionActual, habAux;
+        Habitacion unaHabitacionActual;
         Equipo nuevoEquipo;
         //separo la linea en segmentos
         String[] partes = linea.split(";");
@@ -108,7 +108,7 @@ public class CargarDatos {
             //cargo el codigo de la habitacion y el puntaje del desafio
             nuevoEquipo.cargarDesafiosRealizados(codigoHabitacion,puntajeDesafio ); 
             
-        }   
+        } 
         //guardo el equipo en el hash de equipos
         hashEquipos.put(unNombre, nuevoEquipo);
     }
