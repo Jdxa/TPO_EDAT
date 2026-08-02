@@ -41,6 +41,7 @@ public class main {
                 case 2:
                     System.out.println("Seleccionaste: Altas, Bajas y Modificaciones (ABM) de habitaciones, desafíos y equipos.");
                     gestionABM(scanner, habitaciones, archivo);
+                    break;
                 case 3:
                     mostrarMenuHabitacion();
                     numMenu = scanner.nextInt();
@@ -200,8 +201,7 @@ public class main {
         System.out.println("Ingrese el tipo del desafio:");
         palabra = scanner.next();
         linea += ";" + palabra;
-
-        archivo.cargarDesafio(linea, habitaciones);
+        archivo.cargarDesafios(linea, habitaciones);
     }
     public static void modificarDesafio(Scanner scanner, ArbolAVL habitaciones) {
         int codigoHabitacion, puntaje;
@@ -245,7 +245,7 @@ public class main {
         System.out.println("Ingrese el puntaje del desafío a eliminar:");
         puntaje = scanner.nextInt();
 
-        if(habitaciones.eliminarDesafio(codigoHabitacion, puntaje){
+        if(habitaciones.eliminarDesafio(codigoHabitacion, puntaje)){
             System.out.println("Desafío eliminado correctamente.");
         } else {
             System.out.println("No se encontró el desafío con los datos ingresados.");

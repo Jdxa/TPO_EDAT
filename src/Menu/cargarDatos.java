@@ -44,24 +44,7 @@ public class CargarDatos {
         }
     }
 
-    public void cargarHabitaciones(String linea,ArbolAVL unArbol) {
-        int unCodigo,unaPlanta,unaMedida;
-        String unNombre;
-        boolean tieneSalida;
-        Habitacion carga;
-        String[] partes = linea.split(";");
-        
-        unCodigo=Integer.parseInt(partes[1]);
-        unNombre= partes[2];
-        unaPlanta=Integer.parseInt(partes[3]);
-        unaMedida=Integer.parseInt(partes[4]);
-        tieneSalida=(partes[5].equals("true"));
-        carga= new Habitacion(unCodigo,unNombre,unaPlanta,unaMedida,tieneSalida);
-
-        unArbol.insertar(unCodigo, carga);
-    }
-
-    public void cargarDesafio(String linea,ArbolAVL unArbol){
+    public void cargarDesafios(String linea,ArbolAVL unArbol) {
         int unPuntaje,unCodHab;
         String unNombre,unTipo;
         String[] partes = linea.split(";");
@@ -79,10 +62,28 @@ public class CargarDatos {
         habitacion.cargarDesafio(carga);
     }
 
+    public void cargarHabitaciones(String linea,ArbolAVL unArbol) {
+        int unCodigo,unaPlanta,unaMedida;
+        String unNombre;
+        boolean tieneSalida;
+        Habitacion carga;
+        String[] partes = linea.split(";");
+        
+        unCodigo=Integer.parseInt(partes[1]);
+        unNombre= partes[2];
+        unaPlanta=Integer.parseInt(partes[3]);
+        unaMedida=Integer.parseInt(partes[4]);
+        tieneSalida=(partes[5].equals("true"));
+        carga= new Habitacion(unCodigo,unNombre,unaPlanta,unaMedida,tieneSalida);
+
+        unArbol.insertar(unCodigo, carga);
+    }
+
+
     private void cargarEquipos(String linea,ArbolAVL habitaciones,HashMap<String, Equipo> hashEquipos){
         String unNombre;
         int unPuntajeExig,unPuntajeAcum,unPuntajeAct,unCodHab;
-        Habitacion unaHabitacionActual, habAux;
+        Habitacion unaHabitacionActual;
         Equipo nuevoEquipo;
         //separo la linea en segmentos
         String[] partes = linea.split(";");
@@ -101,14 +102,14 @@ public class CargarDatos {
         for(int i = 6; i < partes.length; i++ ){
             String texto = partes[i];
             texto = texto.replace("(", "").replace(")", "");
-            String [] separados = texto.split(","); 
+            String [] separados = texto.split(",");
             Integer codigoHabitacion = Integer.parseInt(separados[0].trim());
             Integer puntajeDesafio = Integer.parseInt(separados[1].trim());
 
             //cargo el codigo de la habitacion y el puntaje del desafio
             nuevoEquipo.cargarDesafiosRealizados(codigoHabitacion,puntajeDesafio ); 
             
-        } 
+        }
         //guardo el equipo en el hash de equipos
         hashEquipos.put(unNombre, nuevoEquipo);
     }
