@@ -85,6 +85,13 @@ public class Principal {
                     switch (numMenu) {
                         case 1:
                             System.out.println("-> Ejecutando: mostrarDesafío...");
+                            Scanner sc = new Scanner(System.in);
+                            System.out.println("Ingrese el codigo de desafio: ");
+                            int codigoDesafio = sc.nextInt();
+                            System.out.println("Ingrese el numero de habitacion ");
+                            int numeroHabitacion = sc.nextInt();
+                            String strDes =habitaciones.mostrarDesafio(codigoDesafio,numeroHabitacion);
+                            System.out.println(strDes);
                             break;
                         case 2:
                             System.out.println("-> Ejecutando: mostrarDesafíosResueltos...");
@@ -482,7 +489,7 @@ public class Principal {
     // punto 3
 
     // punto 4
-
+    
     // punto 5 consultas sobre habitaciones
 
 }
