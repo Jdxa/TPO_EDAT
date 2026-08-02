@@ -144,15 +144,15 @@ public class ArbolAVL {
         }
         return resultado;
     }
-    private boolean perteneceaux(NodoABB nodo, Comparable elem) {
+    private boolean perteneceaux(NodoAVL nodo, Comparable elem) {
         boolean esta = false;
         int comp = elem.compareTo(nodo.getElem());
         if (comp == 0) {
             esta = true;
         } else if (comp < 0) {
             // comparo si voy por izquierda o derecha
-            if (nodo.getIZquierdo() != null) {
-                esta = perteneceaux(nodo.getIZquierdo(), elem);
+            if (nodo.getIzquierdo() != null) {
+                esta = perteneceaux(nodo.getIzquierdo(), elem);
             }
         } else if (comp > 0) {
             // voy por rama derecha
@@ -347,24 +347,44 @@ public class ArbolAVL {
         }
         return exito;
     }
-    public boolean modificarPlantaHabitacion(int[] datos){
+    public boolean modificarPlantaHabitacion(int codigo ,int planta){
         boolean exito = false;
         if (this.raiz != null) {
-            Habitacion habitacion = (Habitacion) this.recuperar(datos[0]);
+            Habitacion habitacion = (Habitacion) this.recuperar(codigo);
             if (habitacion != null) {
-                habitacion.setPlanta(datos[1]);
+                habitacion.setPlanta(planta);
                 exito = true;
             }
         }
         return exito;
     }
-    public boolean modificarMedidaHabitacion(int[] datos){
+    public boolean modificarMedidaHabitacion(int codigo, int medida){
         boolean exito = false;
         if (this.raiz != null) {
-            Habitacion habitacion = (Habitacion) this.recuperar(datos[0]);
+            Habitacion habitacion = (Habitacion) this.recuperar(codigo);
             if (habitacion != null) {
-                habitacion.setMedida(datos[1]);
+                habitacion.setMedida(medida);
                 exito = true;
+            }
+        }
+        return exito;
+    }
+    public boolean eliminarDesafio(int codigo, int puntaje){
+        boolean exito = false;
+        if (this.raiz != null) {
+            Habitacion habitacion = (Habitacion) this.recuperar(codigo);
+            if (habitacion != null) {
+                exito = habitacion.eliminarDesafio(puntaje);
+            }
+        }
+        return exito;
+    }
+    public boolean perteneceDesafio(int codigo, int puntaje){
+        boolean exito = false;
+        if (this.raiz != null) {
+            Habitacion habitacion = (Habitacion) this.recuperar(codigo);
+            if (habitacion != null) {
+                exito = habitacion.getDesafios().pertenece(puntaje);
             }
         }
         return exito;

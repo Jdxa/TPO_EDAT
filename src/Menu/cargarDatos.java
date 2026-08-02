@@ -61,7 +61,7 @@ public class CargarDatos {
         unArbol.insertar(unCodigo, carga);
     }
 
-    private void cargarDesafios(String linea,ArbolAVL unArbol){
+    public void cargarDesafio(String linea,ArbolAVL unArbol){
         int unPuntaje,unCodHab;
         String unNombre,unTipo;
         String[] partes = linea.split(";");
