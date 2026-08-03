@@ -121,7 +121,7 @@ public class GestorArchivo {
             Integer puntajeDesafio = Integer.parseInt(separados[1].trim());
 
             //cargo el codigo de la habitacion y el puntaje del desafio
-            nuevoEquipo.cargarDesafiosRealizados(codigoHabitacion,puntajeDesafio ); 
+            nuevoEquipo.cargarDesafiosRealizados(codigoHabitacion,puntajeDesafio );
             
         }
         //guardo el equipo en el hash de equipos
