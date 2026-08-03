@@ -12,9 +12,9 @@ import Modelo.Equipo;
 import Modelo.Habitacion;
 import Modelo.Desafio;
 
-public class CargarDatos {
+public class GestorArchivo {
 
-    public void cargarDato(ArbolAVL unArbol, Grafo unGrafo, HashMap<String, Equipo> unHash) {
+    public void cargarDatos(ArbolAVL unArbol, Grafo unGrafo, HashMap<String, Equipo> unHash) {
         String linea;
         try {
             BufferedReader bufferLectura = new BufferedReader(new FileReader("archivoTxt\\setCargaEscapeRoom.txt"));
@@ -29,7 +29,7 @@ public class CargarDatos {
                         cargarHabitaciones(linea,unArbol);
                         break;
                     case 'D':
-                        cargarDesafio(linea,unArbol);
+                        cargarDesafios(linea,unArbol);
                         break;
                     case 'E':
                         cargarEquipos(linea,unArbol,unHash);

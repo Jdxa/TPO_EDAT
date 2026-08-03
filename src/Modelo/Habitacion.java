@@ -71,11 +71,7 @@ public class Habitacion {
 
     public String toString(){
         String str= "";
-        str = "codigo: "+this.codigo+", nombre: "+this.nombre+", planta: "+this.planta+", metrosCuadrados: "+this.metrosCuadrados+", tieneSalida: "+this.tieneSalida+", desafios: "+this.desafios.toString();
+        str = "codigo: "+this.codigo+", nombre: "+this.nombre+", planta: "+this.planta+", metrosCuadrados: "+this.metrosCuadrados+", tieneSalida: "+this.tieneSalida+", desafios: "+this.desafios.toStringDesafio();
         return str;
-    }
-
-    public String mostrarSusDesafios(){
-        return this.desafios.toString();
     }
 }
