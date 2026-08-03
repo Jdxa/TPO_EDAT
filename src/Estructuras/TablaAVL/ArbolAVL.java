@@ -24,7 +24,6 @@ public class ArbolAVL {
         this.raiz = eliminarPrivado(this.raiz, clave, exito);
         return exito[0];
     }
-
     public boolean pertenece(Comparable elem) {
         boolean exito = false;
         if (this.raiz != null) {
@@ -32,6 +31,7 @@ public class ArbolAVL {
         }
         return exito;
     }
+
 
     public Object recuperar(Comparable clave) {
         return recuperarPrivado(this.raiz, clave);
@@ -77,7 +77,7 @@ public class ArbolAVL {
         return listaResultado;
     }
 
-    @Override
+    
     public String toString() {
         String cadena = "Árbol AVL Vacío";
         if (this.raiz != null) {
@@ -86,6 +86,16 @@ public class ArbolAVL {
         return cadena;
     }
 
+    public String toStringDesafio() {
+
+    String cadena= "Sin Desafios";
+    if (this.raiz != null) {
+        cadena = toStringDesafioPrivado(this.raiz);
+        cadena= cadena.substring(0, cadena.length() - 2);
+    }
+    return cadena;
+}
+    
     // --- MÉTODOS PRIVADOS RECURSIVOS ---
 
     private NodoAVL insertarPrivado(NodoAVL nodoActual, Comparable clave, Object dato, boolean[] exito) {
@@ -165,7 +175,6 @@ public class ArbolAVL {
         }
         return esta;
     }
-
     private Object recuperarPrivado(NodoAVL nodoActual, Comparable clave) {
         Object encontrado = null;
         if (nodoActual != null) {
@@ -220,6 +229,20 @@ public class ArbolAVL {
         }
         return cadena;
     }
+
+    private String toStringDesafioPrivado(NodoAVL nodo) {
+    String cadena = "";
+    
+        if (nodo != null) {
+            cadena += toStringDesafioPrivado(nodo.getIzquierdo());
+            
+            cadena += ((Desafio) nodo.getElem()).toStringHabitacion() + ", ";
+            
+            cadena += toStringDesafioPrivado(nodo.getDerecho());
+        }
+        
+    return cadena; // Devolvemos la cadena acumulada en este paso
+}
 
     // --- MÉTODOS DE BALANCEO Y ALTURA ---
 
