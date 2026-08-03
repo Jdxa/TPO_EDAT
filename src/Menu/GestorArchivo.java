@@ -32,7 +32,7 @@ public class GestorArchivo {
                         cargarDesafios(linea,unArbol);
                         break;
                     case 'E':
-                        cargarEquipos(linea,unArbol,unHash);
+                        cargarEquipos(linea,unHash);
                         break;
                 }
             }
@@ -55,7 +55,7 @@ public class GestorArchivo {
                         cargarDesafios(linea,unArbol);
                         break;
                     case 'E':
-                        cargarEquipos(linea,unArbol,unHash);
+                        cargarEquipos(linea,unHash);
                         break;
                 }
             }
@@ -96,10 +96,9 @@ public class GestorArchivo {
     }
 
 
-    private void cargarEquipos(String linea,ArbolAVL habitaciones,HashMap<String, Equipo> hashEquipos){
+    private void cargarEquipos(String linea,HashMap<String, Equipo> hashEquipos){
         String unNombre;
         int unPuntajeExig,unPuntajeAcum,unPuntajeAct,unCodHab;
-        Habitacion unaHabitacionActual;
         Equipo nuevoEquipo;
         //separo la linea en segmentos
         String[] partes = linea.split(";");
@@ -111,9 +110,8 @@ public class GestorArchivo {
         unPuntajeAcum=Integer.parseInt(partes[3]);
         unCodHab=Integer.parseInt(partes[4]);
         unPuntajeAct=Integer.parseInt(partes[5]);
-        unaHabitacionActual=(Habitacion)habitaciones.recuperar(unCodHab);
 
-        nuevoEquipo=new Equipo(unNombre,unPuntajeExig,unPuntajeAcum,unaHabitacionActual,unPuntajeAct);
+        nuevoEquipo=new Equipo(unNombre,unPuntajeExig,unPuntajeAcum,unCodHab,unPuntajeAct);
         //para la lista de desafios resueltos, de forma (codigoHabitacion, puntajeDesafio)
         for(int i = 6; i < partes.length; i++ ){
             String texto = partes[i];
@@ -140,7 +138,5 @@ public class GestorArchivo {
 
         unGrafo.insertarArco(unInicio, unDestino, unPuntaje);
     }
-    public static void hola(){
-        System.out.println("hola");
-    }
+
 }
