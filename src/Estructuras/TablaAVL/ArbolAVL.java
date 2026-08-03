@@ -1,4 +1,5 @@
 package Estructuras.TablaAVL;
+
 import Estructuras.EstructurasAux.*;
 import Modelo.Desafio;
 import Modelo.Habitacion;
@@ -136,12 +137,13 @@ public class ArbolAVL {
                 exito[0] = true;
 
                 if (nodoActual.getIzquierdo() == null || nodoActual.getDerecho() == null) {
-                    resultado = (nodoActual.getIzquierdo() != null) ? nodoActual.getIzquierdo() : nodoActual.getDerecho();
+                    resultado = (nodoActual.getIzquierdo() != null) ? nodoActual.getIzquierdo()
+                            : nodoActual.getDerecho();
                 } else {
                     NodoAVL sucesor = buscarNodoMinimo(nodoActual.getDerecho());
                     nodoActual.setClave(sucesor.getClave());
                     nodoActual.setElem(sucesor.getElem());
-                    
+
                     nodoActual.setDerecho(eliminarPrivado(nodoActual.getDerecho(), sucesor.getClave(), exito));
                     resultado = nodoActual;
                 }
@@ -154,9 +156,10 @@ public class ArbolAVL {
         }
         return resultado;
     }
+
     private boolean perteneceaux(NodoAVL nodo, Comparable elem) {
         boolean esta = false;
-        int comp = elem.compareTo(nodo.getClave());
+        int comp = elem.compareTo(nodo.getElem());
         if (comp == 0) {
             esta = true;
         } else if (comp < 0) {
@@ -198,15 +201,15 @@ public class ArbolAVL {
     private void listarRangoPrivado(NodoAVL nodoActual, Comparable min, Comparable max, Lista lista) {
         if (nodoActual != null) {
             Comparable clave = nodoActual.getClave();
-            
+
             if (clave.compareTo(min) > 0) {
                 listarRangoPrivado(nodoActual.getIzquierdo(), min, max, lista);
             }
-            
+
             if (clave.compareTo(min) >= 0 && clave.compareTo(max) <= 0) {
                 lista.insertar(nodoActual.getElem(), lista.longitud() + 1);
             }
-            
+
             if (clave.compareTo(max) < 0) {
                 listarRangoPrivado(nodoActual.getDerecho(), min, max, lista);
             }
@@ -311,18 +314,20 @@ public class ArbolAVL {
         }
         return resultado;
     }
+
     //
-    public String mostrarHabitacion(int codigo){
-        String str= "No existe";
+    public String mostrarHabitacion(int codigo) {
+        String str = "No existe";
         if (this.raiz != null) {
             Object dato = this.recuperar(codigo);
-            if(dato != null){
-            str = dato.toString();
-           }
+            if (dato != null) {
+                str = dato.toString();
+            }
         }
         return str;
     }
-    public boolean eliminarDesafio(int[] datos){
+
+    public boolean eliminarDesafio(int[] datos) {
         boolean exito = false;
         if (this.raiz != null) {
             Habitacion habitacion = (Habitacion) this.recuperar(datos[0]);
@@ -332,7 +337,8 @@ public class ArbolAVL {
         }
         return exito;
     }
-    public boolean modificarNombreDesafio(int[] datos, String nuevoNombre){
+
+    public boolean modificarNombreDesafio(int[] datos, String nuevoNombre) {
         boolean exito = false;
         if (this.raiz != null) {
             Habitacion habitacion = (Habitacion) this.recuperar(datos[0]);
@@ -346,7 +352,8 @@ public class ArbolAVL {
         }
         return exito;
     }
-    public boolean modificarTipoDesafio(int[] datos, String nuevoTipo){
+
+    public boolean modificarTipoDesafio(int[] datos, String nuevoTipo) {
         boolean exito = false;
         if (this.raiz != null) {
             Habitacion habitacion = (Habitacion) this.recuperar(datos[0]);
@@ -360,7 +367,8 @@ public class ArbolAVL {
         }
         return exito;
     }
-    public boolean modificarNombreHabitacion(int codigo, String nuevoNombre){
+
+    public boolean modificarNombreHabitacion(int codigo, String nuevoNombre) {
         boolean exito = false;
         if (this.raiz != null) {
             Habitacion habitacion = (Habitacion) this.recuperar(codigo);
@@ -371,7 +379,8 @@ public class ArbolAVL {
         }
         return exito;
     }
-    public boolean modificarPlantaHabitacion(int codigo ,int planta){
+
+    public boolean modificarPlantaHabitacion(int codigo, int planta) {
         boolean exito = false;
         if (this.raiz != null) {
             Habitacion habitacion = (Habitacion) this.recuperar(codigo);
@@ -382,7 +391,8 @@ public class ArbolAVL {
         }
         return exito;
     }
-    public boolean modificarMedidaHabitacion(int codigo, int medida){
+
+    public boolean modificarMedidaHabitacion(int codigo, int medida) {
         boolean exito = false;
         if (this.raiz != null) {
             Habitacion habitacion = (Habitacion) this.recuperar(codigo);
@@ -393,7 +403,8 @@ public class ArbolAVL {
         }
         return exito;
     }
-    public boolean eliminarDesafio(int codigo, int puntaje){
+
+    public boolean eliminarDesafio(int codigo, int puntaje) {
         boolean exito = false;
         if (this.raiz != null) {
             Habitacion habitacion = (Habitacion) this.recuperar(codigo);
@@ -403,7 +414,8 @@ public class ArbolAVL {
         }
         return exito;
     }
-    public boolean perteneceDesafio(int codigo, int puntaje){
+
+    public boolean perteneceDesafio(int codigo, int puntaje) {
         boolean exito = false;
         if (this.raiz != null) {
             Habitacion habitacion = (Habitacion) this.recuperar(codigo);
@@ -413,32 +425,14 @@ public class ArbolAVL {
         }
         return exito;
     }
-    public boolean modificarNombreDesafio(int codigo, int puntaje, String nuevoNombre){
-        boolean exito = false;
+
+    public String mostrarDesafio(Comparable codigoDesafio, Comparable numeroHabitacion) {
+        String des = "";
         if (this.raiz != null) {
-            Habitacion habitacion = (Habitacion) this.recuperar(codigo);
-            if (habitacion != null) {
-                Desafio desafio = (Desafio) habitacion.getDesafios().recuperar(puntaje);
-                if (desafio != null) {
-                    desafio.setNombre(nuevoNombre);
-                    exito = true;
-                }
-            }
+            Habitacion hab = (Habitacion) recuperar(numeroHabitacion);
+            ArbolAVL desafios = hab.getDesafios();
+            des = desafios.recuperar(codigoDesafio).toString();
         }
-        return exito;
-    }
-    public boolean modificarTipoDesafio(int codigo, int puntaje, String nuevoTipo){
-        boolean exito = false;
-        if (this.raiz != null) {
-            Habitacion habitacion = (Habitacion) this.recuperar(codigo);
-            if (habitacion != null) {
-                Desafio desafio = (Desafio) habitacion.getDesafios().recuperar(puntaje);
-                if (desafio != null) {
-                    desafio.setTipo(nuevoTipo);
-                    exito = true;
-                }
-            }
-        }
-        return exito;
+        return des;
     }
 }

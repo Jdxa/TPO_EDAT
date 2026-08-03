@@ -65,6 +65,7 @@ public class Equipo {
         return this.desafiosCompletados;
     }
 
-
-    
+    public String toString(){
+        return "nombre: "+this.nombre+", puntajeExigido: "+this.puntajeExigido+", puntajeAcumulado: "+this.puntajeAcumulado+", habitacionActual: "+this.habitacionActual.toString()+", puntajeActual: "+this.puntajeActual+", desafiosCompletados: "+this.desafiosCompletados.toString();
+    }
 }

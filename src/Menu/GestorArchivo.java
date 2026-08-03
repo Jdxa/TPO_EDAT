@@ -18,115 +18,115 @@ public class GestorArchivo {
         String linea;
         try {
             BufferedReader bufferLectura = new BufferedReader(new FileReader("archivoTxt\\setCargaEscapeRoom.txt"));
-            
+
             while ((linea = bufferLectura.readLine()) != null) {
 
                 switch (linea.charAt(0)) {
                     case 'P':
-                        cargarPlano(linea,unGrafo);
+                        cargarPlano(linea, unGrafo);
                         break;
                     case 'H':
-                        cargarHabitaciones(linea,unArbol);
+                        cargarHabitaciones(linea, unArbol);
                         break;
                     case 'D':
-                        cargarDesafios(linea,unArbol);
+                        cargarDesafios(linea, unArbol);
                         break;
                     case 'E':
-                        cargarEquipos(linea,unArbol,unHash);
-                        break;
-                }
-            }
-            
-            bufferLectura.close();
-            
-        } catch(IOException error) {
-            System.out.println("Error al leer el archivo: " + error.getMessage());
-        }
-    }
-    public void cargarDatoLinea(String linea, ArbolAVL unArbol, Grafo unGrafo, HashMap<String, Equipo> unHash) {
-        switch (linea.charAt(0)) {
-                    case 'P':
-                        cargarPlano(linea,unGrafo);
-                        break;
-                    case 'H':
-                        cargarHabitaciones(linea,unArbol);
-                        break;
-                    case 'D':
-                        cargarDesafios(linea,unArbol);
-                        break;
-                    case 'E':
-                        cargarEquipos(linea,unArbol,unHash);
+                        cargarEquipos(linea, unArbol, unHash);
                         break;
                 }
             }
 
-    private void cargarDesafios(String linea,ArbolAVL unArbol) {
-        int unPuntaje,unCodHab;
-        String unNombre,unTipo;
+            bufferLectura.close();
+
+        } catch (IOException error) {
+            System.out.println("Error al leer el archivo: " + error.getMessage());
+        }
+    }
+
+    public void cargarDatoLinea(String linea, ArbolAVL unArbol, Grafo unGrafo, HashMap<String, Equipo> unHash) {
+        switch (linea.charAt(0)) {
+            case 'P':
+                cargarPlano(linea, unGrafo);
+                break;
+            case 'H':
+                cargarHabitaciones(linea, unArbol);
+                break;
+            case 'D':
+                cargarDesafios(linea, unArbol);
+                break;
+            case 'E':
+                cargarEquipos(linea, unArbol, unHash);
+                break;
+        }
+    }
+
+    private void cargarDesafios(String linea, ArbolAVL unArbol) {
+        int unPuntaje, unCodHab;
+        String unNombre, unTipo;
         String[] partes = linea.split(";");
         Desafio carga;
         Habitacion habitacion;
 
-        unPuntaje=Integer.parseInt(partes[1]);
-        unCodHab= Integer.parseInt(partes[2]);
-        unNombre=partes[3];
-        unTipo=partes[4];
+        unPuntaje = Integer.parseInt(partes[1]);
+        unCodHab = Integer.parseInt(partes[2]);
+        unNombre = partes[3];
+        unTipo = partes[4];
 
-        carga = new Desafio(unPuntaje,unCodHab,unNombre,unTipo);
-        
-        habitacion=(Habitacion)unArbol.recuperar(unCodHab);
+        carga = new Desafio(unPuntaje, unCodHab, unNombre, unTipo);
+
+        habitacion = (Habitacion) unArbol.recuperar(unCodHab);
         habitacion.cargarDesafio(carga);
     }
 
-    private void cargarHabitaciones(String linea,ArbolAVL unArbol) {
-        int unCodigo,unaPlanta,unaMedida;
+    private void cargarHabitaciones(String linea, ArbolAVL unArbol) {
+        int unCodigo, unaPlanta, unaMedida;
         String unNombre;
         boolean tieneSalida;
         Habitacion carga;
         String[] partes = linea.split(";");
-        
-        unCodigo=Integer.parseInt(partes[1]);
-        unNombre= partes[2];
-        unaPlanta=Integer.parseInt(partes[3]);
-        unaMedida=Integer.parseInt(partes[4]);
-        tieneSalida=(partes[5].equals("true"));
-        carga= new Habitacion(unCodigo,unNombre,unaPlanta,unaMedida,tieneSalida);
+
+        unCodigo = Integer.parseInt(partes[1]);
+        unNombre = partes[2];
+        unaPlanta = Integer.parseInt(partes[3]);
+        unaMedida = Integer.parseInt(partes[4]);
+        tieneSalida = (partes[5].equals("true"));
+        carga = new Habitacion(unCodigo, unNombre, unaPlanta, unaMedida, tieneSalida);
 
         unArbol.insertar(unCodigo, carga);
     }
 
-
-    private void cargarEquipos(String linea,ArbolAVL habitaciones,HashMap<String, Equipo> hashEquipos){
+    private void cargarEquipos(String linea, ArbolAVL habitaciones, HashMap<String, Equipo> hashEquipos) {
         String unNombre;
-        int unPuntajeExig,unPuntajeAcum,unPuntajeAct,unCodHab;
+        int unPuntajeExig, unPuntajeAcum, unPuntajeAct, unCodHab;
         Habitacion unaHabitacionActual;
         Equipo nuevoEquipo;
-        //separo la linea en segmentos
+        // separo la linea en segmentos
         String[] partes = linea.split(";");
-        
 
-        //obtengo los primeros valores
-        unNombre=partes[1];
-        unPuntajeExig= Integer.parseInt(partes[2]);
-        unPuntajeAcum=Integer.parseInt(partes[3]);
-        unCodHab=Integer.parseInt(partes[4]);
-        unPuntajeAct=Integer.parseInt(partes[5]);
-        unaHabitacionActual=(Habitacion)habitaciones.recuperar(unCodHab);
+        // obtengo los primeros valores
+        unNombre = partes[1];
+        unPuntajeExig = Integer.parseInt(partes[2]);
+        unPuntajeAcum = Integer.parseInt(partes[3]);
+        unCodHab = Integer.parseInt(partes[4]);
+        unPuntajeAct = Integer.parseInt(partes[5]);
+        unaHabitacionActual = (Habitacion) habitaciones.recuperar(unCodHab);
 
-        nuevoEquipo=new Equipo(unNombre,unPuntajeExig,unPuntajeAcum,unaHabitacionActual,unPuntajeAct);
-        //para la lista de desafios resueltos, de forma (codigoHabitacion, puntajeDesafio)
-        for(int i = 6; i < partes.length; i++ ){
+        nuevoEquipo = new Equipo(unNombre, unPuntajeExig, unPuntajeAcum, unaHabitacionActual, unPuntajeAct);
+        // para la lista de desafios resueltos, de forma (codigoHabitacion,
+        // puntajeDesafio)
+        for (int i = 6; i < partes.length; i++) {
             String texto = partes[i];
             texto = texto.replace("(", "").replace(")", "");
-            String [] separados = texto.split(",");
+            String[] separados = texto.split(",");
             Integer codigoHabitacion = Integer.parseInt(separados[0].trim());
             Integer puntajeDesafio = Integer.parseInt(separados[1].trim());
 
-            //cargo el codigo de la habitacion y el puntaje del desafio
-            nuevoEquipo.cargarDesafiosRealizados(codigoHabitacion,puntajeDesafio ); 
-            
+            // cargo el codigo de la habitacion y el puntaje del desafio
+            nuevoEquipo.cargarDesafiosRealizados(codigoHabitacion, puntajeDesafio);
+
         }
-        //guardo el equipo en el hash de equipos
+
         hashEquipos.put(unNombre, nuevoEquipo);
     }
 
@@ -140,7 +140,7 @@ public class GestorArchivo {
 
         unGrafo.insertarArco(unInicio, unDestino, unPuntaje);
     }
-    public static void hola(){
+    public static void hola() {
         System.out.println("hola");
     }
 }
