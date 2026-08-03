@@ -322,55 +322,7 @@ public class ArbolAVL {
         }
         return str;
     }
-    public boolean eliminarDesafio(int[] datos){
-        boolean exito = false;
-        if (this.raiz != null) {
-            Habitacion habitacion = (Habitacion) this.recuperar(datos[0]);
-            if (habitacion != null) {
-                exito = habitacion.eliminarDesafio(datos[1]);
-            }
-        }
-        return exito;
-    }
-    public boolean modificarNombreDesafio(int[] datos, String nuevoNombre){
-        boolean exito = false;
-        if (this.raiz != null) {
-            Habitacion habitacion = (Habitacion) this.recuperar(datos[0]);
-            if (habitacion != null) {
-                Desafio desafio = (Desafio) habitacion.getDesafios().recuperar(datos[1]);
-                if (desafio != null) {
-                    desafio.setNombre(nuevoNombre);
-                    exito = true;
-                }
-            }
-        }
-        return exito;
-    }
-    public boolean modificarTipoDesafio(int[] datos, String nuevoTipo){
-        boolean exito = false;
-        if (this.raiz != null) {
-            Habitacion habitacion = (Habitacion) this.recuperar(datos[0]);
-            if (habitacion != null) {
-                Desafio desafio = (Desafio) habitacion.getDesafios().recuperar(datos[1]);
-                if (desafio != null) {
-                    desafio.setTipo(nuevoTipo);
-                    exito = true;
-                }
-            }
-        }
-        return exito;
-    }
-    public boolean modificarNombreHabitacion(int codigo, String nuevoNombre){
-        boolean exito = false;
-        if (this.raiz != null) {
-            Habitacion habitacion = (Habitacion) this.recuperar(codigo);
-            if (habitacion != null) {
-                habitacion.setNombre(nuevoNombre);
-                exito = true;
-            }
-        }
-        return exito;
-    }
+    
     public boolean modificarPlantaHabitacion(int codigo ,int planta){
         boolean exito = false;
         if (this.raiz != null) {
