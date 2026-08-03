@@ -32,7 +32,7 @@ public class GestorArchivo {
                         cargarDesafios(linea,unArbol);
                         break;
                     case 'E':
-                        cargarEquipos(linea,unArbol,unHash);
+                        cargarEquipos(linea, unArbol, unHash);
                         break;
                 }
             }
@@ -111,9 +111,8 @@ public class GestorArchivo {
         unPuntajeAcum=Integer.parseInt(partes[3]);
         unCodHab=Integer.parseInt(partes[4]);
         unPuntajeAct=Integer.parseInt(partes[5]);
-        unaHabitacionActual=(Habitacion)habitaciones.recuperar(unCodHab);
 
-        nuevoEquipo=new Equipo(unNombre,unPuntajeExig,unPuntajeAcum,unaHabitacionActual,unPuntajeAct);
+        nuevoEquipo=new Equipo(unNombre,unPuntajeExig,unPuntajeAcum,unCodHab,unPuntajeAct);
         //para la lista de desafios resueltos, de forma (codigoHabitacion, puntajeDesafio)
         for(int i = 6; i < partes.length; i++ ){
             String texto = partes[i];
@@ -143,4 +142,5 @@ public class GestorArchivo {
     public static void hola(){
         System.out.println("hola");
     }
+
 }
