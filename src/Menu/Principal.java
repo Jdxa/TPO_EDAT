@@ -37,7 +37,8 @@ public class Principal{
                     break;
                     
                 case 2:
-                    gestionABM(scanner, habitaciones, archivo);
+
+                gestionABM(scanner, habitaciones, archivo, equipo);
                     break;
                 case 3:
                     mostrarMenuHabitacion();
@@ -112,7 +113,7 @@ public class Principal{
         scanner.close();
 
 }
-    public static void gestionABM(Scanner scanner,ArbolAVL habitaciones, GestorArchivo archivo) {
+    public static void gestionABM(Scanner scanner,ArbolAVL habitaciones, GestorArchivo archivo, HashMap<String, Equipo> equipos) {
         System.out.println("Seleccionaste: Altas, Bajas y Modificaciones (ABM) de habitaciones, desafíos y equipos.");
         mostrarMenuABM();
         int opcionABM = scanner.nextInt();
@@ -125,7 +126,7 @@ public class Principal{
                 desafiosABM(scanner, habitaciones, archivo);
                 break;
             case 3:
-                //equiposABM();
+                equiposABM(scanner, equipos, archivo);
                 break;
             case 4:
                 System.out.println("Saliendo del menú de ABM...");
@@ -181,14 +182,15 @@ public class Principal{
                 break;
         }
     }
-     public static void equiposABM(Scanner scanner,ArbolAVL habitaciones){
+     public static void equiposABM(Scanner scanner,HashMap <String, Equipo> equipos, GestorArchivo archivo){
         int opcionABM;
         mostrarMenuABMequipo();
         opcionABM = scanner.nextInt();
         System.out.println("Seleccionaste: Altas, Bajas y Modificaciones de equipos.");
         switch (opcionABM) {
             case 1:
-                //agregarEquipo(scanner, habitaciones);
+                scanner.nextLine();
+                agregarEquipo(scanner, equipos, archivo);
                 break;
             case 2:
                 //modificarEquipo(scanner, habitaciones);
@@ -400,6 +402,32 @@ public class Principal{
         }
     }
     }
+
+    public static void agregarEquipo(Scanner scanner, HashMap<String, Equipo> equipos,GestorArchivo archivo){
+    
+        String nombre,linea;
+        int puntajeExigido, puntajeAcumulado, puntajeActual;
+        System.out.println("--> Crear de equipo");
+        System.out.println("Ingrese el nombre del equipo:");
+        nombre = scanner.nextLine();
+        if(equipos.containsKey(nombre)){
+            System.out.println("El nombre ingresado ya existe. Por favor, ingrese un nombre diferente:");
+        }else{
+        linea="E;"+nombre;
+        System.out.println("Ingrese el puntaje exigido del equipo:");
+        puntajeExigido = scanner.nextInt();
+        linea += ";"+puntajeExigido;
+        System.out.println("Ingrese el puntaje acumulado del equipo:");
+        puntajeAcumulado = scanner.nextInt();
+        linea +=";"+puntajeAcumulado;
+        System.out.println("Ingrese el puntaje actual del equipo:");
+        puntajeActual = scanner.nextInt();
+        linea +=";"+puntajeActual;
+        
+        archivo.cargarDatoLinea(linea, null, null, equipos);
+        System.out.println("Equipo creado exitosamente.");
+        }
+    }
     public static void gestionConsultaGeneral(Scanner scanner,ArbolAVL habitaciones, Grafo planoCasa, HashMap<String, Equipo> equipos) {
         System.out.println("Consulta general de habitaciones, desafíos y equipos.");
         int numMenu;
@@ -407,12 +435,16 @@ public class Principal{
         numMenu=scanner.nextInt();
         switch (numMenu) {
             case 1:
-                
+                System.out.println("Imprimiendo AVL de habitaciones.");
                 break;
             case 2:
+                System.out.println("Imprimiendo Grafo de habitaciones.");
                 break;
-            
             case 3:
+                System.out.println("Imprimiendo Hash de equipos.");
+                break;
+            case 4:
+                System.out.println("Saliendo de la consulta general...");
                 break;
 
             default:
@@ -507,6 +539,7 @@ public class Principal{
             System.out.println("1. Ver AVL");
             System.out.println("2. Ver Grafo");
             System.out.println("3. Ver Hash");
+            System.out.println("4. Salir");
         }
     
     //punto 3
