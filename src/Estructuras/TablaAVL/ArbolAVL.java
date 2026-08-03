@@ -379,6 +379,19 @@ public class ArbolAVL {
         }
         return exito;
     }
+    
+    public boolean modificarNombreHabitacion(int codigo, String nuevoNombre){
+        boolean exito = false;
+        if (this.raiz != null) {
+            Habitacion habitacion = (Habitacion) this.recuperar(codigo);
+            if (habitacion != null) {
+                habitacion.setNombre(nuevoNombre);
+                exito = true;
+            }
+        }
+        return exito;
+    }
+
     public boolean modificarTipoDesafio(int codigo, int puntaje, String nuevoTipo){
         boolean exito = false;
         if (this.raiz != null) {
