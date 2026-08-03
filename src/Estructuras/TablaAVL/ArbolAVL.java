@@ -1,5 +1,7 @@
 package Estructuras.TablaAVL;
 import Estructuras.EstructurasAux.*;
+import Modelo.Desafio;
+import Modelo.Habitacion;
 
 public class ArbolAVL {
     private NodoAVL raiz;
@@ -21,6 +23,14 @@ public class ArbolAVL {
         this.raiz = eliminarPrivado(this.raiz, clave, exito);
         return exito[0];
     }
+    public boolean pertenece(Comparable elem) {
+        boolean exito = false;
+        if (this.raiz != null) {
+            exito = perteneceaux(this.raiz, elem);
+        }
+        return exito;
+    }
+
 
     public Object recuperar(Comparable clave) {
         return recuperarPrivado(this.raiz, clave);
@@ -66,7 +76,7 @@ public class ArbolAVL {
         return listaResultado;
     }
 
-    @Override
+    
     public String toString() {
         String cadena = "Árbol AVL Vacío";
         if (this.raiz != null) {
@@ -75,6 +85,16 @@ public class ArbolAVL {
         return cadena;
     }
 
+    public String toStringDesafio() {
+
+    String cadena= "Sin Desafios";
+    if (this.raiz != null) {
+        cadena = toStringDesafioPrivado(this.raiz);
+        cadena= cadena.substring(0, cadena.length() - 2);
+    }
+    return cadena;
+}
+    
     // --- MÉTODOS PRIVADOS RECURSIVOS ---
 
     private NodoAVL insertarPrivado(NodoAVL nodoActual, Comparable clave, Object dato, boolean[] exito) {
@@ -134,7 +154,24 @@ public class ArbolAVL {
         }
         return resultado;
     }
-
+    private boolean perteneceaux(NodoAVL nodo, Comparable elem) {
+        boolean esta = false;
+        int comp = elem.compareTo(nodo.getClave());
+        if (comp == 0) {
+            esta = true;
+        } else if (comp < 0) {
+            // comparo si voy por izquierda o derecha
+            if (nodo.getIzquierdo() != null) {
+                esta = perteneceaux(nodo.getIzquierdo(), elem);
+            }
+        } else if (comp > 0) {
+            // voy por rama derecha
+            if (nodo.getDerecho() != null) {
+                esta = perteneceaux(nodo.getDerecho(), elem);
+            }
+        }
+        return esta;
+    }
     private Object recuperarPrivado(NodoAVL nodoActual, Comparable clave) {
         Object encontrado = null;
         if (nodoActual != null) {
@@ -189,6 +226,20 @@ public class ArbolAVL {
         }
         return cadena;
     }
+
+    private String toStringDesafioPrivado(NodoAVL nodo) {
+    String cadena = "";
+    
+        if (nodo != null) {
+            cadena += toStringDesafioPrivado(nodo.getIzquierdo());
+            
+            cadena += ((Desafio) nodo.getElem()).toStringHabitacion() + ", ";
+            
+            cadena += toStringDesafioPrivado(nodo.getDerecho());
+        }
+        
+    return cadena; // Devolvemos la cadena acumulada en este paso
+}
 
     // --- MÉTODOS DE BALANCEO Y ALTURA ---
 
@@ -270,5 +321,124 @@ public class ArbolAVL {
            }
         }
         return str;
+    }
+    public boolean eliminarDesafio(int[] datos){
+        boolean exito = false;
+        if (this.raiz != null) {
+            Habitacion habitacion = (Habitacion) this.recuperar(datos[0]);
+            if (habitacion != null) {
+                exito = habitacion.eliminarDesafio(datos[1]);
+            }
+        }
+        return exito;
+    }
+    public boolean modificarNombreDesafio(int[] datos, String nuevoNombre){
+        boolean exito = false;
+        if (this.raiz != null) {
+            Habitacion habitacion = (Habitacion) this.recuperar(datos[0]);
+            if (habitacion != null) {
+                Desafio desafio = (Desafio) habitacion.getDesafios().recuperar(datos[1]);
+                if (desafio != null) {
+                    desafio.setNombre(nuevoNombre);
+                    exito = true;
+                }
+            }
+        }
+        return exito;
+    }
+    public boolean modificarTipoDesafio(int[] datos, String nuevoTipo){
+        boolean exito = false;
+        if (this.raiz != null) {
+            Habitacion habitacion = (Habitacion) this.recuperar(datos[0]);
+            if (habitacion != null) {
+                Desafio desafio = (Desafio) habitacion.getDesafios().recuperar(datos[1]);
+                if (desafio != null) {
+                    desafio.setTipo(nuevoTipo);
+                    exito = true;
+                }
+            }
+        }
+        return exito;
+    }
+    public boolean modificarNombreHabitacion(int codigo, String nuevoNombre){
+        boolean exito = false;
+        if (this.raiz != null) {
+            Habitacion habitacion = (Habitacion) this.recuperar(codigo);
+            if (habitacion != null) {
+                habitacion.setNombre(nuevoNombre);
+                exito = true;
+            }
+        }
+        return exito;
+    }
+    public boolean modificarPlantaHabitacion(int codigo ,int planta){
+        boolean exito = false;
+        if (this.raiz != null) {
+            Habitacion habitacion = (Habitacion) this.recuperar(codigo);
+            if (habitacion != null) {
+                habitacion.setPlanta(planta);
+                exito = true;
+            }
+        }
+        return exito;
+    }
+    public boolean modificarMedidaHabitacion(int codigo, int medida){
+        boolean exito = false;
+        if (this.raiz != null) {
+            Habitacion habitacion = (Habitacion) this.recuperar(codigo);
+            if (habitacion != null) {
+                habitacion.setMedida(medida);
+                exito = true;
+            }
+        }
+        return exito;
+    }
+    public boolean eliminarDesafio(int codigo, int puntaje){
+        boolean exito = false;
+        if (this.raiz != null) {
+            Habitacion habitacion = (Habitacion) this.recuperar(codigo);
+            if (habitacion != null) {
+                exito = habitacion.eliminarDesafio(puntaje);
+            }
+        }
+        return exito;
+    }
+    public boolean perteneceDesafio(int codigo, int puntaje){
+        boolean exito = false;
+        if (this.raiz != null) {
+            Habitacion habitacion = (Habitacion) this.recuperar(codigo);
+            if (habitacion != null) {
+                exito = habitacion.getDesafios().pertenece(puntaje);
+            }
+        }
+        return exito;
+    }
+    public boolean modificarNombreDesafio(int codigo, int puntaje, String nuevoNombre){
+        boolean exito = false;
+        if (this.raiz != null) {
+            Habitacion habitacion = (Habitacion) this.recuperar(codigo);
+            if (habitacion != null) {
+                Desafio desafio = (Desafio) habitacion.getDesafios().recuperar(puntaje);
+                if (desafio != null) {
+                    desafio.setNombre(nuevoNombre);
+                    exito = true;
+                }
+            }
+        }
+        return exito;
+    }
+    public boolean modificarTipoDesafio(int codigo, int puntaje, String nuevoTipo){
+        boolean exito = false;
+        if (this.raiz != null) {
+            Habitacion habitacion = (Habitacion) this.recuperar(codigo);
+            if (habitacion != null) {
+                Desafio desafio = (Desafio) habitacion.getDesafios().recuperar(puntaje);
+                if (desafio != null) {
+                    desafio.setTipo(nuevoTipo);
+                    exito = true;
+                }
+            }
+        }
+        return exito;
     }
 }

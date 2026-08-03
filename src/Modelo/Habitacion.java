@@ -60,13 +60,18 @@ public class Habitacion {
     public boolean cargarDesafio(Desafio unDesafio){
         return desafios.insertar(unDesafio.getPuntaje(),unDesafio);
     }
+
+    public boolean eliminarDesafio(int puntaje){
+        return desafios.eliminar(puntaje);
+    }
+
     public ArbolAVL getDesafios(){
         return this.desafios;
     }
 
     public String toString(){
         String str= "";
-        str = "codigo: "+this.codigo+", nombre: "+this.nombre+", planta: "+this.planta+", metrosCuadrados: "+this.metrosCuadrados+", tieneSalida: "+this.tieneSalida+", desafios: "+this.desafios.toString();
+        str = "codigo: "+this.codigo+", nombre: "+this.nombre+", planta: "+this.planta+", metrosCuadrados: "+this.metrosCuadrados+", tieneSalida: "+this.tieneSalida+", desafios: "+this.desafios.toStringDesafio();
         return str;
     }
 }
