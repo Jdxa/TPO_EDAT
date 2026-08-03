@@ -217,7 +217,8 @@ public class Principal{
 
         linea = "H;" + numero;
         System.out.println("Ingrese el nombre de la habitación:");
-        palabra = scanner.next();
+        scanner.nextLine();
+        palabra = scanner.nextLine();
         linea += ";" + palabra;
         System.out.println("Ingrese la planta de la habitación:");
         numero = scanner.nextInt();
@@ -240,6 +241,7 @@ public class Principal{
         numMenu=scanner.nextInt();
         switch (numMenu) {
             case 1:
+                scanner.nextLine();
                 cambiarNombreHabitacion(scanner, habitaciones, codigo);
                 break;
             case 2:
@@ -263,7 +265,7 @@ public class Principal{
     public static void cambiarNombreHabitacion(Scanner scanner, ArbolAVL habitaciones, int codigo) {
         String nombre;
         System.out.println("Ingrese el nuevo nombre de la habitación:");
-        nombre = scanner.next();
+        nombre = scanner.nextLine();
         habitaciones.modificarNombreHabitacion(codigo, nombre);
         System.out.println("Nombre de la habitación modificado correctamente.");
     }
@@ -314,12 +316,14 @@ public class Principal{
         }
         linea = "D;" + puntaje+";"+codigoHabitacion;
         System.out.println("Ingrese el nombre del desafio:");
-        palabra = scanner.next();
+        scanner.nextLine();
+        palabra = scanner.nextLine();
         linea += ";" + palabra;
         System.out.println("Ingrese el tipo del desafio:");
         palabra = scanner.next();
         linea += ";" + palabra;
         archivo.cargarDatoLinea(linea, habitaciones, null, null);
+        System.out.println("Desafío creado exitosamente.");
     }
 
     public static void modificarDesafio(Scanner scanner, ArbolAVL habitaciones) {
@@ -339,6 +343,7 @@ public class Principal{
         numMenu=scanner.nextInt();
         switch (numMenu) {
             case 1:
+                scanner.nextLine();
                 cambiarNombreDesafio(scanner, habitaciones, codigo,puntaje);
                 break;
             case 2:
@@ -357,7 +362,7 @@ public class Principal{
     public static void cambiarNombreDesafio(Scanner scanner, ArbolAVL habitaciones, int codigo, int puntaje) {
         String nombre;
         System.out.println("Ingrese el nuevo nombre del desafío:");
-        nombre = scanner.next();
+        nombre = scanner.nextLine();
         // Llamo a método de AVL que modifica el nombre del desafío y me devuelve un boolean
         if (habitaciones.modificarNombreDesafio(codigo, puntaje, nombre)) {
             System.out.println("Nombre del desafío modificado correctamente.");
