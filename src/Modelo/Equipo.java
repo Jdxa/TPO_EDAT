@@ -7,18 +7,18 @@ public class Equipo {
     private String nombre;
     private int puntajeExigido;
     private int puntajeAcumulado;
-    private Habitacion habitacionActual;
+    private int codigoHabitacionActual;
     private int puntajeActual;
     private HashMap<Integer, Lista> desafiosCompletados;
 
 
-    public Equipo(String unNombre, int unPuntExigido, int unPuntAcumulado, Habitacion unaHabActual, int unPuntActual){
+    public Equipo(String unNombre, int unPuntExigido, int unPuntAcumulado, int unaHabActual, int unPuntActual){
         this.nombre = unNombre;
         this.puntajeExigido = unPuntExigido;
         this.puntajeAcumulado = unPuntAcumulado;
-        this.habitacionActual = unaHabActual;
+        this.codigoHabitacionActual = unaHabActual;
         this.puntajeActual = unPuntActual;
-        desafiosCompletados = new HashMap<>();
+        desafiosCompletados = new HashMap<Integer, Lista>();
 
     }
     //Nombre desafio
@@ -43,11 +43,11 @@ public class Equipo {
         this.puntajeAcumulado = unPuntAcumulado;
     }
     //Habitacion
-     public Habitacion getHabitacionActual(){
-        return this.habitacionActual;
+     public int getCodigoHabitacionActual(){
+        return this.codigoHabitacionActual;
     }
-    public void setNombre(Habitacion unaHabitacion){
-        this.habitacionActual = unaHabitacion;
+    public void setCodigoHabitacionActual(int unCodigo){
+        this.codigoHabitacionActual = unCodigo;
     }
     //Puntaje Actual
      public int getPuntajeActual(){
@@ -64,8 +64,7 @@ public class Equipo {
     public HashMap<Integer,Lista> getDesafiosCompletados(){
         return this.desafiosCompletados;
     }
-
     public String toString(){
-        return "nombre: "+this.nombre+", puntajeExigido: "+this.puntajeExigido+", puntajeAcumulado: "+this.puntajeAcumulado+", habitacionActual: "+this.habitacionActual.toString()+", puntajeActual: "+this.puntajeActual+", desafiosCompletados: "+this.desafiosCompletados.toString();
+        return "nombre: "+this.nombre+", puntajeExigido: "+this.puntajeExigido+", puntajeAcumulado: "+this.puntajeAcumulado+", habitacionActual: "+this.codigoHabitacionActual+", puntajeActual: "+this.puntajeActual+", desafiosCompletados: "+this.desafiosCompletados.toString();
     }
 }

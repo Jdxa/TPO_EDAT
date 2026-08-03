@@ -29,21 +29,21 @@ public class GestorArchivo {
                         cargarHabitaciones(linea, unArbol);
                         break;
                     case 'D':
-                        cargarDesafios(linea, unArbol);
+                        cargarDesafios(linea,unArbol);
                         break;
                     case 'E':
                         cargarEquipos(linea, unArbol, unHash);
                         break;
                 }
             }
-
+            
             bufferLectura.close();
-
-        } catch (IOException error) {
+            
+        } catch(IOException error) {
             System.out.println("Error al leer el archivo: " + error.getMessage());
         }
     }
-
+    
     public void cargarDatoLinea(String linea, ArbolAVL unArbol, Grafo unGrafo, HashMap<String, Equipo> unHash) {
         switch (linea.charAt(0)) {
             case 'P':
@@ -79,8 +79,8 @@ public class GestorArchivo {
         habitacion.cargarDesafio(carga);
     }
 
-    private void cargarHabitaciones(String linea, ArbolAVL unArbol) {
-        int unCodigo, unaPlanta, unaMedida;
+    private void cargarHabitaciones(String linea,ArbolAVL unArbol) {
+        int unCodigo,unaPlanta,unaMedida;
         String unNombre;
         boolean tieneSalida;
         Habitacion carga;
@@ -96,7 +96,8 @@ public class GestorArchivo {
         unArbol.insertar(unCodigo, carga);
     }
 
-    private void cargarEquipos(String linea, ArbolAVL habitaciones, HashMap<String, Equipo> hashEquipos) {
+
+    private void cargarEquipos(String linea,ArbolAVL habitaciones,HashMap<String, Equipo> hashEquipos){
         String unNombre;
         int unPuntajeExig, unPuntajeAcum, unPuntajeAct, unCodHab;
         Habitacion unaHabitacionActual;
@@ -104,29 +105,27 @@ public class GestorArchivo {
         // separo la linea en segmentos
         String[] partes = linea.split(";");
 
-        // obtengo los primeros valores
-        unNombre = partes[1];
-        unPuntajeExig = Integer.parseInt(partes[2]);
-        unPuntajeAcum = Integer.parseInt(partes[3]);
-        unCodHab = Integer.parseInt(partes[4]);
-        unPuntajeAct = Integer.parseInt(partes[5]);
-        unaHabitacionActual = (Habitacion) habitaciones.recuperar(unCodHab);
+        //obtengo los primeros valores
+        unNombre=partes[1];
+        unPuntajeExig= Integer.parseInt(partes[2]);
+        unPuntajeAcum=Integer.parseInt(partes[3]);
+        unCodHab=Integer.parseInt(partes[4]);
+        unPuntajeAct=Integer.parseInt(partes[5]);
 
-        nuevoEquipo = new Equipo(unNombre, unPuntajeExig, unPuntajeAcum, unaHabitacionActual, unPuntajeAct);
-        // para la lista de desafios resueltos, de forma (codigoHabitacion,
-        // puntajeDesafio)
-        for (int i = 6; i < partes.length; i++) {
+        nuevoEquipo=new Equipo(unNombre,unPuntajeExig,unPuntajeAcum,unCodHab,unPuntajeAct);
+        //para la lista de desafios resueltos, de forma (codigoHabitacion, puntajeDesafio)
+        for(int i = 6; i < partes.length; i++ ){
             String texto = partes[i];
             texto = texto.replace("(", "").replace(")", "");
             String[] separados = texto.split(",");
             Integer codigoHabitacion = Integer.parseInt(separados[0].trim());
             Integer puntajeDesafio = Integer.parseInt(separados[1].trim());
 
-            // cargo el codigo de la habitacion y el puntaje del desafio
-            nuevoEquipo.cargarDesafiosRealizados(codigoHabitacion, puntajeDesafio);
-
+            //cargo el codigo de la habitacion y el puntaje del desafio
+            nuevoEquipo.cargarDesafiosRealizados(codigoHabitacion,puntajeDesafio ); 
+            
         }
-
+        //guardo el equipo en el hash de equipos
         hashEquipos.put(unNombre, nuevoEquipo);
     }
 
@@ -143,4 +142,5 @@ public class GestorArchivo {
     public static void hola() {
         System.out.println("hola");
     }
+
 }
