@@ -33,7 +33,7 @@ public class Grafo {
         return exito;
     }
 
-    private NodoAdy ubicarEtiqueta(Object etiqueta, NodoVert vertice) {
+    /*private NodoAdy ubicarEtiqueta(Object etiqueta, NodoVert vertice) {
         NodoAdy aux = null;
         ;
         if (vertice != null) {
@@ -43,19 +43,23 @@ public class Grafo {
             }
         }
         return aux;
-    }
+    }*/
 
     public boolean insertarArco(Object origen, Object destino, Object etiqueta) {
         boolean exito = false;
-        NodoVert origenVertice = ubicarVertice(origen); // busco el vertice origen
-        NodoVert destinoVertice = ubicarVertice(destino); // busco el vertice destino
-        // busco que exista el vertice
-        if (origenVertice != null && destinoVertice != null) {
-            NodoAdy nuevoArco = new NodoAdy(destinoVertice, null, etiqueta); // creo el arco
-            NodoAdy ultimo = ubicarEtiqueta(etiqueta, origenVertice); // busco el ultimo arco del origen
-            ultimo.setSigAdyacente(nuevoArco); // al ultimo arco lo enlazo con el nuevo arco
-            exito = true;
+        NodoVert origenVertice = ubicarVertice(origen); 
+        NodoVert destinoVertice = ubicarVertice(destino); 
 
+        // Verificamos que ambos vértices existan en el grafo
+        if (origenVertice != null && destinoVertice != null) {
+
+            NodoAdy adyacenteActual = origenVertice.getPrimerAdy();
+
+            NodoAdy nuevoArco = new NodoAdy(destinoVertice, adyacenteActual, etiqueta);
+
+            origenVertice.setPrimerAdy(nuevoArco);
+
+            exito = true;
         }
         return exito;
     }
