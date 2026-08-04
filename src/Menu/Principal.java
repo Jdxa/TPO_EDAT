@@ -5,7 +5,6 @@ import java.util.Scanner;
 import Estructuras.GrafoEtiquetado.Grafo;
 import Estructuras.TablaAVL.ArbolAVL;
 import Modelo.Equipo;
-import Modelo.Habitacion;
 
 public class Principal {
     public static void main(String[] args) {

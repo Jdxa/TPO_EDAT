@@ -100,7 +100,6 @@ public class GestorArchivo {
     private void cargarEquipos(String linea,ArbolAVL habitaciones,HashMap<String, Equipo> hashEquipos){
         String unNombre;
         int unPuntajeExig, unPuntajeAcum, unPuntajeAct, unCodHab;
-        Habitacion unaHabitacionActual;
         Equipo nuevoEquipo;
         // separo la linea en segmentos
         String[] partes = linea.split(";");

@@ -467,14 +467,15 @@ public class ArbolAVL {
 
             HashMap<Integer, Lista> desafiosCompletados = eq.getDesafiosCompletados(); // mapa de desafios
             for (Entry<Integer, Lista> par : desafiosCompletados.entrySet()) {
-                // recorro el hash
+                // recorro el hash, obtengo ambos valores
                 int codigoHabitacion = par.getKey();
-                System.out.println("hab: " + codigoHabitacion);
                 Lista desafios = par.getValue();
+                //clono la lista para usarla como recorrido
                 Lista aux = desafios.clone();
                 Habitacion hab = (Habitacion) recuperar(codigoHabitacion); // busco la habitacion
                 ArbolAVL desafiosHab = hab.getDesafios(); // agarro el arbol de desafios de esa habitacion
                 Lista desafiosComp = buscarDesafio(desafiosHab, aux);
+                //concateno cada string resultante de buscarDesafio
                 str = str + " Desafio: " + desafiosComp.toString();
             }
         }
@@ -485,14 +486,12 @@ public class ArbolAVL {
     private Lista buscarDesafio(ArbolAVL desafiosHab, Lista clavesDesafio) {
         Lista listaDesafiosCompletados = new Lista();
         while (!clavesDesafio.esVacia()) {
-            int claveDesafio = (int) clavesDesafio.recuperar(1);
-            System.out.println("puntaje: " + claveDesafio);
-            // recupero la clave de la lista
-            Desafio des = (Desafio) desafiosHab.recuperar(claveDesafio);
+            int claveDesafio = (int) clavesDesafio.recuperar(1); // recupero la clave
+            Desafio des = (Desafio) desafiosHab.recuperar(claveDesafio); //busco un desafio con esa clave en el AVL
             if (des != null) {
                 listaDesafiosCompletados.insertar(des, 1);
             } else {
-                listaDesafiosCompletados.insertar("no existe", 1);
+                listaDesafiosCompletados.insertar("no existe", 1); //esto es para testeo
             }
             clavesDesafio.eliminar(1); // borro la clave q ya use
         }
