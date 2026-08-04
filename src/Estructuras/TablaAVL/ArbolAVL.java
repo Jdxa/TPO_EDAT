@@ -487,7 +487,7 @@ public class ArbolAVL {
         return listaDesafiosCompletados;
     }
 
-    public String mostrarDesafio(Comparable codigoDes, Comparable numHab){
+    public String mostrarDesafioAux(Comparable codigoDes, Comparable numHab){
         String str= "";
         boolean existe = this.pertenece(numHab);
         if (existe) {
