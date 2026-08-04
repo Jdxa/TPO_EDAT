@@ -26,7 +26,7 @@ public class GestorArchivo {
                         cargarPlano(linea, unGrafo);
                         break;
                     case 'H':
-                        cargarHabitaciones(linea, unArbol);
+                        cargarHabitaciones(linea, unArbol,unGrafo);
                         break;
                     case 'D':
                         cargarDesafios(linea,unArbol);
@@ -50,7 +50,7 @@ public class GestorArchivo {
                 cargarPlano(linea, unGrafo);
                 break;
             case 'H':
-                cargarHabitaciones(linea, unArbol);
+                cargarHabitaciones(linea, unArbol,unGrafo);
                 break;
             case 'D':
                 cargarDesafios(linea, unArbol);
@@ -79,7 +79,7 @@ public class GestorArchivo {
         habitacion.cargarDesafio(carga);
     }
 
-    private void cargarHabitaciones(String linea,ArbolAVL unArbol) {
+    private void cargarHabitaciones(String linea,ArbolAVL unArbol,Grafo unPlano) {
         int unCodigo,unaPlanta,unaMedida;
         String unNombre;
         boolean tieneSalida;
@@ -92,6 +92,7 @@ public class GestorArchivo {
         unaMedida = Integer.parseInt(partes[4]);
         tieneSalida = (partes[5].equals("true"));
         carga = new Habitacion(unCodigo, unNombre, unaPlanta, unaMedida, tieneSalida);
+        unPlano.insertarVertice(unCodigo);
 
         unArbol.insertar(unCodigo, carga);
     }
@@ -136,7 +137,6 @@ public class GestorArchivo {
         unInicio= Integer.parseInt(partes[1]);
         unDestino=Integer.parseInt(partes[2]);
         unPuntaje=Integer.parseInt(partes[3]);
-
         unGrafo.insertarArco(unInicio, unDestino, unPuntaje);
     }
     public static void hola() {

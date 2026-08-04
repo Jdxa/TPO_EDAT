@@ -159,7 +159,7 @@ public class Principal {
 
         switch (opcionABM) {
             case 1:
-                agregarHabitacion(scanner, habitaciones);
+                agregarHabitacion(scanner, habitaciones,planoCasa);
                 break;
             case 2:
                 modificarHabitacion(scanner, habitaciones,planoCasa);
@@ -226,7 +226,7 @@ public class Principal {
         }
     }
 
-    public static void agregarHabitacion(Scanner scanner, ArbolAVL habitaciones) {
+    public static void agregarHabitacion(Scanner scanner, ArbolAVL habitaciones,Grafo planoCasa) {
         int numero;
         String palabra, linea;
         GestorArchivo archivo= new GestorArchivo();
@@ -249,7 +249,7 @@ public class Principal {
         System.out.println("Ingrese la medida de la habitación:");
         numero = scanner.nextInt();
         linea += ";" + numero + ";false";
-        archivo.cargarDatoLinea(linea, habitaciones, null, null);
+        archivo.cargarDatoLinea(linea, habitaciones,planoCasa, null);
 
         System.out.println("Habitación creada exitosamente.");
     }
@@ -573,7 +573,7 @@ public class Principal {
                 puntaje=scanner.nextInt();
                 if(habitaciones.perteneceDesafio(codigo,puntaje)){
                 equipo.cargarDesafiosRealizados(codigo,puntaje);
-                equipo.actualizarPuntaje();
+                //equipo.actualizarPuntaje();
                 }else{
                     System.out.println("El desafio no existe.");
                 }
