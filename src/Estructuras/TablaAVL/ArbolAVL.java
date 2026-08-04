@@ -331,17 +331,6 @@ public class ArbolAVL {
         return str;
     }
 
-    public boolean eliminarDesafio(int[] datos) {
-        boolean exito = false;
-        if (this.raiz != null) {
-            Habitacion habitacion = (Habitacion) this.recuperar(datos[0]);
-            if (habitacion != null) {
-                exito = habitacion.eliminarDesafio(datos[1]);
-            }
-        }
-        return exito;
-    }
-
     public boolean modificarNombreDesafio(int[] datos, String nuevoNombre) {
         boolean exito = false;
         if (this.raiz != null) {
@@ -496,6 +485,30 @@ public class ArbolAVL {
             clavesDesafio.eliminar(1); // borro la clave q ya use
         }
         return listaDesafiosCompletados;
+    }
+
+    public String mostrarDesafio(Comparable codigoDes, Comparable numHab){
+        String str= "";
+        boolean existe = this.pertenece(numHab);
+        if (existe) {
+            Habitacion hab = (Habitacion)this.recuperar(numHab);
+            ArbolAVL desafiosHab = hab.getDesafios();
+            if (!desafiosHab.esVacio()) {
+                existe = desafiosHab.pertenece(codigoDes);
+                if (existe) {
+                    Desafio des = (Desafio )desafiosHab.recuperar(codigoDes);
+                    str = des.toString();
+                }else{
+                    str = "No existe ese desafio";
+                }
+            }else{
+                str = "La habitaciones no tiene desafios";
+            }
+        }else{
+            str = "No existe esa habitacion";
+        }
+        
+        return str;
     }
 
 }

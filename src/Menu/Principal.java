@@ -80,6 +80,9 @@ public class Principal {
                     switch (numMenu) {
                         case 1:
                             System.out.println("-> Ejecutando: mostrarDesafío...");
+                            int codigoDesafio= sc.nextInt();
+                            int numHabitacion = sc.nextInt();
+                            System.out.println(habitaciones.mostrarDesafio(codigoDesafio,numHabitacion));  
                             break;
                         case 2:
                             System.out.println("-> Ejecutando: mostrarDesafíosResueltos...");
@@ -579,6 +582,12 @@ public class Principal {
         Equipo unEq = mapaEq.get(nombreEq);
         return unEq;
     }
+
+    //dado un Equipo , un Desafio, una Habitacion -> resolvio
+    /*
+    busco el equipo con buscarEquipo YES
+    busco el desafio que me dan?
+    busco la habitacion */
     // punto 5 consultas sobre habitaciones
 
 }
