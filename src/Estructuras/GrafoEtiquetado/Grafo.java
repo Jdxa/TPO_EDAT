@@ -498,4 +498,28 @@ public class Grafo {
         // backtracking
         caminoActual.eliminar(caminoActual.longitud());
     }
+
+    public String toString(){
+        String str = "";
+        NodoVert aux = this.inicio;
+        //Recorro los vertices
+        while (aux != null) {
+            str += "Vertice "+aux.getElem()+ " ->";
+            NodoAdy auxAdy = aux.getPrimerAdy();
+            if (auxAdy == null) {
+                str += "Sin adyacencias";
+            }else{
+                //recorro adyacentes
+                while (auxAdy != null) {
+                    str+= auxAdy.toString();
+                    auxAdy = auxAdy.getSigAdyacente();
+                }
+            }
+            str += "\n";
+            aux = aux.getSigVertice();
+        }
+        return str;
+    }
+
+    
 }
