@@ -1,4 +1,5 @@
 package Menu;
+
 import java.util.HashMap;
 import java.util.Scanner;
 import Estructuras.EstructurasAux.Lista;
@@ -84,7 +85,7 @@ public class Principal {
                             break;
                         case 2:
                             System.out.println("-> Ejecutando: mostrarDesafíosResueltos...");
-                            mostrarDesafiosResueltos(scanner,equipo,habitaciones);
+                            mostrarDesafiosResueltos(scanner, equipo, habitaciones);
                             break;
                         case 3:
                             System.out.println("-> Ejecutando: verificarDesafíoResuelto...");
@@ -571,23 +572,25 @@ public class Principal {
     // punto 3
 
     // punto 4
-    private static void mostrarDesafio(Scanner sc, ArbolAVL habitaciones){
+    private static void mostrarDesafio(Scanner sc, ArbolAVL habitaciones) {
         System.out.println("Ingrese el codigo del desafio ");
         Comparable codigoDes = sc.nextInt();
         System.out.println("Ingrese el numero de habitacion");
         Comparable numHab = sc.nextInt();
-        String str =habitaciones.mostrarDesafioAux(codigoDes,numHab);
+        String str = habitaciones.mostrarDesafioAux(codigoDes, numHab);
         System.out.println(str);
     }
-    private static void mostrarDesafiosResueltos(Scanner sc, HashMap<String, Equipo> listaEquipos, ArbolAVL habitaciones){
-        String str ="";
+
+    private static void mostrarDesafiosResueltos(Scanner sc, HashMap<String, Equipo> listaEquipos,
+            ArbolAVL habitaciones) {
+        String str = "";
         System.out.println("Ingrese el nombre del equipo: ");
         String nombreEq = sc.nextLine();
         Equipo eq = buscarEquipo(nombreEq, listaEquipos);
         if (eq != null) {
-            str = "El equipo "+nombreEq+" resolvio estos desafios: \n"+habitaciones.listarDesafiosHabitacion(eq);
-        }else{
-            str = "No existe el equipo "+nombreEq;
+            str = "El equipo " + nombreEq + " resolvio estos desafios: \n" + habitaciones.listarDesafiosHabitacion(eq);
+        } else {
+            str = "No existe el equipo " + nombreEq;
         }
         System.out.println(str);
     }
@@ -596,8 +599,8 @@ public class Principal {
         Equipo unEq = mapaEq.get(nombreEq);
         return unEq;
     }
-    private static void verificarDesafioResuelto(Scanner sc, HashMap <String,Equipo> mapaEq){
-        sc.nextLine();
+
+    private static void verificarDesafioResuelto(Scanner sc, HashMap<String, Equipo> mapaEq) {
         System.out.println("Ingrese el nombre del equipo: ");
         String nombreEq = sc.nextLine();
         Equipo eq = buscarEquipo(nombreEq, mapaEq);
@@ -608,19 +611,24 @@ public class Principal {
         boolean exito = verificarDesafioResueltoAux(eq, des, hab);
         if (exito) {
             System.out.println("El equipo lo resolvio");
-        }else{
+        } else {
             System.out.println("El equipo no lo resolvio o no existe");
         }
     }
 
     private static boolean verificarDesafioResueltoAux(Equipo eq, Integer des, Integer hab) {
         boolean exito = false;
-        HashMap<Integer, Lista> desafiosResueltos = eq.getDesafiosCompletados();
-        if (desafiosResueltos != null) {
-            Lista desafiosHab = desafiosResueltos.get(hab);
-            int aux = desafiosHab.localizar(des);
-            if (aux > -1)
-                exito = true;
+        if (eq != null) {
+            HashMap <Integer,Lista> desafiosResueltos = eq.getDesafiosCompletados();
+            if (desafiosResueltos != null) {
+                Lista desafiosHab = desafiosResueltos.get(hab);
+                if (!desafiosHab.esVacia()) {
+                    int aux = desafiosHab.localizar(des);
+                    if (aux > -1)
+                        exito = true;
+                }
+
+            }
         }
         return exito;
     }
