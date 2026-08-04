@@ -114,6 +114,7 @@ public class GestorArchivo {
 
         nuevoEquipo=new Equipo(unNombre,unPuntajeExig,unPuntajeAcum,unCodHab,unPuntajeAct);
         //para la lista de desafios resueltos, de forma (codigoHabitacion, puntajeDesafio)
+        
         for(int i = 6; i < partes.length; i++ ){
             String texto = partes[i];
             texto = texto.replace("(", "").replace(")", "");
