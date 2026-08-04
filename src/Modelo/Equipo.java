@@ -64,7 +64,12 @@ public class Equipo {
     public HashMap<Integer,Lista> getDesafiosCompletados(){
         return this.desafiosCompletados;
     }
+    public void actualizarPuntaje(){
+        int acu;
+        this.desafiosCompletados.
+    }
     public String toString(){
         return "nombre: "+this.nombre+", puntajeExigido: "+this.puntajeExigido+", puntajeAcumulado: "+this.puntajeAcumulado+", codigo habitacion actual: "+this.codigoHabitacionActual+", puntajeActual: "+this.puntajeActual+", desafiosCompletados: "+this.desafiosCompletados.toString();
     }
+    
 }
