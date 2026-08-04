@@ -80,7 +80,9 @@ public class Principal {
                     switch (numMenu) {
                         case 1:
                             System.out.println("-> Ejecutando: mostrarDesafío...");
+                            System.out.println("Ingrese el codigo del desafio: ");
                             int codigoDesafio= sc.nextInt();
+                            System.out.println("Ingrese el numero de la habitacion: ");
                             int numHabitacion = sc.nextInt();
                             System.out.println(habitaciones.mostrarDesafio(codigoDesafio,numHabitacion));  
                             break;
