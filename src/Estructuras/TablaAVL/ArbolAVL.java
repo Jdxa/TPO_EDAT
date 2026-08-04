@@ -1,6 +1,11 @@
 package Estructuras.TablaAVL;
+
+import java.util.HashMap;
+import java.util.Map.Entry;
+
 import Estructuras.EstructurasAux.*;
 import Modelo.Desafio;
+import Modelo.Equipo;
 import Modelo.Habitacion;
 
 public class ArbolAVL {
@@ -23,6 +28,7 @@ public class ArbolAVL {
         this.raiz = eliminarPrivado(this.raiz, clave, exito);
         return exito[0];
     }
+
     public boolean pertenece(Comparable elem) {
         boolean exito = false;
         if (this.raiz != null) {
@@ -30,7 +36,6 @@ public class ArbolAVL {
         }
         return exito;
     }
-
 
     public Object recuperar(Comparable clave) {
         return recuperarPrivado(this.raiz, clave);
@@ -76,7 +81,6 @@ public class ArbolAVL {
         return listaResultado;
     }
 
-    
     public String toString() {
         String cadena = "Árbol AVL Vacío";
         if (this.raiz != null) {
@@ -87,14 +91,14 @@ public class ArbolAVL {
 
     public String toStringDesafio() {
 
-    String cadena= "Sin Desafios";
-    if (this.raiz != null) {
-        cadena = toStringDesafioPrivado(this.raiz);
-        cadena= cadena.substring(0, cadena.length() - 2);
+        String cadena = "Sin Desafios";
+        if (this.raiz != null) {
+            cadena = toStringDesafioPrivado(this.raiz);
+            cadena = cadena.substring(0, cadena.length() - 2);
+        }
+        return cadena;
     }
-    return cadena;
-}
-    
+
     // --- MÉTODOS PRIVADOS RECURSIVOS ---
 
     private NodoAVL insertarPrivado(NodoAVL nodoActual, Comparable clave, Object dato, boolean[] exito) {
@@ -136,12 +140,13 @@ public class ArbolAVL {
                 exito[0] = true;
 
                 if (nodoActual.getIzquierdo() == null || nodoActual.getDerecho() == null) {
-                    resultado = (nodoActual.getIzquierdo() != null) ? nodoActual.getIzquierdo() : nodoActual.getDerecho();
+                    resultado = (nodoActual.getIzquierdo() != null) ? nodoActual.getIzquierdo()
+                            : nodoActual.getDerecho();
                 } else {
                     NodoAVL sucesor = buscarNodoMinimo(nodoActual.getDerecho());
                     nodoActual.setClave(sucesor.getClave());
                     nodoActual.setElem(sucesor.getElem());
-                    
+
                     nodoActual.setDerecho(eliminarPrivado(nodoActual.getDerecho(), sucesor.getClave(), exito));
                     resultado = nodoActual;
                 }
@@ -154,6 +159,7 @@ public class ArbolAVL {
         }
         return resultado;
     }
+
     private boolean perteneceaux(NodoAVL nodo, Comparable elem) {
         boolean esta = false;
         int comp = elem.compareTo(nodo.getClave());
@@ -172,6 +178,7 @@ public class ArbolAVL {
         }
         return esta;
     }
+
     private Object recuperarPrivado(NodoAVL nodoActual, Comparable clave) {
         Object encontrado = null;
         if (nodoActual != null) {
@@ -198,15 +205,15 @@ public class ArbolAVL {
     private void listarRangoPrivado(NodoAVL nodoActual, Comparable min, Comparable max, Lista lista) {
         if (nodoActual != null) {
             Comparable clave = nodoActual.getClave();
-            
+
             if (clave.compareTo(min) > 0) {
                 listarRangoPrivado(nodoActual.getIzquierdo(), min, max, lista);
             }
-            
+
             if (clave.compareTo(min) >= 0 && clave.compareTo(max) <= 0) {
                 lista.insertar(nodoActual.getElem(), lista.longitud() + 1);
             }
-            
+
             if (clave.compareTo(max) < 0) {
                 listarRangoPrivado(nodoActual.getDerecho(), min, max, lista);
             }
@@ -228,18 +235,18 @@ public class ArbolAVL {
     }
 
     private String toStringDesafioPrivado(NodoAVL nodo) {
-    String cadena = "";
-    
+        String cadena = "";
+
         if (nodo != null) {
             cadena += toStringDesafioPrivado(nodo.getIzquierdo());
-            
+
             cadena += ((Desafio) nodo.getElem()).toStringHabitacion() + ", ";
-            
+
             cadena += toStringDesafioPrivado(nodo.getDerecho());
         }
-        
-    return cadena; // Devolvemos la cadena acumulada en este paso
-}
+
+        return cadena; // Devolvemos la cadena acumulada en este paso
+    }
 
     // --- MÉTODOS DE BALANCEO Y ALTURA ---
 
@@ -311,18 +318,20 @@ public class ArbolAVL {
         }
         return resultado;
     }
+
     //
-    public String mostrarHabitacion(int codigo){
-        String str= "No existe";
+    public String mostrarHabitacion(int codigo) {
+        String str = "No existe";
         if (this.raiz != null) {
             Object dato = this.recuperar(codigo);
-            if(dato != null){
-            str = dato.toString();
-           }
+            if (dato != null) {
+                str = dato.toString();
+            }
         }
         return str;
     }
-    public boolean eliminarDesafio(int[] datos){
+
+    public boolean eliminarDesafio(int[] datos) {
         boolean exito = false;
         if (this.raiz != null) {
             Habitacion habitacion = (Habitacion) this.recuperar(datos[0]);
@@ -332,7 +341,8 @@ public class ArbolAVL {
         }
         return exito;
     }
-    public boolean modificarNombreDesafio(int[] datos, String nuevoNombre){
+
+    public boolean modificarNombreDesafio(int[] datos, String nuevoNombre) {
         boolean exito = false;
         if (this.raiz != null) {
             Habitacion habitacion = (Habitacion) this.recuperar(datos[0]);
@@ -346,7 +356,8 @@ public class ArbolAVL {
         }
         return exito;
     }
-    public boolean modificarTipoDesafio(int[] datos, String nuevoTipo){
+
+    public boolean modificarTipoDesafio(int[] datos, String nuevoTipo) {
         boolean exito = false;
         if (this.raiz != null) {
             Habitacion habitacion = (Habitacion) this.recuperar(datos[0]);
@@ -360,7 +371,8 @@ public class ArbolAVL {
         }
         return exito;
     }
-    public boolean modificarNombreHabitacion(int codigo, String nuevoNombre){
+
+    public boolean modificarNombreHabitacion(int codigo, String nuevoNombre) {
         boolean exito = false;
         if (this.raiz != null) {
             Habitacion habitacion = (Habitacion) this.recuperar(codigo);
@@ -371,7 +383,8 @@ public class ArbolAVL {
         }
         return exito;
     }
-    public boolean modificarPlantaHabitacion(int codigo ,int planta){
+
+    public boolean modificarPlantaHabitacion(int codigo, int planta) {
         boolean exito = false;
         if (this.raiz != null) {
             Habitacion habitacion = (Habitacion) this.recuperar(codigo);
@@ -382,7 +395,8 @@ public class ArbolAVL {
         }
         return exito;
     }
-    public boolean modificarMedidaHabitacion(int codigo, int medida){
+
+    public boolean modificarMedidaHabitacion(int codigo, int medida) {
         boolean exito = false;
         if (this.raiz != null) {
             Habitacion habitacion = (Habitacion) this.recuperar(codigo);
@@ -393,7 +407,8 @@ public class ArbolAVL {
         }
         return exito;
     }
-    public boolean eliminarDesafio(int codigo, int puntaje){
+
+    public boolean eliminarDesafio(int codigo, int puntaje) {
         boolean exito = false;
         if (this.raiz != null) {
             Habitacion habitacion = (Habitacion) this.recuperar(codigo);
@@ -403,7 +418,8 @@ public class ArbolAVL {
         }
         return exito;
     }
-    public boolean perteneceDesafio(int codigo, int puntaje){
+
+    public boolean perteneceDesafio(int codigo, int puntaje) {
         boolean exito = false;
         if (this.raiz != null) {
             Habitacion habitacion = (Habitacion) this.recuperar(codigo);
@@ -413,7 +429,8 @@ public class ArbolAVL {
         }
         return exito;
     }
-    public boolean modificarNombreDesafio(int codigo, int puntaje, String nuevoNombre){
+
+    public boolean modificarNombreDesafio(int codigo, int puntaje, String nuevoNombre) {
         boolean exito = false;
         if (this.raiz != null) {
             Habitacion habitacion = (Habitacion) this.recuperar(codigo);
@@ -427,7 +444,8 @@ public class ArbolAVL {
         }
         return exito;
     }
-    public boolean modificarTipoDesafio(int codigo, int puntaje, String nuevoTipo){
+
+    public boolean modificarTipoDesafio(int codigo, int puntaje, String nuevoTipo) {
         boolean exito = false;
         if (this.raiz != null) {
             Habitacion habitacion = (Habitacion) this.recuperar(codigo);
@@ -441,4 +459,44 @@ public class ArbolAVL {
         }
         return exito;
     }
+
+    // metodos de mostrarDesafiosResueltos
+    public String listarDesafiosHabitacion(Equipo eq) {
+        String str = "{";
+        if (eq != null) {
+
+            HashMap<Integer, Lista> desafiosCompletados = eq.getDesafiosCompletados(); // mapa de desafios
+            for (Entry<Integer, Lista> par : desafiosCompletados.entrySet()) {
+                // recorro el hash
+                int codigoHabitacion = par.getKey();
+                System.out.println("hab: " + codigoHabitacion);
+                Lista desafios = par.getValue();
+                Lista aux = desafios.clone();
+                Habitacion hab = (Habitacion) recuperar(codigoHabitacion); // busco la habitacion
+                ArbolAVL desafiosHab = hab.getDesafios(); // agarro el arbol de desafios de esa habitacion
+                Lista desafiosComp = buscarDesafio(desafiosHab, aux);
+                str = str + " Desafio: " + desafiosComp.toString();
+            }
+        }
+        str = str + "}";
+        return str;
+    }
+
+    private Lista buscarDesafio(ArbolAVL desafiosHab, Lista clavesDesafio) {
+        Lista listaDesafiosCompletados = new Lista();
+        while (!clavesDesafio.esVacia()) {
+            int claveDesafio = (int) clavesDesafio.recuperar(1);
+            System.out.println("puntaje: " + claveDesafio);
+            // recupero la clave de la lista
+            Desafio des = (Desafio) desafiosHab.recuperar(claveDesafio);
+            if (des != null) {
+                listaDesafiosCompletados.insertar(des, 1);
+            } else {
+                listaDesafiosCompletados.insertar("no existe", 1);
+            }
+            clavesDesafio.eliminar(1); // borro la clave q ya use
+        }
+        return listaDesafiosCompletados;
+    }
+
 }

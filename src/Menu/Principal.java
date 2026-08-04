@@ -1,11 +1,11 @@
 package Menu;
-
 import java.util.HashMap;
 import java.util.Scanner;
 
 import Estructuras.GrafoEtiquetado.Grafo;
 import Estructuras.TablaAVL.ArbolAVL;
 import Modelo.Equipo;
+import Modelo.Habitacion;
 
 public class Principal {
     public static void main(String[] args) {
@@ -46,7 +46,6 @@ public class Principal {
                 case 3:
                     mostrarMenuHabitacion();
                     numMenu = scanner.nextInt();
-
                     switch (numMenu) {
                         case 1:
                             System.out.println("-> Ejecutando: mostrarHabitación...");
@@ -81,13 +80,19 @@ public class Principal {
                 case 4:
                     mostrarMenuDesafio();
                     numMenu = scanner.nextInt();
-
+                    Scanner sc = new Scanner(System.in);
                     switch (numMenu) {
                         case 1:
                             System.out.println("-> Ejecutando: mostrarDesafío...");
                             break;
                         case 2:
                             System.out.println("-> Ejecutando: mostrarDesafíosResueltos...");
+                            System.out.println("Ingrese el nombre del equipo: ");
+                            String nombreEq= sc.nextLine();
+                            Equipo eq = buscarEquipo(nombreEq,equipo);
+                            String str =habitaciones.listarDesafiosHabitacion(eq);
+                            System.out.println("Los "+nombreEq+" completaros los siguientes desafios: \n"+str);
+                            
                             break;
                         case 3:
                             System.out.println("-> Ejecutando: verificarDesafíoResuelto...");
@@ -649,7 +654,12 @@ public class Principal {
     // punto 3
 
     // punto 4
+    
 
+    private static Equipo buscarEquipo(String nombreEq, HashMap<String,Equipo> mapaEq){
+        Equipo unEq = mapaEq.get(nombreEq);
+        return unEq;
+    }
     // punto 5 consultas sobre habitaciones
 
     //agregar a modificacion de habitacion carga de conexiones
