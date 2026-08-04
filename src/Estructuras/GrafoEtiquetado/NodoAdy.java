@@ -38,6 +38,6 @@ public class NodoAdy {
     }
 
     public String toString(){
-        return "["+ this.getVertice()+","+this.etiqueta+"]";
+        return "["+ this.vertice.getElem()+", "+this.etiqueta+"]";
     }
 }
