@@ -64,9 +64,9 @@ public class Equipo {
     public HashMap<Integer,Lista> getDesafiosCompletados(){
         return this.desafiosCompletados;
     }
-    public void actualizarPuntajes(int codigo){
+    public void actualizarPuntajes(){
         actualizarPuntajeAcumulado();
-        // actualizarPuntaje(codigo);
+        actualizarPuntajeActual();
 
     }
     private void actualizarPuntajeAcumulado(){
@@ -78,7 +78,11 @@ public class Equipo {
         }
         this.puntajeAcumulado=acu;
     }
-    private void actualizarPuntajoActual(){}
+    public void actualizarPuntajeActual(){
+        Lista listaAux=this.desafiosCompletados.get(this.codigoHabitacionActual);
+        
+        this.puntajeActual=listaAux.sumarElementos();
+    }
 
     public String toString(){
         return "nombre: "+this.nombre+", puntajeExigido: "+this.puntajeExigido+", puntajeAcumulado: "+this.puntajeAcumulado+", codigo habitacion actual: "+this.codigoHabitacionActual+", puntajeActual: "+this.puntajeActual+", desafiosCompletados: "+this.desafiosCompletados.toString();
