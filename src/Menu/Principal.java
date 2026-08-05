@@ -5,6 +5,7 @@ import java.util.Scanner;
 import Estructuras.EstructurasAux.Lista;
 import Estructuras.GrafoEtiquetado.Grafo;
 import Estructuras.TablaAVL.ArbolAVL;
+import Modelo.Desafio;
 import Modelo.Equipo;
 
 public class Principal {
@@ -95,6 +96,7 @@ public class Principal {
                             break;
                         case 4:
                             System.out.println("-> Ejecutando: mostrarDesafíosTipo...");
+                            mostrarDesafiosPorTipo(scanner, habitaciones);
                             break;
                         default:
                             System.out.println("Opción de desafío no válida.");
@@ -861,6 +863,42 @@ public class Principal {
             }
         }
         return exito;
+    }
+
+    public static void mostrarDesafiosPorTipo(Scanner sc, ArbolAVL habitaciones){
+        String str = "";
+        System.out.println("Ingrese la clave de la habitacion: ");
+        int claveHabitacion = sc.nextInt();
+        System.out.println("Ingrese el rango inferior [a]: ");
+        int a = sc.nextInt(); //Rango inferior
+        System.out.println("Ingrese el rango superior [b]: ");
+        int b = sc.nextInt(); //Rango Superior
+        System.out.println("Ingrese el tipo de desafio: ");
+        sc.nextLine();
+        String x = sc.nextLine();
+        if (!habitaciones.esVacio()) {
+            Lista l =habitaciones.filtrarPorRango(claveHabitacion, a, b);
+            if (!l.esVacia()) {
+                str+= "Los desafios del tipo "+x+ " en la habitacion "+claveHabitacion +" son los siguientes: \n";
+                str += filtrarPorTipo(l, x);
+            }else{
+                str += "No hay desafios con esos filtros";
+            }
+        }
+        System.out.println(str);
+    }  
+    
+    private static String filtrarPorTipo(Lista enRango, Comparable x){
+        String str = "";
+        int i = 1;
+        while (i <= enRango.longitud()) {
+            Desafio desafioActual = (Desafio)enRango.recuperar(i);
+            if (desafioActual.getTipo().equals(x)) {
+                str += desafioActual.toString() + "\n";
+            }
+            i++;
+        }
+        return str;
     }
     // punto 5 consultas sobre habitaciones
 
