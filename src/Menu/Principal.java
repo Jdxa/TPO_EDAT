@@ -11,7 +11,7 @@ import Modelo.Equipo;
 public class Principal {
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         int numMenu;
         GestorArchivo archivo = new GestorArchivo();
         Grafo planoCasa = new Grafo();
@@ -22,7 +22,7 @@ public class Principal {
 
         do {
             mostrarMenu();
-            numMenu = scanner.nextInt();
+            numMenu = sc.nextInt();
 
             switch (numMenu) {
                 case 1:
@@ -39,17 +39,17 @@ public class Principal {
 
                 case 2:
 
-                    gestionABM(scanner, habitaciones, equipo,planoCasa);
+                    gestionABM(sc, habitaciones, equipo,planoCasa);
                     break;
 
                 case 3:
                     mostrarMenuHabitacion();
-                    numMenu = scanner.nextInt();
+                    numMenu = sc.nextInt();
                     switch (numMenu) {
                         case 1:
                             System.out.println("-> Ejecutando: mostrarHabitación...");
                             System.out.println("Ingrese un numero de habitacion:");
-                            numMenu = scanner.nextInt();
+                            numMenu = sc.nextInt();
                             // Llamo a metodo de AVL que me da un String de los datos de la habitacion
                             // encontrada
                             System.out.println(habitaciones.mostrarHabitacion(numMenu));
@@ -57,7 +57,7 @@ public class Principal {
                         case 2:
                             System.out.println("-> Ejecutando: habitacionesContiguas...");
                             System.out.println("Ingrese un numero de habitacion:");
-                            numMenu = scanner.nextInt();
+                            numMenu = sc.nextInt();
                             // llamo metodo de Grafo que me da un String de las habitaciones contiguas
                             System.out.println(planoCasa.habitacionesContiguas(numMenu));
                             break;
@@ -78,25 +78,24 @@ public class Principal {
 
                 case 4:
                     mostrarMenuDesafio();
-                    numMenu = scanner.nextInt();
-                    scanner.nextLine();
+                    numMenu = sc.nextInt();
+                    sc.nextLine();
                     switch (numMenu) {
                         case 1:
                             System.out.println("-> Ejecutando: mostrarDesafío...");
-                            mostrarDesafio(scanner, habitaciones);
+                            mostrarDesafio(sc, habitaciones);
                             break;
                         case 2:
                             System.out.println("-> Ejecutando: mostrarDesafíosResueltos...");
-                            mostrarDesafiosResueltos(scanner, equipo, habitaciones);
+                            mostrarDesafiosResueltos(sc, equipo, habitaciones);
                             break;
                         case 3:
                             System.out.println("-> Ejecutando: verificarDesafíoResuelto...");
-                            verificarDesafioResuelto(scanner, equipo);
+                            verificarDesafioResuelto(sc, equipo);
 
                             break;
                         case 4:
                             System.out.println("-> Ejecutando: mostrarDesafíosTipo...");
-                            mostrarDesafiosPorTipo(scanner, habitaciones);
                             break;
                         default:
                             System.out.println("Opción de desafío no válida.");
@@ -105,11 +104,11 @@ public class Principal {
                     break;
                 case 5:
                     System.out.println("Consultas sobre equipos");
-                    gestionConsultaEquipos(scanner,equipo,habitaciones,planoCasa);
+                    gestionConsultaEquipos(sc,equipo,habitaciones,planoCasa);
                     break;
                 case 6:
                     System.out.println("Consulta general");
-                    gestionConsultaGeneral(scanner, habitaciones, planoCasa, equipo);
+                    gestionConsultaGeneral(sc, habitaciones, planoCasa, equipo);
                     break;
 
                 case 0:
@@ -122,24 +121,24 @@ public class Principal {
             }
         } while (numMenu != 0);
 
-        scanner.close();
+        sc.close();
     }
 
-    public static void gestionABM(Scanner scanner, ArbolAVL habitaciones,
+    public static void gestionABM(Scanner sc, ArbolAVL habitaciones,
             HashMap<String, Equipo> equipos,Grafo planoCasa) {
         System.out.println("Seleccionaste: Altas, Bajas y Modificaciones (ABM) de habitaciones, desafíos y equipos.");
         mostrarMenuABM();
-        int opcionABM = scanner.nextInt();
+        int opcionABM = sc.nextInt();
 
         switch (opcionABM) {
             case 1:
-                habitacionesABM(scanner, habitaciones,planoCasa);
+                habitacionesABM(sc, habitaciones,planoCasa);
                 break;
             case 2:
-                desafiosABM(scanner, habitaciones);
+                desafiosABM(sc, habitaciones);
                 break;
             case 3:
-                equiposABM(scanner, equipos,planoCasa,habitaciones);
+                equiposABM(sc, equipos,planoCasa,habitaciones);
                 break;
             case 4:
                 System.out.println("Saliendo del menú de ABM...");
@@ -150,20 +149,20 @@ public class Principal {
         }
     }
 
-    public static void habitacionesABM(Scanner scanner, ArbolAVL habitaciones,Grafo planoCasa) {
+    public static void habitacionesABM(Scanner sc, ArbolAVL habitaciones,Grafo planoCasa) {
         int opcionABM;
         mostrarMenuABMhabitacion();
-        opcionABM = scanner.nextInt();
+        opcionABM = sc.nextInt();
 
         switch (opcionABM) {
             case 1:
-                agregarHabitacion(scanner, habitaciones,planoCasa);
+                agregarHabitacion(sc, habitaciones,planoCasa);
                 break;
             case 2:
-                modificarHabitacion(scanner, habitaciones,planoCasa);
+                modificarHabitacion(sc, habitaciones,planoCasa);
                 break;
             case 3:
-                eliminarHabitacion(scanner, habitaciones);
+                eliminarHabitacion(sc, habitaciones);
                 break;
             case 4:
                 System.out.println("Saliendo del menú de ABM...");
@@ -174,20 +173,20 @@ public class Principal {
         }
     }
 
-    public static void desafiosABM(Scanner scanner, ArbolAVL habitaciones) {
+    public static void desafiosABM(Scanner sc, ArbolAVL habitaciones) {
         int opcionABM;
         mostrarMenuABMdesafio();
-        opcionABM = scanner.nextInt();
+        opcionABM = sc.nextInt();
 
         switch (opcionABM) {
             case 1:
-                agregarDesafio(scanner, habitaciones);
+                agregarDesafio(sc, habitaciones);
                 break;
             case 2:
-                modificarDesafio(scanner, habitaciones);
+                modificarDesafio(sc, habitaciones);
                 break;
             case 3:
-                eliminarDesafio(scanner, habitaciones);
+                eliminarDesafio(sc, habitaciones);
                 break;
             case 4:
                 System.out.println("Saliendo del menú de ABM...");
@@ -198,23 +197,23 @@ public class Principal {
         }
     }
 
-    public static void equiposABM(Scanner scanner, HashMap<String, Equipo> equipos,Grafo planoCasa,ArbolAVL habitaciones) {
+    public static void equiposABM(Scanner sc, HashMap<String, Equipo> equipos,Grafo planoCasa,ArbolAVL habitaciones) {
         int opcionABM;
         mostrarMenuABMequipo();
-        opcionABM = scanner.nextInt();
+        opcionABM = sc.nextInt();
         System.out.println("Seleccionaste: Altas, Bajas y Modificaciones de equipos.");
         switch (opcionABM) {
             case 1:
-                scanner.nextLine();
-                agregarEquipo(scanner, equipos, habitaciones);
+                sc.nextLine();
+                agregarEquipo(sc, equipos, habitaciones);
                 break;
             case 2:
-                scanner.nextLine();
-                modificarEquipo(scanner, equipos);
+                sc.nextLine();
+                modificarEquipo(sc, equipos);
                 break;
             case 3:
-                scanner.nextLine();
-                eliminarEquipo(scanner, equipos);
+                sc.nextLine();
+                eliminarEquipo(sc, equipos);
                 break;
             case 4:
                 System.out.println("Saliendo del menú de ABM...");
@@ -225,55 +224,55 @@ public class Principal {
         }
     }
 
-    public static void agregarHabitacion(Scanner scanner, ArbolAVL habitaciones,Grafo planoCasa) {
+    public static void agregarHabitacion(Scanner sc, ArbolAVL habitaciones,Grafo planoCasa) {
         int numero;
         String palabra, linea;
         GestorArchivo archivo= new GestorArchivo();
         System.out.println("--> crear de habitacion");
         System.out.println("Ingrese el código que le quiere dar a la habitación:");
-        numero = scanner.nextInt();
+        numero = sc.nextInt();
         while (habitaciones.pertenece(numero)) {
             System.out.println("El código ingresado ya existe. Por favor, ingrese un código diferente:");
-            numero = scanner.nextInt();
+            numero = sc.nextInt();
         }
 
         linea = "H;" + numero;
         System.out.println("Ingrese el nombre de la habitación:");
-        scanner.nextLine();
-        palabra = scanner.nextLine();
+        sc.nextLine();
+        palabra = sc.nextLine();
         linea += ";" + palabra;
         System.out.println("Ingrese la planta de la habitación:");
-        numero = scanner.nextInt();
+        numero = sc.nextInt();
         linea += ";" + numero;
         System.out.println("Ingrese la medida de la habitación:");
-        numero = scanner.nextInt();
+        numero = sc.nextInt();
         linea += ";" + numero + ";false";
         archivo.cargarDatoLinea(linea, habitaciones,planoCasa, null);
 
         System.out.println("Habitación creada exitosamente.");
     }
 
-    public static void modificarHabitacion(Scanner scanner, ArbolAVL habitaciones, Grafo planoCasa) {
+    public static void modificarHabitacion(Scanner sc, ArbolAVL habitaciones, Grafo planoCasa) {
         int codigo, numMenu;
         System.out.println("--> Modificación de habitación");
         System.out.println("Ingrese el código de la habitación a modificar:");
-        codigo = scanner.nextInt();
+        codigo = sc.nextInt();
         if (habitaciones.pertenece(codigo)) {
             mostrarMenuModificarHabitacion();
-            numMenu = scanner.nextInt();
+            numMenu = sc.nextInt();
             switch (numMenu) {
                 case 1:
-                    scanner.nextLine();
-                    cambiarNombreHabitacion(scanner, habitaciones, codigo);
+                    sc.nextLine();
+                    cambiarNombreHabitacion(sc, habitaciones, codigo);
                     break;
                 case 2:
-                    cambiarPlantaHabitacion(scanner, habitaciones, codigo);
+                    cambiarPlantaHabitacion(sc, habitaciones, codigo);
                     break;
                 case 3:
-                    cambiarMedidaHabitacion(scanner, habitaciones, codigo);
+                    cambiarMedidaHabitacion(sc, habitaciones, codigo);
                     break;
                 case 4:
-                    añadirCaminos(scanner,planoCasa,codigo);
+                    añadirCaminos(sc,planoCasa,codigo);
                     break;
                 case 5:
                     System.out.println("Saliendo de la modificación de habitación...");
@@ -287,35 +286,35 @@ public class Principal {
         }
     }
 
-    public static void cambiarNombreHabitacion(Scanner scanner, ArbolAVL habitaciones, int codigo) {
+    public static void cambiarNombreHabitacion(Scanner sc, ArbolAVL habitaciones, int codigo) {
         String nombre;
         System.out.println("Ingrese el nuevo nombre de la habitación:");
-        nombre = scanner.nextLine();
+        nombre = sc.nextLine();
         habitaciones.modificarNombreHabitacion(codigo, nombre);
         System.out.println("Nombre de la habitación modificado correctamente.");
     }
 
-    public static void cambiarPlantaHabitacion(Scanner scanner, ArbolAVL habitaciones, int codigo) {
+    public static void cambiarPlantaHabitacion(Scanner sc, ArbolAVL habitaciones, int codigo) {
         int planta;
         System.out.println("Ingrese la nueva planta de la habitación:");
-        planta = scanner.nextInt();
+        planta = sc.nextInt();
         habitaciones.modificarPlantaHabitacion(codigo, planta);
         System.out.println("Planta de la habitación modificada correctamente.");
 
     }
 
-    private static void cambiarMedidaHabitacion(Scanner scanner, ArbolAVL habitaciones, int codigo) {
+    private static void cambiarMedidaHabitacion(Scanner sc, ArbolAVL habitaciones, int codigo) {
         int medida;
         System.out.println("Ingrese la nueva medida de la habitación:");
-        medida = scanner.nextInt();
+        medida = sc.nextInt();
         habitaciones.modificarMedidaHabitacion(codigo, medida);
         System.out.println("Medida de la habitación modificada correctamente.");
     }
 
-    private static void eliminarHabitacion(Scanner scanner, ArbolAVL habitaciones) {
+    private static void eliminarHabitacion(Scanner sc, ArbolAVL habitaciones) {
         int codigo;
         System.out.println("inserte el codigo de la habitacion a eliminar.");
-        codigo = scanner.nextInt();
+        codigo = sc.nextInt();
         // Llamo a metodo AVL que elimina si existe habitacion y devuelve boolean
         if (habitaciones.eliminar(codigo)) {
             System.out.println("Habitación eliminada correctamente.");
@@ -323,72 +322,72 @@ public class Principal {
             System.out.println("No se encontró la habitación con el código ingresado.");
         }
     }
-    public static void añadirCaminos(Scanner scanner, Grafo planoCasa, int codigo){
+    public static void añadirCaminos(Scanner sc, Grafo planoCasa, int codigo){
         int destino,puntajeRequerido;
         String linea;
         GestorArchivo archivo= new GestorArchivo();
         linea="P;codigo;";
         System.out.println("inserte la habitacion destino.");
-        destino = scanner.nextInt();
+        destino = sc.nextInt();
         linea+=destino+";";
         System.out.println("inserte el requisito de puntos para usar la puerta.");
-        puntajeRequerido = scanner.nextInt();
+        puntajeRequerido = sc.nextInt();
         linea+=puntajeRequerido;
         archivo.cargarDatoLinea(linea, null, planoCasa, null);
     }
 
-    public static void agregarDesafio(Scanner scanner, ArbolAVL habitaciones) {
+    public static void agregarDesafio(Scanner sc, ArbolAVL habitaciones) {
         int codigoHabitacion, puntaje;
         String linea, palabra;
         GestorArchivo archivo=new GestorArchivo();
         
         System.out.println("--> Crear de desafío");
         System.out.println("Ingrese el código de la habitación a la que pertenece el desafío:");
-        codigoHabitacion = scanner.nextInt();
+        codigoHabitacion = sc.nextInt();
         if (!habitaciones.pertenece(codigoHabitacion)) {
             System.out.println("No se encontró la habitación con el código ingresado. Por favor, ingrese un código válido.");
         } else {
         }
         System.out.println("Ingrese el puntaje del desafío:");
-        puntaje = scanner.nextInt();
+        puntaje = sc.nextInt();
         while (habitaciones.perteneceDesafio(codigoHabitacion, puntaje)) {
             System.out.println("El puntaje ingresado ya existe. Por favor, ingrese un puntaje diferente:");
-            puntaje = scanner.nextInt();
+            puntaje = sc.nextInt();
         }
         linea = "D;" + puntaje + ";" + codigoHabitacion;
         System.out.println("Ingrese el nombre del desafio:");
-        scanner.nextLine();
-        palabra = scanner.nextLine();
+        sc.nextLine();
+        palabra = sc.nextLine();
         linea += ";" + palabra;
         System.out.println("Ingrese el tipo del desafio:");
-        palabra = scanner.next();
+        palabra = sc.next();
         linea += ";" + palabra;
         archivo.cargarDatoLinea(linea, habitaciones, null, null);
         System.out.println("Desafío creado exitosamente.");
     }
 
-    public static void modificarDesafio(Scanner scanner, ArbolAVL habitaciones) {
+    public static void modificarDesafio(Scanner sc, ArbolAVL habitaciones) {
         int codigo, numMenu, puntaje;
         System.out.println("--> Modificación de habitación");
         System.out.println("Ingrese el código de la habitación a modificar:");
-        codigo = scanner.nextInt();
+        codigo = sc.nextInt();
         if (!habitaciones.pertenece(codigo)) {
             System.out.println("No se encontró la habitación con el código ingresado.");
         } else {
             System.out.println("Ingrese el puntaje del desafio a modificar:");
-            puntaje = scanner.nextInt();
+            puntaje = sc.nextInt();
             if (!habitaciones.perteneceDesafio(codigo, puntaje)) {
                 System.out.println("No se encontró el desafío con el puntaje ingresado.");
             } else {
                 mostrarMenuModificardesafio();
-                numMenu = scanner.nextInt();
+                numMenu = sc.nextInt();
                 switch (numMenu) {
                     case 1:
-                        scanner.nextLine();
-                        cambiarNombreDesafio(scanner, habitaciones, codigo, puntaje);
+                        sc.nextLine();
+                        cambiarNombreDesafio(sc, habitaciones, codigo, puntaje);
                         break;
                     case 2:
-                        cambiarTipoDesafio(scanner, habitaciones, codigo, puntaje);
+                        cambiarTipoDesafio(sc, habitaciones, codigo, puntaje);
                         break;
                     case 4:
                         System.out.println("Saliendo de la modificación de habitación...");
@@ -401,10 +400,10 @@ public class Principal {
         }
     }
 
-    public static void cambiarNombreDesafio(Scanner scanner, ArbolAVL habitaciones, int codigo, int puntaje) {
+    public static void cambiarNombreDesafio(Scanner sc, ArbolAVL habitaciones, int codigo, int puntaje) {
         String nombre;
         System.out.println("Ingrese el nuevo nombre del desafío:");
-        nombre = scanner.nextLine();
+        nombre = sc.nextLine();
         // Llamo a método de AVL que modifica el nombre del desafío y me devuelve un
         // boolean
         habitaciones.modificarNombreDesafio(codigo, puntaje, nombre);
@@ -412,10 +411,10 @@ public class Principal {
 
     }
 
-    public static void cambiarTipoDesafio(Scanner scanner, ArbolAVL habitaciones, int codigo, int puntaje) {
+    public static void cambiarTipoDesafio(Scanner sc, ArbolAVL habitaciones, int codigo, int puntaje) {
         String tipo;
         System.out.println("Ingrese el nuevo tipo del desafío:");
-        tipo = scanner.next();
+        tipo = sc.next();
         // Llamo a método de AVL que modifica el tipo del desafío y me devuelve un
         // boolean
         habitaciones.modificarTipoDesafio(codigo, puntaje, tipo);
@@ -423,18 +422,18 @@ public class Principal {
 
     }
 
-    public static void eliminarDesafio(Scanner scanner, ArbolAVL habitaciones) {
+    public static void eliminarDesafio(Scanner sc, ArbolAVL habitaciones) {
         int codigoHabitacion, puntaje;
 
         System.out.println("--> Baja de desafío");
         System.out.println("Ingrese el código de la habitación del desafío a eliminar:");
-        codigoHabitacion = scanner.nextInt();
+        codigoHabitacion = sc.nextInt();
         if (!habitaciones.pertenece(codigoHabitacion)) {
             System.out.println(
                     "No se encontró la habitación con el código ingresado. Por favor, ingrese un código válido.");
         } else {
             System.out.println("Ingrese el puntaje del desafío a eliminar:");
-            puntaje = scanner.nextInt();
+            puntaje = sc.nextInt();
 
             if (habitaciones.eliminarDesafio(codigoHabitacion, puntaje)) {
                 System.out.println("Desafío eliminado correctamente.");
@@ -444,22 +443,22 @@ public class Principal {
         }
     }
 
-    public static void agregarEquipo(Scanner scanner, HashMap<String, Equipo> equipos,ArbolAVL habitaciones) {
+    public static void agregarEquipo(Scanner sc, HashMap<String, Equipo> equipos,ArbolAVL habitaciones) {
         GestorArchivo archivo= new GestorArchivo();
         String nombre, linea;
         int puntajeExigido, codigo;
         System.out.println("--> Crear de equipo");
         System.out.println("Ingrese el nombre del equipo:");
-        nombre = scanner.nextLine();
+        nombre = sc.nextLine();
         if (equipos.containsKey(nombre)) {
             System.out.println("El nombre ingresado ya existe. Por favor, ingrese un nombre diferente:");
         } else {
             linea = "E;" + nombre;
             System.out.println("Ingrese el puntaje exigido del equipo:");
-            puntajeExigido = scanner.nextInt();
+            puntajeExigido = sc.nextInt();
             linea += ";" + puntajeExigido + ";0";
             System.out.println("Ingrese el codigo de la habitacion actual del equipo:");
-            codigo = scanner.nextInt();
+            codigo = sc.nextInt();
             if(habitaciones.pertenece(codigo)){
             linea += ";" + codigo + ";0";
             archivo.cargarDatoLinea(linea, null, null, equipos);
@@ -470,17 +469,17 @@ public class Principal {
             System.out.println("No se pudo crear puesto que no existe una habitacion con dicho codigo.");
         }
     }
-    public static void modificarEquipo(Scanner scanner, HashMap<String, Equipo> equipos) {
+    public static void modificarEquipo(Scanner sc, HashMap<String, Equipo> equipos) {
         String nombre;
         int numMenu;
         System.out.println("Introduce el nombre del equipo a modificar:");
-        nombre=scanner.nextLine();
+        nombre=sc.nextLine();
         if (equipos.containsKey(nombre)) {
             mostrarMenuModificarEquipo();
-            numMenu = scanner.nextInt();
+            numMenu = sc.nextInt();
             switch (numMenu) {
                 case 1:
-                    cambiarPuntajeExigido(scanner, equipos, nombre);
+                    cambiarPuntajeExigido(sc, equipos, nombre);
                     break;
                 case 2:
                     System.out.println("Saliendo de la modificación de equipo...");
@@ -493,31 +492,32 @@ public class Principal {
             System.out.println("El equipo no existe.");
         }
     }
-    public static void eliminarEquipo(Scanner scanner, HashMap<String, Equipo> equipos) {
+    public static void eliminarEquipo(Scanner sc, HashMap<String, Equipo> equipos) {
         String nombre;
         System.out.println("Introduce el nombre del equipo a eliminar:");
-        nombre=scanner.nextLine();
+        nombre=sc.nextLine();
         if (equipos.containsKey(nombre)) {
-            
+            equipos.remove(nombre);
+            System.out.println("Equipo eliminado");
         }else{
-
+            System.out.println("El equipo no existe.");
         }
     }
 
 
 
-    public static void cambiarPuntajeExigido(Scanner scanner, HashMap<String, Equipo> equipos, String nombre) {
+    public static void cambiarPuntajeExigido(Scanner sc, HashMap<String, Equipo> equipos, String nombre) {
         int puntajeExigido;
         System.out.println("Ingrese el nuevo puntaje exigido del equipo:");
-        puntajeExigido = scanner.nextInt();
+        puntajeExigido = sc.nextInt();
         equipos.get(nombre).setPuntajeExigido(puntajeExigido);
         System.out.println("Puntaje exigido del equipo modificado correctamente.");
     }
 
-    public static void cambiarCodigoHabitacionActual(Scanner scanner, HashMap<String, Equipo> equipos, String nombre,Grafo planoCasa) {
+    public static void cambiarCodigoHabitacionActual(Scanner sc, HashMap<String, Equipo> equipos, String nombre,Grafo planoCasa) {
         int codigo;
         System.out.println("Ingrese el nuevo código de la habitación actual del equipo:");
-        codigo = scanner.nextInt();
+        codigo = sc.nextInt();
         if(planoCasa.existeArco(codigo,equipos.get(nombre).getCodigoHabitacionActual())){
 
         System.out.println("Código de la habitación actual del equipo modificado correctamente.");
@@ -525,15 +525,15 @@ public class Principal {
         System.out.println("No se pueden mover a esa habitacion.");
     }
 }
-    public static void gestionConsultaEquipos(Scanner scanner,HashMap<String, Equipo> equipos,ArbolAVL habitaciones,Grafo planoCasa){
+    public static void gestionConsultaEquipos(Scanner sc,HashMap<String, Equipo> equipos,ArbolAVL habitaciones,Grafo planoCasa){
         int numMenu;
         mostrarMenuConsultaEquipos();
-        numMenu=scanner.nextInt();
+        numMenu=sc.nextInt();
         switch (numMenu) {
             case 1:
                 System.out.println("-->Mostrar informacion de equipo");
-                scanner.nextLine();
-                mostrarEquipo(scanner,equipos);
+                sc.nextLine();
+                mostrarEquipo(sc,equipos);
                 break;
             case 2:
                 System.out.println("--> Mostrar posbiles desafios");
@@ -541,21 +541,18 @@ public class Principal {
                 break;
             case 3:
                 System.out.println("-->Jugar desafio");
-                scanner.nextLine();
-                jugarDesafio(scanner,equipos, habitaciones);
+                sc.nextLine();
+                jugarDesafio(sc,equipos, habitaciones);
                 break;
             case 4:
                 System.out.println("--> Cambiar de habitacion ");
-                scanner.nextLine();
-                cambiarDeHabitacion(scanner,equipos,habitaciones,planoCasa);
+                sc.nextLine();
+                cambiarDeHabitacion(sc,equipos,habitaciones,planoCasa);
                 break;
             case 5:
                 System.out.println("--> Puede salir ");
-                scanner.nextLine();
-                if(puedeSalirDeHabitacion(scanner,equipos,habitaciones)){
-                    System.out.println("El equipo pudo salir ");
-                    elimin
-                }
+                sc.nextLine();
+                puedeSalirEquipo(sc,equipos,habitaciones);
                 break;
             case 6:
                 System.out.println("Saliendo de consulta de equipos... ");
@@ -564,11 +561,11 @@ public class Principal {
                 break;
         }
     }
-    public static void mostrarEquipo(Scanner scanner,HashMap<String, Equipo> equipos){
+    public static void mostrarEquipo(Scanner sc,HashMap<String, Equipo> equipos){
         String nombre;
 
         System.out.println("Introduce el nombre del equipo a modificar:");
-        nombre=scanner.nextLine();
+        nombre=sc.nextLine();
         if (equipos.containsKey(nombre)) {
             Equipo equipo= equipos.get(nombre);
             equipo.toString();
@@ -576,20 +573,20 @@ public class Principal {
                 System.out.println("El equipo no existe.");
             }
     }
-    public static void jugarDesafio(Scanner scanner,HashMap<String, Equipo> equipos,ArbolAVL habitaciones){
+    public static void jugarDesafio(Scanner sc,HashMap<String, Equipo> equipos,ArbolAVL habitaciones){
         String nombre;
         int codigo,puntaje;
 
         System.out.println("Introduce el nombre del equipo que juega el desafio:");
-        nombre=scanner.nextLine();
+        nombre=sc.nextLine();
 
         if (equipos.containsKey(nombre)) {
             System.out.println("Introduce el codigo de la habitacion:");
-            codigo=scanner.nextInt();
+            codigo=sc.nextInt();
             if(habitaciones.pertenece(codigo)){
                 Equipo equipo= equipos.get(nombre);
                 System.out.println("Introduce el puntaje del desafio que estan jugando:");
-                puntaje=scanner.nextInt();
+                puntaje=sc.nextInt();
                 if(habitaciones.perteneceDesafio(codigo,puntaje)){
                 equipo.cargarDesafiosRealizados(codigo,puntaje);
                 equipo.actualizarPuntajes();
@@ -604,14 +601,14 @@ public class Principal {
             System.out.println("El equipo no existe.");
         }
     }
-    public static void cambiarDeHabitacion(Scanner scanner,HashMap<String, Equipo> equipos,ArbolAVL habitaciones,Grafo planoCasa){
+    public static void cambiarDeHabitacion(Scanner sc,HashMap<String, Equipo> equipos,ArbolAVL habitaciones,Grafo planoCasa){
         String nombre;
         int codigo;
         System.out.println("Introduce el nombre del equipo que juega el desafio:");
-        nombre=scanner.nextLine();
+        nombre=sc.nextLine();
         if (equipos.containsKey(nombre)) {
             System.out.println("introduce el codigo de la habitacion a la que quieren avanzar");
-            codigo=scanner.nextInt();
+            codigo=sc.nextInt();
             if(habitaciones.pertenece(codigo)){
                 Equipo equipo=equipos.get(nombre);
                 if(planoCasa.existeArco(equipo.getCodigoHabitacionActual(),codigo)){
@@ -633,16 +630,16 @@ public class Principal {
             System.out.println("El equipo no existe.");
         }
     }
-    public static boolean puedeSalirDeHabitacion(Scanner scanner,HashMap<String, Equipo> equipos, ArbolAVL habitaciones){
-        boolean exito=false;
+    public static void puedeSalirEquipo(Scanner sc,HashMap<String, Equipo> equipos, ArbolAVL habitaciones){
         String nombre;
         System.out.println("Introduce el nombre del equipo que juega el desafio:");
-        nombre=scanner.nextLine();
+        nombre=sc.nextLine();
         if (equipos.containsKey(nombre)) {
             Equipo equipo = equipos.get(nombre);
             if(habitaciones.tieneSalida(equipo.getCodigoHabitacionActual())){
                 if(equipo.getPuntajeAcumulado()>=equipo.getPuntajeExigido()){
-                    exito=true;
+                    equipos.remove(nombre);
+                    System.out.println("El equipo "+nombre+" logro escapar.");
                 }else{
                     System.out.println("El equipo no tiene el puntaje para escapar.");
                 }
@@ -652,15 +649,14 @@ public class Principal {
         }else{
             System.out.println("El equipo no existe.");
         }
-        return exito;
     }
 
-    public static void gestionConsultaGeneral(Scanner scanner, ArbolAVL habitaciones, Grafo planoCasa,
+    public static void gestionConsultaGeneral(Scanner sc, ArbolAVL habitaciones, Grafo planoCasa,
             HashMap<String, Equipo> equipos) {
         System.out.println("Consulta general de habitaciones, desafíos y equipos.");
         int numMenu;
         mostrarMenuConsultaGeneral();
-        numMenu = scanner.nextInt();
+        numMenu = sc.nextInt();
         switch (numMenu) {
             case 1:
                 System.out.println("Imprimiendo AVL de habitaciones.");
@@ -864,7 +860,7 @@ public class Principal {
         }
         return exito;
     }
-
+    // punto 5 consultas sobre habitaciones
     public static void mostrarDesafiosPorTipo(Scanner sc, ArbolAVL habitaciones){
         String str = "";
         System.out.println("Ingrese la clave de la habitacion: ");
@@ -886,9 +882,9 @@ public class Principal {
             }
         }
         System.out.println(str);
-    }  
-    
-    private static String filtrarPorTipo(Lista enRango, Comparable x){
+    }
+
+    private static String filtrarPorTipo(Lista enRango, String x){
         String str = "";
         int i = 1;
         while (i <= enRango.longitud()) {
@@ -900,8 +896,6 @@ public class Principal {
         }
         return str;
     }
-    // punto 5 consultas sobre habitaciones
-
     //agregar a modificacion de habitacion carga de conexiones
     //agregar a modificacion de equipos cambio de habitacion si hay puertas y puntos totales
     //y actualizar puntaje actual.
