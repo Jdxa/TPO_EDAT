@@ -510,6 +510,14 @@ public class ArbolAVL {
         
         return str;
     }
+    public boolean tieneSalida(int codigo){
+        boolean exito=false;
+        Habitacion hab=(Habitacion)this.recuperar(codigo);
+        if(hab!=null){
+        exito= hab.getTieneSalida();
+        }
+        return exito;
+        }
     public Lista filtrarPorRango(Comparable codigoHab, Comparable a, Comparable b){
         Habitacion hab = (Habitacion)recuperar(codigoHab);
         Lista desafiosEnRango = new Lista();
