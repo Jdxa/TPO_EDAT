@@ -510,4 +510,12 @@ public class ArbolAVL {
         
         return str;
     }
+    public boolean tieneSalida(int codigo){
+        boolean exito=false;
+        Habitacion hab=(Habitacion)this.recuperar(codigo);
+        if(hab!=null){
+        exito= hab.getTieneSalida();
+        }
+        return exito;
+        }
 }

@@ -31,7 +31,6 @@ public class Principal {
                         break;
                     } else {
                         archivo.cargarDatos(habitaciones, planoCasa, equipo);
-                        
                         estaCargado = true;
                     }
 
@@ -122,7 +121,6 @@ public class Principal {
         } while (numMenu != 0);
 
         scanner.close();
-
     }
 
     public static void gestionABM(Scanner scanner, ArbolAVL habitaciones,
@@ -213,7 +211,8 @@ public class Principal {
                 modificarEquipo(scanner, equipos);
                 break;
             case 3:
-                // eliminarEquipo(scanner, habitaciones);
+                scanner.nextLine();
+                eliminarEquipo(scanner, equipos);
                 break;
             case 4:
                 System.out.println("Saliendo del menú de ABM...");
@@ -340,6 +339,7 @@ public class Principal {
         int codigoHabitacion, puntaje;
         String linea, palabra;
         GestorArchivo archivo=new GestorArchivo();
+        
         System.out.println("--> Crear de desafío");
         System.out.println("Ingrese el código de la habitación a la que pertenece el desafío:");
         codigoHabitacion = scanner.nextInt();
@@ -491,6 +491,17 @@ public class Principal {
             System.out.println("El equipo no existe.");
         }
     }
+    public static void eliminarEquipo(Scanner scanner, HashMap<String, Equipo> equipos) {
+        String nombre;
+        System.out.println("Introduce el nombre del equipo a eliminar:");
+        nombre=scanner.nextLine();
+        if (equipos.containsKey(nombre)) {
+            
+        }else{
+
+        }
+    }
+
 
 
     public static void cambiarPuntajeExigido(Scanner scanner, HashMap<String, Equipo> equipos, String nombre) {
@@ -538,6 +549,11 @@ public class Principal {
                 break;
             case 5:
                 System.out.println("--> Puede salir ");
+                scanner.nextLine();
+                if(puedeSalirDeHabitacion(scanner,equipos,habitaciones)){
+                    System.out.println("El equipo pudo salir ");
+                    elimin
+                }
                 break;
             case 6:
                 System.out.println("Saliendo de consulta de equipos... ");
@@ -574,7 +590,7 @@ public class Principal {
                 puntaje=scanner.nextInt();
                 if(habitaciones.perteneceDesafio(codigo,puntaje)){
                 equipo.cargarDesafiosRealizados(codigo,puntaje);
-                equipo.actualizarPuntajes(codigo);
+                equipo.actualizarPuntajes();
                 System.out.println("Se ha agregado el desafio como realizado para el equipo "+nombre+".");
                 }else{
                     System.out.println("El desafio no existe.");
@@ -614,6 +630,27 @@ public class Principal {
         }else{
             System.out.println("El equipo no existe.");
         }
+    }
+    public static boolean puedeSalirDeHabitacion(Scanner scanner,HashMap<String, Equipo> equipos, ArbolAVL habitaciones){
+        boolean exito=false;
+        String nombre;
+        System.out.println("Introduce el nombre del equipo que juega el desafio:");
+        nombre=scanner.nextLine();
+        if (equipos.containsKey(nombre)) {
+            Equipo equipo = equipos.get(nombre);
+            if(habitaciones.tieneSalida(equipo.getCodigoHabitacionActual())){
+                if(equipo.getPuntajeAcumulado()>=equipo.getPuntajeExigido()){
+                    exito=true;
+                }else{
+                    System.out.println("El equipo no tiene el puntaje para escapar.");
+                }
+            }else{
+                System.out.println("La habitacion no tiene salida.");
+            }
+        }else{
+            System.out.println("El equipo no existe.");
+        }
+        return exito;
     }
 
     public static void gestionConsultaGeneral(Scanner scanner, ArbolAVL habitaciones, Grafo planoCasa,
