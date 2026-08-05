@@ -66,7 +66,7 @@ public class Equipo {
     }
     public void actualizarPuntajes(int codigo){
         actualizarPuntajeAcumulado();
-        actualizarPuntaje(codigo);
+        // actualizarPuntaje(codigo);
 
     }
     private void actualizarPuntajeAcumulado(){

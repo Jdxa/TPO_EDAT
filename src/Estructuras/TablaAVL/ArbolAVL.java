@@ -510,4 +510,20 @@ public class ArbolAVL {
         
         return str;
     }
+    public Lista filtrarPorRango(Comparable codigoHab, Comparable a, Comparable b){
+        Habitacion hab = (Habitacion)recuperar(codigoHab);
+        Lista desafiosEnRango = new Lista();
+        if (hab != null) {
+            ArbolAVL desafios = hab.getDesafios();
+            if (!desafios.esVacio()) {
+                desafiosEnRango = desafios.listarRango(a, b); 
+            }    
+        }
+        return desafiosEnRango;
+    }
+
+    
+    /*
+    puntajes a y b tipo x
+    filtrar por x  */
 }
