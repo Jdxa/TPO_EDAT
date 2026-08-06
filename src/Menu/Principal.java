@@ -32,7 +32,7 @@ public class Principal {
                         break;
                     } else {
                         archivo.cargarDatos(habitaciones, planoCasa, equipo);
-                        GestorArchivo.registrarLog("Se cargaron los datos");
+                    //  GestorArchivo.registrarLog("Se cargaron los datos");
                         estaCargado = true;
                     }
 
