@@ -74,14 +74,13 @@ public class Grafo {
             aux = aux.getSigVertice();
         }
         if (aux != null) {
-            // elimino arcos q vayan a aux
-            NodoVert v = this.inicio;
-            while (v != null) {
-                if (v != aux) {
-                    this.eliminarArco(v.getElem(), aux.getElem());
-                }
-                v = v.getSigVertice();
+            // elimino arcos q vayan a aux 
+            NodoAdy ady = aux.getPrimerAdy();
+            while (ady != null) {
+                this.eliminarArco(ady.getVertice().getElem(),aux.getElem());
+                ady = ady.getSigAdyacente();
             }
+            
             // desenlaza aux de la lista de vertices
             if (anterior == null) {
                 this.inicio = aux.getSigVertice();
