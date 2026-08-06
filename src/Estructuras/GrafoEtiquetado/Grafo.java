@@ -45,7 +45,7 @@ public class Grafo {
         return aux;
     }*/
 
-    public boolean insertarArco(Object origen, Object destino, Object etiqueta) {
+    public boolean insertarArco(Object origen, Object destino, int etiqueta) {
         boolean exito = false;
         NodoVert origenVertice = ubicarVertice(origen); 
         NodoVert destinoVertice = ubicarVertice(destino); 
@@ -403,7 +403,7 @@ public class Grafo {
                 while (!exito && ady != null) {
                     // comprueba q no este visitado el nodo a visitar
                     if (visitados.localizar(ady.getVertice().getElem()) < 0) {
-                        int costo = (int) ady.getEtiqueta();
+                        int costo = ady.getEtiqueta();
                         // entra si k me alcanza para llegar al nodo a visitar, en caso contrario corta
                         // el programa y no es posible llegar
                         if (sumaActual + costo <= k) {
@@ -450,7 +450,7 @@ public class Grafo {
 
                 while (ady != null) {
                     if (visitados.localizar(ady.getVertice().getElem()) < 0) {
-                        int etiqueta = (int) ady.getEtiqueta();
+                        int etiqueta = ady.getEtiqueta();
                         minimoPuntajeAux(n.getSigVertice(), dest, sumaActual + etiqueta, visitados, minCoste);
                     }
                     ady = ady.getSigAdyacente();
@@ -487,7 +487,7 @@ public class Grafo {
                 while (ady != null) {
                     // para evitar ciclos
                     if (caminoActual.localizar(ady.getVertice().getElem()) < 0) {
-                        int costo = (int) ady.getEtiqueta();
+                        int costo = ady.getEtiqueta();
 
                         if (sumaActual + costo <= p) {
                             sinPasarPorAux(ady.getVertice(), dest, hab3, p, sumaActual + costo, caminoActual,
