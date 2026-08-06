@@ -32,6 +32,7 @@ public class Principal {
                         break;
                     } else {
                         archivo.cargarDatos(habitaciones, planoCasa, equipo);
+                        GestorArchivo.registrarLog("Se cargaron los datos");
                         estaCargado = true;
                     }
 
@@ -162,6 +163,7 @@ public class Principal {
         codigo = sc.nextInt();
         linea += ";" + codigo + ";false";
         archivo.cargarDatoLinea(linea, habitaciones,planoCasa, null);
+        GestorArchivo.registrarLog("Se agrego una habitacion con el nombre: "+palabra);
 
         res="Habitación creada exitosamente.";
         }else{
@@ -212,10 +214,12 @@ public class Principal {
 
     public static String cambiarNombreHabitacion(Scanner sc, ArbolAVL habitaciones, int codigo) {
         String nombre;
+        
         System.out.println("Ingrese el nuevo nombre de la habitación:");
         nombre = sc.nextLine();
         //opero desde AVL los atributos de habitacion
         habitaciones.modificarNombreHabitacion(codigo, nombre);
+        GestorArchivo.registrarLog("Se modifico el nombre de la habitacion "+codigo+" por: "+nombre);
         return "Nombre de la habitación modificado correctamente.";
     }
 
@@ -225,6 +229,7 @@ public class Principal {
         planta = sc.nextInt();
         //opero desde AVL los atributos de habitacion
         habitaciones.modificarPlantaHabitacion(codigo, planta);
+        GestorArchivo.registrarLog("Se modifico la plata de la habitacion "+codigo+" por: "+planta);
         return "Planta de la habitación modificada correctamente.";
     }
 
@@ -234,6 +239,7 @@ public class Principal {
         medida = sc.nextInt();
         //opero desde AVL los atributos de habitacion
         habitaciones.modificarMedidaHabitacion(codigo, medida);
+        GestorArchivo.registrarLog("Se modifico la medida de la habitacion "+codigo+" por: "+medida);
         return "Medida de la habitación modificada correctamente.";
     }
 
@@ -245,6 +251,7 @@ public class Principal {
         // Llamo a metodo AVL que elimina si existe habitacion y devuelve boolean
         if (habitaciones.eliminar(codigo)) {
             planoCasa.eliminarVertice(codigo);
+            GestorArchivo.registrarLog("Se elimino la habitacion "+codigo);
             res="Habitación eliminada correctamente.";
         } else {
             res="No se encontró la habitación con el código "+codigo+".";
@@ -255,7 +262,7 @@ public class Principal {
         int destino,puntajeRequerido;
         String linea,res;
         GestorArchivo archivo= new GestorArchivo();
-        linea="P;codigo;";
+        linea="P;"+codigo+";";
         System.out.println("inserte la habitacion destino.");
         destino = sc.nextInt();
         if(planoCasa.existeVertice(destino)){
@@ -264,6 +271,7 @@ public class Principal {
         puntajeRequerido = sc.nextInt();
         linea+=puntajeRequerido;
         archivo.cargarDatoLinea(linea, null, planoCasa, null);
+        GestorArchivo.registrarLog("Se agrego la puerta con origen "+codigo+" y destino "+destino+" con un puntaje de "+puntajeRequerido);
         res="Se cargo exitosamente la nueva puerta";
         }else{
         res="no existe la habitacion destino";
@@ -326,6 +334,7 @@ public class Principal {
         palabra = sc.next();
         linea += ";" + palabra;
         archivo.cargarDatoLinea(linea, habitaciones, null, null);
+        GestorArchivo.registrarLog("Se creo un desafio con codigo "+puntaje+" en la habitacion "+codigoHabitacion);
         res="Desafío creado exitosamente.";
         }else{
         res="El puntaje ingresado ya le pertenece a otro desafio de la habitacion";
@@ -383,6 +392,7 @@ public class Principal {
         // Llamo a método de AVL que modifica el nombre del desafío y me devuelve un
         // boolean
         habitaciones.modificarNombreDesafio(codigo, puntaje, nombre);
+        GestorArchivo.registrarLog("Se cambio el nombre del desafio "+codigo+" por: "+nombre);
         return "Nombre del desafío modificado correctamente.";
 
     }
@@ -394,6 +404,7 @@ public class Principal {
         // Llamo a método de AVL que modifica el tipo del desafío y me devuelve un
         // boolean
         habitaciones.modificarTipoDesafio(codigo, puntaje, tipo);
+        GestorArchivo.registrarLog("Se cambio el tipo, al desafio "+codigo+" por: "+tipo);
         return "Tipo del desafío modificado correctamente.";
 
     }
@@ -410,6 +421,7 @@ public class Principal {
             System.out.println("Ingrese el puntaje del desafío a eliminar:");
             puntaje = sc.nextInt();
             if(habitaciones.eliminarDesafio(codigoHabitacion, puntaje)){
+                GestorArchivo.registrarLog("Se elimino el desafio "+puntaje+" en la habitacion "+codigoHabitacion);
                 res="Desafío eliminado correctamente.";
             } else {
                 res="No se encontró el desafio ingresado, en la habitacion ingresada.";
@@ -477,6 +489,7 @@ public static void equiposABM(Scanner sc, HashMap<String, Equipo> equipos,
             if(habitaciones.pertenece(codigo)){
             linea += ";" + codigo + ";0";
             archivo.cargarDatoLinea(linea, null, null, equipos);
+            GestorArchivo.registrarLog("Se agrego el equipo "+nombre);
             res="Equipo creado exitosamente.";
             }else{
             res="No se pudo crear puesto que no existe una habitacion con dicho codigo.";
@@ -514,6 +527,7 @@ public static void equiposABM(Scanner sc, HashMap<String, Equipo> equipos,
         System.out.println("Ingrese el nuevo puntaje exigido del equipo:");
         puntajeExigido = sc.nextInt();
         equipos.get(nombre).setPuntajeExigido(puntajeExigido);
+        GestorArchivo.registrarLog("Se modifico el puntaje exigido del equipo "+nombre+" por: "+puntajeExigido);
         return "Puntaje exigido del equipo modificado correctamente.";
     }
 
@@ -522,6 +536,7 @@ public static void equiposABM(Scanner sc, HashMap<String, Equipo> equipos,
         System.out.println("Introduce el nombre del equipo a eliminar:");
         nombre=sc.nextLine();
         if (equipos.remove(nombre)!=null) {
+            GestorArchivo.registrarLog("Se elimino el equipo "+nombre);
             res="Equipo eliminado";
         }else{
             res="El equipo no existe.";

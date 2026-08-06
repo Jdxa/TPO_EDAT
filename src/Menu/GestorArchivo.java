@@ -1,8 +1,10 @@
 package Menu;
 
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 //---------------------------
 import Estructuras.GrafoEtiquetado.Grafo;
@@ -141,6 +143,16 @@ public class GestorArchivo {
     }
     public static void hola() {
         System.out.println("hola");
+    }
+
+    public static void registrarLog(String mensaje){
+        try{
+            PrintWriter salida = new PrintWriter(new FileOutputStream("archivoTxt\\\\log.txt"));
+            salida.println(mensaje);
+            salida.close();
+        }catch(IOException e){
+            System.out.println("Ocurrio un error al escribir el log"+ e.getMessage());
+        }
     }
 
 }
