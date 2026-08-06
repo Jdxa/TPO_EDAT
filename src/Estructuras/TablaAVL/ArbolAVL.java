@@ -529,9 +529,44 @@ public class ArbolAVL {
         }
         return desafiosEnRango;
     }
-
+        public String listarMayoesoIgualesDesafios(Comparable codigoHab, Comparable a){
+        Habitacion hab = (Habitacion)recuperar(codigoHab);
+        String res="";
+        Lista desafiosEnRango = new Lista();
+        if (hab != null) {
+            ArbolAVL desafios = hab.getDesafios();
+            if (!desafios.esVacio()) {
+                desafiosEnRango = desafios.listarMayores(a); 
+            }
+            while(!desafiosEnRango.esVacia()){
+                res=desafiosEnRango.recuperar(1).toString()+"\n";
+                desafiosEnRango.eliminar(1);
+            }
+        }
+        return res;
+    }
     
-    /*
-    puntajes a y b tipo x
-    filtrar por x  */
+    public Lista listarMayores(Comparable min) {
+        Lista listaResultado = new Lista();
+        listarMayoresAux(this.raiz, min, listaResultado);
+        return listaResultado;
+    }
+
+    private void listarMayoresAux(NodoAVL nodoActual, Comparable min, Lista lista) {
+        if (nodoActual != null) {
+            Comparable clave = nodoActual.getClave();
+
+            // Recorremos el subárbol izquierdo si la clave actual es mayor al mínimo.
+            if (clave.compareTo(min) > 0) {
+                listarMayoresAux(nodoActual.getIzquierdo(), min, lista);
+            }
+
+            if (clave.compareTo(min) >= 0) {
+                lista.insertar(nodoActual.getElem(), lista.longitud() + 1);
+            }
+
+            // Siempre recorremos el subárbol derecho.
+            listarMayoresAux(nodoActual.getDerecho(), min, lista);
+        }
+    }
 }
