@@ -452,7 +452,7 @@ public class Grafo {
                 while (ady != null) {
                     if (visitados.localizar(ady.getVertice().getElem()) < 0) {
                         int etiqueta = ady.getEtiqueta();
-                        minimoPuntajeAux(n.getSigVertice(), dest, sumaActual + etiqueta, visitados, minCoste,
+                        minimoPuntajeAux(ady.getVertice(), dest, sumaActual + etiqueta, visitados, minCoste,
                                 mejorCamino);
                     }
                     ady = ady.getSigAdyacente();
