@@ -580,6 +580,15 @@ public static void equiposABM(Scanner sc, HashMap<String, Equipo> equipos,
 
             case 4:
                 System.out.println("Seleccionaste: cual es el minimo puntaje para ir de habitacion A a habitacion B");
+                Lista mejorCamino = new Lista();
+                System.out.println("Ingrese hab1: ");
+                int hab1 = sc.nextInt();
+                System.out.println("Ingrese hab2: ");
+                int hab2 = sc.nextInt();
+                int puntajeMin = planoCasa.minimoPuntaje(hab1, hab2, mejorCamino);
+                System.out.println("El puntaje min es: "+puntajeMin);
+                System.out.println("El mejor camino es: "+mejorCamino.toString());
+
             break;
 
             case 5:

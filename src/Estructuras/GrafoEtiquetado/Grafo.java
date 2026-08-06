@@ -444,8 +444,12 @@ public class Grafo {
 
             if (n.getElem().equals(dest)) {
                 minCoste[0] = sumaActual;
-
-                mejorCamino = visitados.clone();
+                //hago esto en vez de un clone porque sino no guarda al lista en la variable local
+                mejorCamino.vaciar();
+                for (int i=1; i <= visitados.longitud(); i++){
+                    mejorCamino.insertar(visitados.recuperar(i), i);
+                }
+                
             } else {
                 NodoAdy ady = n.getPrimerAdy();
 
