@@ -359,7 +359,7 @@ public class Grafo {
         return clon;
     }
 
-    public String habitacionesContiguas(Object elem) {
+    public String listarAdyacentesString(Object elem) {
         NodoVert nodoVert = ubicarVertice(elem);
         String str = "No existe";
         Lista adyacentes = new Lista();

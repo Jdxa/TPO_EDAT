@@ -571,7 +571,7 @@ public static void equiposABM(Scanner sc, HashMap<String, Equipo> equipos,
                 System.out.println("Ingrese un numero de habitacion:");
                 numMenu = sc.nextInt();
                 // llamo metodo de Grafo que me da un String de las habitaciones contiguas
-                System.out.println(planoCasa.habitacionesContiguas(numMenu));
+                System.out.println(planoCasa.listarAdyacentesString(numMenu));
             break;
 
             case 3:
