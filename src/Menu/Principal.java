@@ -262,7 +262,7 @@ public class Principal {
         int destino,puntajeRequerido;
         String linea,res;
         GestorArchivo archivo= new GestorArchivo();
-        linea="P;"+codigo;
+        linea="P;"+codigo+";";
         System.out.println("inserte la habitacion destino.");
         destino = sc.nextInt();
         if(planoCasa.existeVertice(destino)){
