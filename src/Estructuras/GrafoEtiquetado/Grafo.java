@@ -33,22 +33,24 @@ public class Grafo {
         return exito;
     }
 
-    /*private NodoAdy ubicarEtiqueta(Object etiqueta, NodoVert vertice) {
-        NodoAdy aux = null;
-        ;
-        if (vertice != null) {
-            aux = vertice.getPrimerAdy();
-            while (aux.getSigAdyacente() != null && aux.getEtiqueta().equals(etiqueta)) {
-                aux = aux.getSigAdyacente();
-            }
-        }
-        return aux;
-    }*/
+    /*
+     * private NodoAdy ubicarEtiqueta(Object etiqueta, NodoVert vertice) {
+     * NodoAdy aux = null;
+     * ;
+     * if (vertice != null) {
+     * aux = vertice.getPrimerAdy();
+     * while (aux.getSigAdyacente() != null && aux.getEtiqueta().equals(etiqueta)) {
+     * aux = aux.getSigAdyacente();
+     * }
+     * }
+     * return aux;
+     * }
+     */
 
     public boolean insertarArco(Object origen, Object destino, int etiqueta) {
         boolean exito = false;
-        NodoVert origenVertice = ubicarVertice(origen); 
-        NodoVert destinoVertice = ubicarVertice(destino); 
+        NodoVert origenVertice = ubicarVertice(origen);
+        NodoVert destinoVertice = ubicarVertice(destino);
 
         // Verificamos que ambos vértices existan en el grafo
         if (origenVertice != null && destinoVertice != null) {
@@ -74,13 +76,13 @@ public class Grafo {
             aux = aux.getSigVertice();
         }
         if (aux != null) {
-            // elimino arcos q vayan a aux 
+            // elimino arcos q vayan a aux
             NodoAdy ady = aux.getPrimerAdy();
             while (ady != null) {
-                this.eliminarArco(ady.getVertice().getElem(),aux.getElem());
+                this.eliminarArco(ady.getVertice().getElem(), aux.getElem());
                 ady = ady.getSigAdyacente();
             }
-            
+
             // desenlaza aux de la lista de vertices
             if (anterior == null) {
                 this.inicio = aux.getSigVertice();
@@ -420,44 +422,48 @@ public class Grafo {
         return exito;
     }
 
-    public int minimoPuntaje(Object origen, Object destino) {
+    public int minimoPuntaje(Object origen, Object destino, Lista mejorCamino) {
         NodoVert nodoO = ubicarVertice(origen);
         NodoVert nodoD = ubicarVertice(destino);
-        int [] minCoste = {-1};
-        if (nodoD != null && nodoO!= null) {
+        int[] minCoste = { -1 };
+        if (nodoD != null && nodoO != null) {
             Lista visitados = new Lista();
-            minimoPuntajeAux(nodoO, destino, 0, visitados, minCoste);
+            minimoPuntajeAux(nodoO, destino, 0, visitados, minCoste, mejorCamino);
         }
         return minCoste[0];
     }
 
-    private void minimoPuntajeAux(NodoVert n, Object dest, int sumaActual, Lista visitados, int[] minCoste) {
-        boolean flag = true;
+    // es generico
+    private void minimoPuntajeAux(NodoVert n, Object dest, int sumaActual, Lista visitados, int[] minCoste,
+            Lista mejorCamino) {
 
-        if (minCoste[0] != -1 && sumaActual >= minCoste[0]) {
-            flag = false;
-        }
-        if (flag) {
+        if (minCoste[0] == -1 || sumaActual < minCoste[0]) {
+            // anoto por donde pase
+            int posActual = visitados.longitud() + 1;
+            visitados.insertar(n.getElem(), posActual);
+
             if (n.getElem().equals(dest)) {
-                // llegue a destino
-                if ((minCoste[0] == -1 || sumaActual < minCoste[0])) {
-                    minCoste[0] = sumaActual;
-                }
+                minCoste[0] = sumaActual;
+
+                mejorCamino = visitados.clone();
             } else {
-                visitados.insertar(minCoste, visitados.longitud() + 1);
                 NodoAdy ady = n.getPrimerAdy();
 
                 while (ady != null) {
                     if (visitados.localizar(ady.getVertice().getElem()) < 0) {
                         int etiqueta = ady.getEtiqueta();
-                        minimoPuntajeAux(n.getSigVertice(), dest, sumaActual + etiqueta, visitados, minCoste);
+                        minimoPuntajeAux(n.getSigVertice(), dest, sumaActual + etiqueta, visitados, minCoste,
+                                mejorCamino);
                     }
                     ady = ady.getSigAdyacente();
                 }
-                visitados.eliminar(visitados.longitud());
             }
+
+            visitados.eliminar(posActual);
         }
+
     }
+
     public Lista sinPasarPor(Object hab1, Object hab2, Object hab3, int p) {
         Lista caminosExitosos = new Lista();
         NodoVert nodoO = ubicarVertice(hab1);
@@ -502,19 +508,19 @@ public class Grafo {
         caminoActual.eliminar(caminoActual.longitud());
     }
 
-    public String toString(){
+    public String toString() {
         String str = "";
         NodoVert aux = this.inicio;
-        //Recorro los vertices
+        // Recorro los vertices
         while (aux != null) {
-            str += "Vertice "+aux.getElem()+ " ->";
+            str += "Vertice " + aux.getElem() + " ->";
             NodoAdy auxAdy = aux.getPrimerAdy();
             if (auxAdy == null) {
                 str += "Sin adyacencias";
-            }else{
-                //recorro adyacentes
+            } else {
+                // recorro adyacentes
                 while (auxAdy != null) {
-                    str+= auxAdy.toString();
+                    str += auxAdy.toString();
                     auxAdy = auxAdy.getSigAdyacente();
                 }
             }

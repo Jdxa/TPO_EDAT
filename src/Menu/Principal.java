@@ -813,7 +813,8 @@ public static void gestionConsultaDesafios(Scanner sc,ArbolAVL habitaciones,
             System.out.println("introduce el codigo de la habitacion a la que quieren avanzar");
             codigo=sc.nextInt();
             if(planoCasa.existeArco(codActual,codigo)){
-                puntajeNecesario=planoCasa.minimoPuntaje(codActual, codigo)-equipo.getPuntajeActual();
+               
+                puntajeNecesario=planoCasa.minimoPuntaje(codActual, codigo, new Lista())-equipo.getPuntajeActual();
                 //obtengo el puntaje del camino mas corto que seria la etiqueta entre adyacentes
                 // y luego le resto el puntaje actual del equipo para obtener el valor que deberia
                 //buscar que tengas los desafios como minimo para que solo resolviendo uno puedan
