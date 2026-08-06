@@ -1,7 +1,7 @@
 package Estructuras.GrafoEtiquetado;
 
-import Estructuras.EstructurasAux.Cola;
-import Estructuras.EstructurasAux.Lista;
+import Estructuras.Lineales.Cola;
+import Estructuras.Lineales.Lista;
 
 public class Grafo {
 
@@ -33,22 +33,24 @@ public class Grafo {
         return exito;
     }
 
-    /*private NodoAdy ubicarEtiqueta(Object etiqueta, NodoVert vertice) {
-        NodoAdy aux = null;
-        ;
-        if (vertice != null) {
-            aux = vertice.getPrimerAdy();
-            while (aux.getSigAdyacente() != null && aux.getEtiqueta().equals(etiqueta)) {
-                aux = aux.getSigAdyacente();
-            }
-        }
-        return aux;
-    }*/
+    /*
+     * private NodoAdy ubicarEtiqueta(Object etiqueta, NodoVert vertice) {
+     * NodoAdy aux = null;
+     * ;
+     * if (vertice != null) {
+     * aux = vertice.getPrimerAdy();
+     * while (aux.getSigAdyacente() != null && aux.getEtiqueta().equals(etiqueta)) {
+     * aux = aux.getSigAdyacente();
+     * }
+     * }
+     * return aux;
+     * }
+     */
 
-    public boolean insertarArco(Object origen, Object destino, Object etiqueta) {
+    public boolean insertarArco(Object origen, Object destino, int etiqueta) {
         boolean exito = false;
-        NodoVert origenVertice = ubicarVertice(origen); 
-        NodoVert destinoVertice = ubicarVertice(destino); 
+        NodoVert origenVertice = ubicarVertice(origen);
+        NodoVert destinoVertice = ubicarVertice(destino);
 
         // Verificamos que ambos vértices existan en el grafo
         if (origenVertice != null && destinoVertice != null) {
@@ -75,13 +77,12 @@ public class Grafo {
         }
         if (aux != null) {
             // elimino arcos q vayan a aux
-            NodoVert v = this.inicio;
-            while (v != null) {
-                if (v != aux) {
-                    this.eliminarArco(v.getElem(), aux.getElem());
-                }
-                v = v.getSigVertice();
+            NodoAdy ady = aux.getPrimerAdy();
+            while (ady != null) {
+                this.eliminarArco(ady.getVertice().getElem(), aux.getElem());
+                ady = ady.getSigAdyacente();
             }
+
             // desenlaza aux de la lista de vertices
             if (anterior == null) {
                 this.inicio = aux.getSigVertice();
@@ -358,7 +359,7 @@ public class Grafo {
         return clon;
     }
 
-    public String habitacionesContiguas(Object elem) {
+    public String listarAdyacentesString(Object elem) {
         NodoVert nodoVert = ubicarVertice(elem);
         String str = "No existe";
         Lista adyacentes = new Lista();
@@ -403,7 +404,7 @@ public class Grafo {
                 while (!exito && ady != null) {
                     // comprueba q no este visitado el nodo a visitar
                     if (visitados.localizar(ady.getVertice().getElem()) < 0) {
-                        int costo = (int) ady.getEtiqueta();
+                        int costo = ady.getEtiqueta();
                         // entra si k me alcanza para llegar al nodo a visitar, en caso contrario corta
                         // el programa y no es posible llegar
                         if (sumaActual + costo <= k) {
@@ -421,44 +422,52 @@ public class Grafo {
         return exito;
     }
 
-    public int minimoPuntaje(Object origen, Object destino) {
+    public int minimoPuntaje(Object origen, Object destino, Lista mejorCamino) {
         NodoVert nodoO = ubicarVertice(origen);
         NodoVert nodoD = ubicarVertice(destino);
-        int [] minCoste = {-1};
-        if (nodoD != null && nodoO!= null) {
+        int[] minCoste = { -1 };
+        if (nodoD != null && nodoO != null) {
             Lista visitados = new Lista();
-            minimoPuntajeAux(nodoO, destino, 0, visitados, minCoste);
+            minimoPuntajeAux(nodoO, destino, 0, visitados, minCoste, mejorCamino);
         }
         return minCoste[0];
     }
 
-    private void minimoPuntajeAux(NodoVert n, Object dest, int sumaActual, Lista visitados, int[] minCoste) {
-        boolean flag = true;
+    // es generico
+    private void minimoPuntajeAux(NodoVert n, Object dest, int sumaActual, Lista visitados, int[] minCoste,
+            Lista mejorCamino) {
 
-        if (minCoste[0] != -1 && sumaActual >= minCoste[0]) {
-            flag = false;
-        }
-        if (flag) {
+        if (minCoste[0] == -1 || sumaActual < minCoste[0]) {
+            // anoto por donde pase
+            int posActual = visitados.longitud() + 1;
+            visitados.insertar(n.getElem(), posActual);
+
             if (n.getElem().equals(dest)) {
-                // llegue a destino
-                if ((minCoste[0] == -1 || sumaActual < minCoste[0])) {
-                    minCoste[0] = sumaActual;
+                minCoste[0] = sumaActual;
+                //hago esto en vez de un clone porque sino no guarda al lista en la variable local
+                mejorCamino.vaciar();
+                for (int i=1; i <= visitados.longitud(); i++){
+                    mejorCamino.insertar(visitados.recuperar(i), i);
                 }
+                
             } else {
-                visitados.insertar(minCoste, visitados.longitud() + 1);
                 NodoAdy ady = n.getPrimerAdy();
 
                 while (ady != null) {
                     if (visitados.localizar(ady.getVertice().getElem()) < 0) {
-                        int etiqueta = (int) ady.getEtiqueta();
-                        minimoPuntajeAux(n.getSigVertice(), dest, sumaActual + etiqueta, visitados, minCoste);
+                        int etiqueta = ady.getEtiqueta();
+                        minimoPuntajeAux(ady.getVertice(), dest, sumaActual + etiqueta, visitados, minCoste,
+                                mejorCamino);
                     }
                     ady = ady.getSigAdyacente();
                 }
-                visitados.eliminar(visitados.longitud());
             }
+
+            visitados.eliminar(posActual);
         }
+
     }
+
     public Lista sinPasarPor(Object hab1, Object hab2, Object hab3, int p) {
         Lista caminosExitosos = new Lista();
         NodoVert nodoO = ubicarVertice(hab1);
@@ -487,7 +496,7 @@ public class Grafo {
                 while (ady != null) {
                     // para evitar ciclos
                     if (caminoActual.localizar(ady.getVertice().getElem()) < 0) {
-                        int costo = (int) ady.getEtiqueta();
+                        int costo = ady.getEtiqueta();
 
                         if (sumaActual + costo <= p) {
                             sinPasarPorAux(ady.getVertice(), dest, hab3, p, sumaActual + costo, caminoActual,
@@ -503,19 +512,19 @@ public class Grafo {
         caminoActual.eliminar(caminoActual.longitud());
     }
 
-    public String toString(){
+    public String toString() {
         String str = "";
         NodoVert aux = this.inicio;
-        //Recorro los vertices
+        // Recorro los vertices
         while (aux != null) {
-            str += "Vertice "+aux.getElem()+ " ->";
+            str += "Vertice " + aux.getElem() + " ->";
             NodoAdy auxAdy = aux.getPrimerAdy();
             if (auxAdy == null) {
                 str += "Sin adyacencias";
-            }else{
-                //recorro adyacentes
+            } else {
+                // recorro adyacentes
                 while (auxAdy != null) {
-                    str+= auxAdy.toString();
+                    str += auxAdy.toString();
                     auxAdy = auxAdy.getSigAdyacente();
                 }
             }

@@ -2,8 +2,9 @@ package Menu;
 
 import java.util.HashMap;
 import java.util.Scanner;
-import Estructuras.EstructurasAux.Lista;
+
 import Estructuras.GrafoEtiquetado.Grafo;
+import Estructuras.Lineales.Lista;
 import Estructuras.TablaAVL.ArbolAVL;
 import Modelo.Desafio;
 import Modelo.Equipo;
@@ -32,7 +33,7 @@ public class Principal {
                         break;
                     } else {
                         archivo.cargarDatos(habitaciones, planoCasa, equipo);
-                        GestorArchivo.registrarLog("Se cargaron los datos");
+                    //  GestorArchivo.registrarLog("Se cargaron los datos");
                         estaCargado = true;
                     }
 
@@ -570,7 +571,7 @@ public static void equiposABM(Scanner sc, HashMap<String, Equipo> equipos,
                 System.out.println("Ingrese un numero de habitacion:");
                 numMenu = sc.nextInt();
                 // llamo metodo de Grafo que me da un String de las habitaciones contiguas
-                System.out.println(planoCasa.habitacionesContiguas(numMenu));
+                System.out.println(planoCasa.listarAdyacentesString(numMenu));
             break;
 
             case 3:
@@ -580,6 +581,15 @@ public static void equiposABM(Scanner sc, HashMap<String, Equipo> equipos,
 
             case 4:
                 System.out.println("Seleccionaste: cual es el minimo puntaje para ir de habitacion A a habitacion B");
+                Lista mejorCamino = new Lista();
+                System.out.println("Ingrese hab1: ");
+                int hab1 = sc.nextInt();
+                System.out.println("Ingrese hab2: ");
+                int hab2 = sc.nextInt();
+                int puntajeMin = planoCasa.minimoPuntaje(hab1, hab2, mejorCamino);
+                System.out.println("El puntaje min es: "+puntajeMin);
+                System.out.println("El mejor camino es: "+mejorCamino.toString());
+
             break;
 
             case 5:
@@ -813,7 +823,8 @@ public static void gestionConsultaDesafios(Scanner sc,ArbolAVL habitaciones,
             System.out.println("introduce el codigo de la habitacion a la que quieren avanzar");
             codigo=sc.nextInt();
             if(planoCasa.existeArco(codActual,codigo)){
-                puntajeNecesario=planoCasa.minimoPuntaje(codActual, codigo)-equipo.getPuntajeActual();
+               
+                puntajeNecesario=planoCasa.minimoPuntaje(codActual, codigo, new Lista())-equipo.getPuntajeActual();
                 //obtengo el puntaje del camino mas corto que seria la etiqueta entre adyacentes
                 // y luego le resto el puntaje actual del equipo para obtener el valor que deberia
                 //buscar que tengas los desafios como minimo para que solo resolviendo uno puedan

@@ -3,7 +3,7 @@ package Estructuras.TablaAVL;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import Estructuras.EstructurasAux.*;
+import Estructuras.Lineales.*;
 import Modelo.Desafio;
 import Modelo.Equipo;
 import Modelo.Habitacion;
