@@ -1,4 +1,4 @@
-package Estructuras.EstructurasAux;
+package Estructuras.Lineales;
 
 // import static org.junit.Assert.*;
 

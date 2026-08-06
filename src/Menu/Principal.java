@@ -2,8 +2,9 @@ package Menu;
 
 import java.util.HashMap;
 import java.util.Scanner;
-import Estructuras.EstructurasAux.Lista;
+
 import Estructuras.GrafoEtiquetado.Grafo;
+import Estructuras.Lineales.Lista;
 import Estructuras.TablaAVL.ArbolAVL;
 import Modelo.Desafio;
 import Modelo.Equipo;

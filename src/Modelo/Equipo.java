@@ -1,7 +1,7 @@
 package Modelo;
 import java.util.HashMap;
 
-import Estructuras.EstructurasAux.Lista;
+import Estructuras.Lineales.Lista;
 
 public class Equipo {
     private String nombre;
