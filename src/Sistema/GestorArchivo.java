@@ -1,4 +1,4 @@
-package Menu;
+package Sistema;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
@@ -16,7 +16,7 @@ import Modelo.Desafio;
 
 public class GestorArchivo {
 
-    public void cargarDatos(ArbolAVL unArbol, Grafo unGrafo, HashMap<String, Equipo> unHash) {
+    public static void cargarDatos(ArbolAVL unArbol, Grafo unGrafo, HashMap<String, Equipo> unHash) {
         String linea;
         try {
             BufferedReader bufferLectura = new BufferedReader(new FileReader("archivoTxt\\setCargaEscapeRoom.txt"));
@@ -46,7 +46,7 @@ public class GestorArchivo {
         }
     }
     
-    public void cargarDatoLinea(String linea, ArbolAVL unArbol, Grafo unGrafo, HashMap<String, Equipo> unHash) {
+    public static void cargarDatoLinea(String linea, ArbolAVL unArbol, Grafo unGrafo, HashMap<String, Equipo> unHash) {
         switch (linea.charAt(0)) {
             case 'P':
                 cargarPlano(linea, unGrafo);
@@ -63,7 +63,7 @@ public class GestorArchivo {
         }
     }
 
-    private void cargarDesafios(String linea, ArbolAVL unArbol) {
+    private static void cargarDesafios(String linea, ArbolAVL unArbol) {
         int unPuntaje, unCodHab;
         String unNombre, unTipo;
         String[] partes = linea.split(";");
@@ -81,7 +81,7 @@ public class GestorArchivo {
         habitacion.cargarDesafio(carga);
     }
 
-    private void cargarHabitaciones(String linea,ArbolAVL unArbol,Grafo unPlano) {
+    private static void cargarHabitaciones(String linea,ArbolAVL unArbol,Grafo unPlano) {
         int unCodigo,unaPlanta,unaMedida;
         String unNombre;
         boolean tieneSalida;
@@ -100,7 +100,7 @@ public class GestorArchivo {
     }
 
 
-    private void cargarEquipos(String linea,ArbolAVL habitaciones,HashMap<String, Equipo> hashEquipos){
+    private static void cargarEquipos(String linea,ArbolAVL habitaciones,HashMap<String, Equipo> hashEquipos){
         String unNombre;
         int unPuntajeExig, unPuntajeAcum, unPuntajeAct, unCodHab;
         Equipo nuevoEquipo;
@@ -132,7 +132,7 @@ public class GestorArchivo {
         hashEquipos.put(unNombre, nuevoEquipo);
     }
 
-    private void cargarPlano(String linea,Grafo unGrafo){
+    private static void cargarPlano(String linea,Grafo unGrafo){
         int unInicio,unDestino,unPuntaje;
         String[] partes = linea.split(";");
 

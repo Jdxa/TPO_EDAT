@@ -1,5 +1,7 @@
 package Modelo;
+import Estructuras.Lineales.Lista;
 import Estructuras.TablaAVL.ArbolAVL;
+import Modelo.Desafio;
 
 public class Habitacion {
     private int codigo;
@@ -71,10 +73,21 @@ public class Habitacion {
 
     public String toString(){
         String str= "";
-        str = "codigo: "+this.codigo+", nombre: "+this.nombre+", planta: "+this.planta+", metrosCuadrados: "+this.metrosCuadrados+", tieneSalida: "+this.tieneSalida+", desafios: "+this.desafios.toStringDesafio();
+        str = "codigo: "+this.codigo+", nombre: "+this.nombre+", planta: "+this.planta+", metrosCuadrados: "+this.metrosCuadrados+", tieneSalida: "+this.tieneSalida+", desafios: "+mostrarSusDesafios();
         return str;
     }
     public String mostrarSusDesafios(){
-        return this.desafios.toString();
+        String res=" sus desafos son ";
+        Lista l=this.desafios.listar();
+        if(this.desafios.esVacio()){
+            res="no tiene desafios";
+        }else{
+        while(!l.esVacia()){
+            res+=((Desafio) l.recuperar(1)).toStringHabitacion()+" y ";
+            l.eliminar(1);
+        }
+            res = res.substring(0, res.length() - 3);
     }
+    return res;
+}
 }
