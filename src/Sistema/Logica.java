@@ -1,12 +1,11 @@
 package Sistema;
 
-import java.util.HashMap;
-import java.util.Scanner;
-
 import Estructuras.GrafoEtiquetado.Grafo;
 import Estructuras.Lineales.Lista;
 import Estructuras.TablaAVL.ArbolAVL;
 import Modelo.*;
+import java.util.HashMap;
+import java.util.Scanner;
 
 public class Logica {
 
@@ -315,12 +314,13 @@ public class Logica {
     }
     
     public String mostrarDesafiosPorTipo(int codigo,int a, int b,String x){
+        //me devuelve los desafios de la habitacion con codigo, que esten entre a y b y sean del tipo x
         String res = "no existe la habitacion";
         if (this.habitaciones.pertenece(codigo)) {
             Habitacion unaHab= (Habitacion) this.habitaciones.recuperar(codigo);
-            Lista l=unaHab.getDesafios().listarRango(a, b);
+            Lista l= unaHab.getDesafios().listarRango(a, b);
             if (!l.esVacia()) {
-                res+= "Los desafios del tipo "+x+ " en la habitacion "+codigo +" son los siguientes: \n";
+                res = "Los desafios del tipo "+x+ " en la habitacion "+codigo +" son los siguientes: \n";
                 res += filtrarPorTipo(l, x);
             }else{
                 res += "No hay desafios con esos filtros";
@@ -358,7 +358,7 @@ public class Logica {
             Equipo equipo=equipos.get(nombre);
             codActual=equipo.getCodigoHabitacionActual();
             if(this.planoCasa.existeArco(codActual,codigo)){
-                puntajeNecesario=this.planoCasa.caminoMenorCosto(codActual, codigo, null);
+                puntajeNecesario=this.planoCasa.caminoMenorCosto(codActual, codigo, new Lista()); //agrego una lista y no null asi no me rompe el metodo, aunque solo queremos el return
                 //obtengo el puntaje del camino mas corto que seria la etiqueta entre adyacentes
                 // y luego le resto el puntaje actual del equipo para obtener el valor que deberia
                 //buscar que tengas los desafios como minimo para que solo resolviendo uno puedan

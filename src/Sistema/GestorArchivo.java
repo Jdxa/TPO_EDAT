@@ -1,25 +1,23 @@
 package Sistema;
 
+import Estructuras.GrafoEtiquetado.Grafo;
+import Estructuras.TablaAVL.ArbolAVL;
+import Modelo.Desafio;
+import Modelo.Equipo;
+import Modelo.Habitacion;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
-//---------------------------
-import Estructuras.GrafoEtiquetado.Grafo;
-import Estructuras.TablaAVL.ArbolAVL;
-//---------------------------
-import Modelo.Equipo;
-import Modelo.Habitacion;
-import Modelo.Desafio;
 
 public class GestorArchivo {
 
     public static void cargarDatos(ArbolAVL unArbol, Grafo unGrafo, HashMap<String, Equipo> unHash) {
         String linea;
         try {
-            BufferedReader bufferLectura = new BufferedReader(new FileReader("archivoTxt\\setCargaEscapeRoom.txt"));
+            BufferedReader bufferLectura = new BufferedReader(new FileReader("archivoTxt/setCargaEscapeRoom.txt"));
 
             while ((linea = bufferLectura.readLine()) != null) {
 
