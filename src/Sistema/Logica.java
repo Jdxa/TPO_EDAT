@@ -257,12 +257,13 @@ public class Logica {
         return str;
     }
     public String sinPasarPor(int hab1, int hab2, int hab3, int p){
-        String str;
+        String str; 
         Lista l = planoCasa.sinPasarPor(hab1, hab2, hab3, p);
-        if(!l.esVacia()){
-            str = l.toString();
+        if(!l.esVacia()){ 
+            System.out.println("l no es vacia");
+            str =l.toString();
         }else{
-            str = "No existen caminos tales";
+            str = "No existen tales caminos";
         }
         return str;
     }
@@ -303,7 +304,7 @@ public class Logica {
                 int codigoHabitacion = par.getKey();
                 Lista desafios = par.getValue();
                 //clono la lista para usarla como recorrido
-                Lista aux = desafios.clone();
+                Lista aux = desafios.clonar();
                 Habitacion hab = (Habitacion) habitaciones.recuperar(codigoHabitacion); // busco la habitacion
                 ArbolAVL desafiosHab = hab.getDesafios(); // agarro el arbol de desafios de esa habitacion
                 Lista desafiosComp = buscarDesafio(desafiosHab, aux);

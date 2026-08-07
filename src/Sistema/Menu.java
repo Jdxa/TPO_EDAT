@@ -434,6 +434,7 @@ public static void equiposABM(Scanner sc,Logica scapeRoom) {
         System.out.println("Ingrese valor p: ");
         p = sc.nextInt();
         System.out.println(scapeRoom.sinPasarPor(hab1, hab2, hab3, p));
+        
     }
 
     //---------------------------------------------------------------------------
