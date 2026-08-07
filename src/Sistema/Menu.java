@@ -541,7 +541,7 @@ public static void gestionConsultaDesafios(Scanner sc,Logica scapeRoom){
                 sc.nextLine();
                 System.out.println("Introduce el nombre del equipo que juega el desafio:");
                 nombre=sc.nextLine();
-                System.out.println("introduce el codigo de la habitacion a la que quieren avanzar");
+                System.out.println("introduce el codigo de la habitacion donde esta el desagio");
                 codigo=sc.nextInt();
                 System.out.println("Introduce el puntaje del desafio que estan jugando:");
                 puntaje=sc.nextInt();

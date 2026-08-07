@@ -1,1 +1,1 @@
-Se cambio el tipo, al desafio 1 por: 
+Se creo un desafio con codigo 15 en la habitacion 12
