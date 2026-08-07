@@ -232,12 +232,10 @@ public class Logica {
     }
     public String mostrarContiguas(int codigo){
         Lista listaContiguas = this.planoCasa.listarAdyacentes(codigo);
-        String str= "";
+        String str;
         if (!listaContiguas.esVacia()){
-            int longitud = listaContiguas.longitud();
-            for (int i= 1; i <= longitud; i++){
-                str += "Habitacion: "+listaContiguas.recuperar(i)+ "\n";
-            }
+            
+            str = "Habitaciones contiguas: "+listaContiguas.toString();
         }else{
             str = "No tiene contiguas";
         }
