@@ -2,12 +2,10 @@ package Sistema;
 
 import java.util.Scanner;
 
-import Sistema.Logica;
-
 public class Menu {
     public static void main(String[] args) {
 
-        Logica scapeRoom=new Logica();
+        Logica EscapeRoom=new Logica();
         Scanner sc = new Scanner(System.in);
         int numMenu;
 
@@ -18,32 +16,32 @@ public class Menu {
             switch (numMenu) {
                 case 1:
                     System.out.println("Seleccionaste: Carga inicial del sistema.");
-                    System.out.println(scapeRoom.cargarScapeRoom());
+                    System.out.println(EscapeRoom.cargarScapeRoom());
 
                     break;
 
                 case 2:
                     System.out.println("Seleccionaste: Altas, Bajas y Modificaciones (ABM) de habitaciones, desafíos y equipos.");
-                    gestionABM(sc,scapeRoom);
+                    gestionABM(sc,EscapeRoom);
                     break;
 
                 case 3:
                     System.out.println("Seleccionaste: Consultas sobre habitaciones");
-                    gestionConsultaHabitacion(sc,scapeRoom);
+                    gestionConsultaHabitacion(sc,EscapeRoom);
 
                     break;
 
                 case 4:
                     System.out.println("Seleccionaste: Consultas sobre desafíos");
-                    gestionConsultaDesafios(sc,scapeRoom);
+                    gestionConsultaDesafios(sc,EscapeRoom);
                     break;
                 case 5:
                     System.out.println("Seleccionaste: Consultas sobre equipos");
-                    gestionConsultaEquipos(sc,scapeRoom);
+                    gestionConsultaEquipos(sc,EscapeRoom);
                     break;
                 case 6:
                     System.out.println("Seleccionaste: Consulta general");
-                    gestionConsultaGeneral(sc, scapeRoom);
+                    gestionConsultaGeneral(sc, EscapeRoom);
                     break;
 
                 case 7:

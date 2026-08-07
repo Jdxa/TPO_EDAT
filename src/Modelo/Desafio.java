@@ -45,6 +45,7 @@ public class Desafio {
         this.tipo = unTipo;
     }
 
+    @Override
     public String toString(){
         return "puntaje: "+this.puntajeOtorga+", codHabitacion: "+this.codHabitacion+", nombre: "+this.nombre+", tipo: "+this.tipo;
     }

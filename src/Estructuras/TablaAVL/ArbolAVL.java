@@ -75,7 +75,7 @@ public class ArbolAVL {
         listarRangoPrivado(this.raiz, min, max, listaResultado);
         return listaResultado;
     }
-
+    @Override
     public String toString() {
         String cadena = "Árbol AVL Vacío";
         if (this.raiz != null) {

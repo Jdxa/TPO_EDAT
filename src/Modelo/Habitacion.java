@@ -1,7 +1,6 @@
 package Modelo;
 import Estructuras.Lineales.Lista;
 import Estructuras.TablaAVL.ArbolAVL;
-import Modelo.Desafio;
 
 public class Habitacion {
     private int codigo;
@@ -70,11 +69,9 @@ public class Habitacion {
     public ArbolAVL getDesafios(){
         return this.desafios;
     }
-
+    @Override
     public String toString(){
-        String str= "";
-        str = "codigo: "+this.codigo+", nombre: "+this.nombre+", planta: "+this.planta+", metrosCuadrados: "+this.metrosCuadrados+", tieneSalida: "+this.tieneSalida+", desafios: "+mostrarSusDesafios();
-        return str;
+        return "codigo: "+this.codigo+", nombre: "+this.nombre+", planta: "+this.planta+", metrosCuadrados: "+this.metrosCuadrados+", tieneSalida: "+this.tieneSalida+", desafios: "+mostrarSusDesafios();
     }
     public String mostrarSusDesafios(){
         String res=" sus desafos son ";

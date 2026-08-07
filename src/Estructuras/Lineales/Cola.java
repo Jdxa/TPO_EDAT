@@ -56,7 +56,9 @@ public class Cola {
         this.frente = null;
         this.fin = null;
     }
-    public Cola clone(){
+    
+    
+    public Cola clonar(){
         Cola clon = new Cola();
             Nodo nodoActual = this.frente;
             while (nodoActual != null) {
@@ -76,6 +78,7 @@ public class Cola {
         
         return clon;
     }
+    @Override
     public String toString(){
         String s = "[";
         Nodo nodoActual = this.frente;

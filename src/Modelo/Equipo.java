@@ -1,7 +1,6 @@
 package Modelo;
-import java.util.HashMap;
-
 import Estructuras.Lineales.Lista;
+import java.util.HashMap;
 
 public class Equipo {
     private String nombre;
@@ -18,7 +17,7 @@ public class Equipo {
         this.puntajeAcumulado = unPuntAcumulado;
         this.codigoHabitacionActual = unaHabActual;
         this.puntajeActual = unPuntActual;
-        desafiosCompletados = new HashMap<Integer, Lista>();
+        desafiosCompletados = new HashMap<Integer,Lista>(); 
 
     }
     //Nombre desafio
@@ -84,6 +83,7 @@ public class Equipo {
         this.puntajeActual=listaAux.sumarElementos();
     }
 
+    @Override
     public String toString(){
         return "nombre: "+this.nombre+", puntajeExigido: "+this.puntajeExigido+", puntajeAcumulado: "+this.puntajeAcumulado+", codigo habitacion actual: "+this.codigoHabitacionActual+", puntajeActual: "+this.puntajeActual+", desafiosCompletados: "+this.desafiosCompletados.toString();
     }
