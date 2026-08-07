@@ -5,6 +5,7 @@ import Estructuras.Lineales.Lista;
 import Estructuras.TablaAVL.ArbolAVL;
 import Modelo.*;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class Logica {
@@ -267,12 +268,12 @@ public class Logica {
         if(this.equipos.containsKey(nombre)){
             Equipo equipo= this.equipos.get(nombre);
             equipo.getDesafiosCompletados();
-            res = "El equipo " + nombre + " resolvio estos desafios: \n" + "";//listarDesafiosAUX(equipo);
+            res = "El equipo " + nombre + " resolvio estos desafios: \n" +listarDesafiosAUX(equipo);
         }
         return res;
     }
-    /* 
-    public String listarDesafiosAUX(Equipo eq) {
+
+    private String listarDesafiosAUX(Equipo eq) {
         String str = "{";
         if (eq != null) {
 
@@ -283,7 +284,7 @@ public class Logica {
                 Lista desafios = par.getValue();
                 //clono la lista para usarla como recorrido
                 Lista aux = desafios.clone();
-                Habitacion hab = (Habitacion) recuperar(codigoHabitacion); // busco la habitacion
+                Habitacion hab = (Habitacion) habitaciones.recuperar(codigoHabitacion); // busco la habitacion
                 ArbolAVL desafiosHab = hab.getDesafios(); // agarro el arbol de desafios de esa habitacion
                 Lista desafiosComp = buscarDesafio(desafiosHab, aux);
                 //concateno cada string resultante de buscarDesafio
@@ -293,7 +294,22 @@ public class Logica {
         str = str + "}";
         return str;
     }
-*/
+
+    private Lista buscarDesafio(ArbolAVL desafiosHab, Lista clavesDesafio) {
+        Lista listaDesafiosCompletados = new Lista();
+        while (!clavesDesafio.esVacia()) {
+            int claveDesafio = (int) clavesDesafio.recuperar(1); // recupero la clave
+            Desafio des = (Desafio) desafiosHab.recuperar(claveDesafio); //busco un desafio con esa clave en el AVL
+            if (des != null) {
+                listaDesafiosCompletados.insertar(des, 1);
+            } else {
+                listaDesafiosCompletados.insertar("no existe", 1); //esto es para testeo
+            }
+            clavesDesafio.eliminar(1); // borro la clave q ya use
+        }
+        return listaDesafiosCompletados;
+    }
+
     
     public String verificarDesafioResuelto(String nombre,int codigo, int puntaje) {
         String res="el equipo no existe";
