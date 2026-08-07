@@ -491,7 +491,6 @@ public class Grafo {
             } else {
                 // paso recursivo
                 NodoAdy ady = n.getPrimerAdy();
-                System.out.println("Buscando adyacentes de: " + n.getElem());
                 while (ady != null) {
                     // para evitar ciclos
                     if (caminoActual.localizar(ady.getVertice().getElem()) < 0) {
