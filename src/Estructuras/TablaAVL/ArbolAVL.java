@@ -1,8 +1,5 @@
 package Estructuras.TablaAVL;
 
-import java.util.HashMap;
-import java.util.Map.Entry;
-
 import Estructuras.Lineales.*;
 
 
@@ -83,16 +80,6 @@ public class ArbolAVL {
         String cadena = "Árbol AVL Vacío";
         if (this.raiz != null) {
             cadena = toStringPrivado(this.raiz);
-        }
-        return cadena;
-    }
-
-    public String toStringDesafio() {
-
-        String cadena = "Sin Desafios";
-        if (this.raiz != null) {
-            cadena = toStringDesafioPrivado(this.raiz);
-            cadena = cadena.substring(0, cadena.length() - 2);
         }
         return cadena;
     }
@@ -232,20 +219,6 @@ public class ArbolAVL {
         return cadena;
     }
 
-    private String toStringDesafioPrivado(NodoAVL nodo) {
-        String cadena = "";
-
-        if (nodo != null) {
-            cadena += toStringDesafioPrivado(nodo.getIzquierdo());
-
-            cadena += ((Desafio) nodo.getElem()).toStringHabitacion() + ", ";
-
-            cadena += toStringDesafioPrivado(nodo.getDerecho());
-        }
-
-        return cadena; // Devolvemos la cadena acumulada en este paso
-    }
-
     // --- MÉTODOS DE BALANCEO Y ALTURA ---
 
     private NodoAVL balancear(NodoAVL nodoActual) {
@@ -317,7 +290,7 @@ public class ArbolAVL {
         return resultado;
     }
 
-    private Lista buscarDesafio(ArbolAVL desafiosHab, Lista clavesDesafio) {
+    /*private Lista buscarDesafio(ArbolAVL desafiosHab, Lista clavesDesafio) {
         Lista listaDesafiosCompletados = new Lista();
         while (!clavesDesafio.esVacia()) {
             int claveDesafio = (int) clavesDesafio.recuperar(1); // recupero la clave
@@ -331,7 +304,7 @@ public class ArbolAVL {
         }
         return listaDesafiosCompletados;
     }
-    
+    */
     public Lista listarMayores(Comparable min) {
         Lista listaResultado = new Lista();
         listarMayoresAux(this.raiz, min, listaResultado);

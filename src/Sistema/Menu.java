@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import Sistema.Logica;
 
-public class Principal {
+public class Menu {
     public static void main(String[] args) {
 
         Logica scapeRoom=new Logica();
@@ -262,6 +262,7 @@ public class Principal {
                     case 2:
                         System.out.println("Seleccionaste: Modificar tipo del desafio");
                         System.out.println("Ingrese el nuevo tipo del desafío:");
+                        sc.nextLine();
                         nombre = sc.nextLine();
                         res=scapeRoom.cambiarTipoDesafio(codigo, puntaje,nombre);
                     break;
@@ -599,7 +600,7 @@ public static void gestionConsultaDesafios(Scanner sc,Logica scapeRoom){
         System.out.println("4. Consultas sobre desafíos");
         System.out.println("5. Consultas sobre equipos");
         System.out.println("6. Consulta general");
-        System.out.println("0. Salir");
+        System.out.println("7. Salir");
         System.out.print("Introduce un número para avanzar: ");
     }
 

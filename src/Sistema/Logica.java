@@ -36,7 +36,7 @@ public class Logica {
     public String agregarHabitacion(int codigo, String nombre, int planta, int medida){
         String linea,res="El codigo de la habitacion ya esta en uso.";
 
-        if (this.habitaciones.pertenece(codigo)) {
+        if (!this.habitaciones.pertenece(codigo)) {
         linea = "H;" + codigo+";" + nombre+";" + planta+ ";" + medida + ";false";
         GestorArchivo.cargarDatoLinea(linea, this.habitaciones,this.planoCasa, null);
         GestorArchivo.registrarLog("Se agrego una habitacion con el nombre: "+nombre);
@@ -117,7 +117,7 @@ public class Logica {
 
         if (this.habitaciones.pertenece(codigo)) {
             Habitacion unaHab=(Habitacion) this.habitaciones.recuperar(codigo);
-            if(unaHab.getDesafios().pertenece(puntaje)){
+            if(!unaHab.getDesafios().pertenece(puntaje)){
             linea = "D;" + puntaje + ";" + codigo+";"+nombre+";"+tipo;
             GestorArchivo.cargarDatoLinea(linea, this.habitaciones, null, null);
             GestorArchivo.registrarLog("Se creo un desafio con codigo "+puntaje+" en la habitacion "+codigo);
@@ -268,10 +268,11 @@ public class Logica {
         if(this.equipos.containsKey(nombre)){
             Equipo equipo= this.equipos.get(nombre);
             equipo.getDesafiosCompletados();
-            res = "El equipo " + nombre + " resolvio estos desafios: \n" + listarDesafiosAUX(equipo);
+            res = "El equipo " + nombre + " resolvio estos desafios: \n" + "";//listarDesafiosAUX(equipo);
         }
         return res;
     }
+    /* 
     public String listarDesafiosAUX(Equipo eq) {
         String str = "{";
         if (eq != null) {
@@ -293,7 +294,7 @@ public class Logica {
         str = str + "}";
         return str;
     }
-
+*/
     
     public String verificarDesafioResuelto(String nombre,int codigo, int puntaje) {
         String res="el equipo no existe";
