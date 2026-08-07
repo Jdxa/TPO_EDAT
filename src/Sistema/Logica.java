@@ -395,7 +395,8 @@ public class Logica {
             Equipo equipo=equipos.get(nombre);
             codActual=equipo.getCodigoHabitacionActual();
             if(this.planoCasa.existeArco(codActual,codigo)){
-                puntajeNecesario=this.planoCasa.caminoMenorCosto(codActual, codigo, new Lista()); //agrego una lista y no null asi no me rompe el metodo, aunque solo queremos el return
+                puntajeNecesario=this.planoCasa.caminoMenorCosto(codActual, codigo, new Lista()); 
+                //agrego una lista y no null asi no me rompe el metodo, aunque solo queremos el return
                 //obtengo el puntaje del camino mas corto que seria la etiqueta entre adyacentes
                 // y luego le resto el puntaje actual del equipo para obtener el valor que deberia
                 //buscar que tengas los desafios como minimo para que solo resolviendo uno puedan
