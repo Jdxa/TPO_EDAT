@@ -365,7 +365,6 @@ public class Grafo {
         Lista adyacentes = new Lista();
         if (this.inicio != null) {
             if (nodoVert != null) {
-
                 NodoAdy nodoAdy = nodoVert.getPrimerAdy();
                 while (nodoAdy != null) {
                     adyacentes.insertar(nodoAdy.toString(), 1);
@@ -375,7 +374,6 @@ public class Grafo {
         }
         str = adyacentes.toString();
         return str;
-
     }
 
     public boolean esPosibleLlegar(Object origen, Object destino, int k) {
@@ -422,19 +420,19 @@ public class Grafo {
         return exito;
     }
 
-    public int minimoPuntaje(Object origen, Object destino, Lista mejorCamino) {
+    public int caminoMenorCosto(Object origen, Object destino, Lista mejorCamino) {
         NodoVert nodoO = ubicarVertice(origen);
         NodoVert nodoD = ubicarVertice(destino);
         int[] minCoste = { -1 };
         if (nodoD != null && nodoO != null) {
             Lista visitados = new Lista();
-            minimoPuntajeAux(nodoO, destino, 0, visitados, minCoste, mejorCamino);
+            caminoMenorCostoAux(nodoO, destino, 0, visitados, minCoste, mejorCamino);
         }
         return minCoste[0];
     }
 
     // es generico
-    private void minimoPuntajeAux(NodoVert n, Object dest, int sumaActual, Lista visitados, int[] minCoste,
+    private void caminoMenorCostoAux(NodoVert n, Object dest, int sumaActual, Lista visitados, int[] minCoste,
             Lista mejorCamino) {
 
         if (minCoste[0] == -1 || sumaActual < minCoste[0]) {
@@ -456,7 +454,7 @@ public class Grafo {
                 while (ady != null) {
                     if (visitados.localizar(ady.getVertice().getElem()) < 0) {
                         int etiqueta = ady.getEtiqueta();
-                        minimoPuntajeAux(ady.getVertice(), dest, sumaActual + etiqueta, visitados, minCoste,
+                        caminoMenorCostoAux(ady.getVertice(), dest, sumaActual + etiqueta, visitados, minCoste,
                                 mejorCamino);
                     }
                     ady = ady.getSigAdyacente();
