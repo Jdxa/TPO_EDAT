@@ -50,6 +50,6 @@ public class Desafio {
         return "puntaje: "+this.puntajeOtorga+", codHabitacion: "+this.codHabitacion+", nombre: "+this.nombre+", tipo: "+this.tipo;
     }
     public String toStringHabitacion(){
-         return this.nombre+"|"+this.puntajeOtorga+"|"+this.tipo;
+         return "Nombre: "+this.nombre+" ,puntajeOtorga: |"+this.puntajeOtorga+"|, tipo: "+this.tipo;
     }
 }

@@ -10,9 +10,9 @@ import java.util.Scanner;
 
 public class Logica {
 
-    private Grafo planoCasa;
-    private ArbolAVL habitaciones;
-    private HashMap<String, Equipo> equipos;
+    private final Grafo planoCasa;
+    private final ArbolAVL habitaciones;
+    private final HashMap<String, Equipo> equipos;
     private boolean estaCargado;
 
     public Logica(){
@@ -234,7 +234,7 @@ public class Logica {
         return this.planoCasa.listarAdyacentesString(codigo);
     }
 
-    public String minimoPuntaje(Scanner sc,int hab1, int hab2){
+    public String minimoPuntaje(int hab1, int hab2){
         String res="no existe habitacion partida";
         Lista mejorCamino = new Lista();
         int puntajeMin = this.planoCasa.caminoMenorCosto(hab1, hab2, mejorCamino);
@@ -248,6 +248,26 @@ public class Logica {
         }
         return res;
     }
+    public String esPosibleLlegar(int hab1, int hab2, int k){
+        String str= "No es posible";
+        boolean exito = this.planoCasa.esPosibleLlegar(hab1, hab2, k);
+        if (exito){
+            str = "Es posible";
+        }
+        return str;
+    }
+    public String sinPasarPor(int hab1, int hab2, int hab3, int p){
+        String str;
+        Lista l = planoCasa.sinPasarPor(hab1, hab2, hab3, p);
+        if(!l.esVacia()){
+            str = l.toString();
+        }else{
+            str = "No existen caminos tales";
+        }
+        return str;
+    }
+        
+
 
     //------------------------------------------------------------------------------------------
     public String mostrarDesafio(Scanner sc, int codigo, int puntaje) {

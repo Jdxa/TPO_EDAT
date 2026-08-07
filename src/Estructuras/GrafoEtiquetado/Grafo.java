@@ -509,7 +509,7 @@ public class Grafo {
         // backtracking
         caminoActual.eliminar(caminoActual.longitud());
     }
-
+    @Override
     public String toString() {
         String str = "";
         NodoVert aux = this.inicio;

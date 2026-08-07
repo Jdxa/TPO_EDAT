@@ -383,7 +383,7 @@ public static void equiposABM(Scanner sc,Logica scapeRoom) {
 
             case 3:
                 System.out.println("Seleccionaste: es posible llegar de habitacion A a habitacion B");
-                
+                gestionEsPosibleLlegar(sc, scapeRoom);
             break;
 
             case 4:
@@ -393,7 +393,7 @@ public static void equiposABM(Scanner sc,Logica scapeRoom) {
 
             case 5:
                 System.out.println("Seleccionaste: cuales son las formas de ir a de habitacion A a habitacion B sin pasar por la habitacion C");
-
+                gestionSinPasarPor(sc, scapeRoom);
             break;
 
             case 6:
@@ -411,7 +411,29 @@ public static void equiposABM(Scanner sc,Logica scapeRoom) {
         hab1 = sc.nextInt();
         System.out.println("Ingrese hab2: ");
         hab2 = sc.nextInt();
-        System.out.println(scapeRoom.minimoPuntaje(sc,hab1,hab2));
+        System.out.println(scapeRoom.minimoPuntaje(hab1,hab2));
+    }
+    public static void gestionEsPosibleLlegar(Scanner sc, Logica scapeRoom){
+        int hab1, hab2, k;
+        System.out.println("Ingrese hab1: ");
+        hab1 = sc.nextInt();
+        System.out.println("Ingrese hab2: ");
+        hab2 = sc.nextInt();
+        System.out.println("Ingrese valor k: ");
+        k = sc.nextInt();
+        System.out.println(scapeRoom.esPosibleLlegar(hab1, hab2, k));
+    }
+    public static void gestionSinPasarPor(Scanner sc, Logica scapeRoom){
+        int hab1, hab2, hab3, p;
+        System.out.println("Ingrese hab1: ");
+        hab1 = sc.nextInt();
+        System.out.println("Ingrese hab2: ");
+        hab2 = sc.nextInt();
+        System.out.println("Ingrese hab3: ");
+        hab3 = sc.nextInt();
+        System.out.println("Ingrese valor p: ");
+        p = sc.nextInt();
+        System.out.println(scapeRoom.sinPasarPor(hab1, hab2, hab3, p));
     }
 
     //---------------------------------------------------------------------------
