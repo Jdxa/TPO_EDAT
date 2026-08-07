@@ -318,8 +318,9 @@ public class Grafo {
             }
         }
     }
-
-    public Grafo clone() {
+    
+    
+    public Grafo clonar() {
         Grafo clon = new Grafo();
         if (this.inicio != null) {
             // 1. Clonar todos los vértices primero manteniendo el orden
@@ -359,21 +360,20 @@ public class Grafo {
         return clon;
     }
 
-    public String listarAdyacentesString(Object elem) {
+    public Lista listarAdyacentes(Object elem) {
         NodoVert nodoVert = ubicarVertice(elem);
-        String str = "No existe";
         Lista adyacentes = new Lista();
         if (this.inicio != null) {
             if (nodoVert != null) {
                 NodoAdy nodoAdy = nodoVert.getPrimerAdy();
                 while (nodoAdy != null) {
-                    adyacentes.insertar(nodoAdy.toString(), 1);
+                    adyacentes.insertar(nodoAdy.getVertice().getElem(), 1);
                     nodoAdy = nodoAdy.getSigAdyacente();
                 }
             }
         }
-        str = adyacentes.toString();
-        return str;
+        
+        return adyacentes;
     }
 
     public boolean esPosibleLlegar(Object origen, Object destino, int k) {
