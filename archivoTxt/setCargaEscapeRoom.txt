@@ -9,7 +9,7 @@ H;7;Comedor;0;20;false
 H;6;Cocina;0;15;false
 H;8;Depósito;-1;15;false
 H;9;Despensa;0;10;false
-H;1;Altillo;2;20;false
+H;1;Altillo;2;20;true
 H;3;Biblioteca;1;25;false
 H;4;Bodega;-1;20;false
 H;11;Dormitorio de huéspedes;1;20;false
@@ -23,6 +23,7 @@ H;22;Sala de Juegos;1;30;false
 H;23;Sala de Música;1;20;false
 H;24;Sótano;-1;40;false
 D;20;10;Acertijo del Cuadro;Lógico
+D;30;10;Acertijo de robot;Busqueda
 D;30;5;Llave del Auto;Búsqueda
 D;40;2;Fuga de Agua;Destreza
 D;50;15;Planta Carnívora;Ingenio
@@ -46,6 +47,7 @@ D;30;21;Control Remoto;Búsqueda
 D;50;22;Rompecabezas;Matemático
 D;40;23;Nota Musical;Letras
 D;60;24;Caja Fuerte;Lógico
+E;Papus;0;70;1;50;(10,20);(1,50)
 E;Los Valientes;400;100;10;20;(10,20);(5,30);(15,50)
 E;Los Locos Adams;450;150;2;40;(2,40);(7,40);(6,20);(1,50)
 E;Cazafantasmas;300;60;13;35;(12,25);(13,35)

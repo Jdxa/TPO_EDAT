@@ -294,25 +294,5 @@ public void agregarElem(Object nuevo, int x) {
         }
     }
 }
-    public int sumarElementos() {
-        int acumulador = 0;
-        
-        // Empezamos desde el primer nodo de la lista
-        Nodo aux = this.cabecera; 
-
-        // Recorremos la lista nodo por nodo
-        while (aux != null) {
-            Object elemento = aux.getDato();
-            
-            if (elemento != null) {
-                acumulador += (int) elemento;
-            }
-            
-            // Pasamos al siguiente nodo
-            aux = aux.getEnlace(); 
-        }
-
-        return acumulador;
-    }
 
 }

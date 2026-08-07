@@ -71,16 +71,28 @@ public class Equipo {
     private void actualizarPuntajeAcumulado(){
         int acu;
         acu=0;
-        for (Lista listaActual : this.desafiosCompletados.values()) {
-            
-            acu+=listaActual.sumarElementos();
+        for (Lista l : this.desafiosCompletados.values()) {
+            if (l != null) {
+                // Recorremos la lista desde la posición 1 hasta su longitud total
+                int longitud = l.longitud();
+                for (int i = 1; i <= longitud; i++) {
+                    acu += (Integer) l.recuperar(i);
+                }
+            }
         }
-        this.puntajeAcumulado=acu;
+        this.puntajeAcumulado = acu;
     }
     public void actualizarPuntajeActual(){
-        Lista listaAux=this.desafiosCompletados.get(this.codigoHabitacionActual);
-        
-        this.puntajeActual=listaAux.sumarElementos();
+        int num=0;
+        if(this.desafiosCompletados.get(this.codigoHabitacionActual)!=null){
+        Lista l=this.desafiosCompletados.get(this.codigoHabitacionActual);
+
+        int longitud = l.longitud();
+        for (int i = 1; i <= longitud; i++) {
+        num += (Integer) l.recuperar(i);
+        }
+    }
+        this.puntajeActual=num;
     }
 
     @Override
