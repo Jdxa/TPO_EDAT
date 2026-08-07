@@ -10,9 +10,9 @@ import java.util.Scanner;
 
 public class Logica {
 
-    private Grafo planoCasa;
-    private ArbolAVL habitaciones;
-    private HashMap<String, Equipo> equipos;
+    private final Grafo planoCasa;
+    private final ArbolAVL habitaciones;
+    private final HashMap<String, Equipo> equipos;
     private boolean estaCargado;
 
     public Logica(){
@@ -234,7 +234,7 @@ public class Logica {
         return this.planoCasa.listarAdyacentesString(codigo);
     }
 
-    public String minimoPuntaje(Scanner sc,int hab1, int hab2){
+    public String minimoPuntaje(int hab1, int hab2){
         String res="no existe habitacion partida";
         Lista mejorCamino = new Lista();
         int puntajeMin = this.planoCasa.caminoMenorCosto(hab1, hab2, mejorCamino);
@@ -248,6 +248,27 @@ public class Logica {
         }
         return res;
     }
+    public String esPosibleLlegar(int hab1, int hab2, int k){
+        String str= "No es posible";
+        boolean exito = this.planoCasa.esPosibleLlegar(hab1, hab2, k);
+        if (exito){
+            str = "Es posible";
+        }
+        return str;
+    }
+    public String sinPasarPor(int hab1, int hab2, int hab3, int p){
+        String str; 
+        Lista l = planoCasa.sinPasarPor(hab1, hab2, hab3, p);
+        if(!l.esVacia()){ 
+            System.out.println("l no es vacia");
+            str =l.toString();
+        }else{
+            str = "No existen tales caminos";
+        }
+        return str;
+    }
+        
+
 
     //------------------------------------------------------------------------------------------
     public String mostrarDesafio(Scanner sc, int codigo, int puntaje) {
@@ -283,7 +304,7 @@ public class Logica {
                 int codigoHabitacion = par.getKey();
                 Lista desafios = par.getValue();
                 //clono la lista para usarla como recorrido
-                Lista aux = desafios.clone();
+                Lista aux = desafios.clonar();
                 Habitacion hab = (Habitacion) habitaciones.recuperar(codigoHabitacion); // busco la habitacion
                 ArbolAVL desafiosHab = hab.getDesafios(); // agarro el arbol de desafios de esa habitacion
                 Lista desafiosComp = buscarDesafio(desafiosHab, aux);

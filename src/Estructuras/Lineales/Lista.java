@@ -135,6 +135,7 @@ public class Lista {
     }
 
     /////////////////////////////////////////////////////////////////
+    @Override
     public String toString() {
         String res = "[";
         Nodo actual = this.cabecera;
@@ -150,29 +151,32 @@ public class Lista {
     }
 
     ////////////////////////////////////////////////////////////
-    public Lista clone() {
-        Lista clon = new Lista();
-        Nodo nuevoNodo = new Nodo(null, null); // este nodo sera el que uso para cargar
-        Nodo actual = new Nodo(null, null); // este nodo referencia el de la lista original a evaluar
-        Nodo anteriorNodo = new Nodo(null, null); // este nodo referencia el nodo ya cargado para su posterior enlace
-        if (this.cabecera != null) {
+   public Lista clonar() {
+    Lista clon = new Lista();
+    
+    if (this.cabecera != null) {
+        // Clonamos la cabecera
+        Nodo actual = this.cabecera; 
+        Nodo nuevoNodo = new Nodo(actual.getDato(), null); 
+        clon.cabecera = nuevoNodo; 
+        
+        Nodo anteriorNodo = nuevoNodo; 
 
-            actual = this.cabecera; // solo si la lista no esta referencio la cabecera en actual
-            nuevoNodo.setDato(actual.getDato()); // al nuevo nodo le seteo el dato del actual
-            anteriorNodo = nuevoNodo; // anterior nodo es el nodo que ya esta cargado
-            clon.cabecera = nuevoNodo; // seteo el primer nodo de la lista
-
-            if (this.longitud() > 1) { // cuando la lista tiene mas de un elemento
-                for (int i = 1; i < this.longitud(); i++) {
-                    actual = actual.getEnlace(); // me muevo al siguiente nodo
-                    nuevoNodo.setDato(actual.getDato()); // al nodo por cargar le pongo el dato
-                    anteriorNodo.setEnlace(nuevoNodo); // lo linkeo con el anterior cargado
-                    anteriorNodo = anteriorNodo.getEnlace(); // ahora anterior es el que ya cargue
-                }
-            }
+        // Clonamos el resto
+        actual = actual.getEnlace(); // Avanzamos al segundo nodo original (si existe)
+        
+        while (actual != null) {
+            
+            nuevoNodo = new Nodo(actual.getDato(), null); 
+            
+            anteriorNodo.setEnlace(nuevoNodo); // Linkeamos el anterior al nuevo
+            anteriorNodo = nuevoNodo;          // Ahora el anterior es el que acabamos de crear
+            
+            actual = actual.getEnlace();       // Avanzamos en la lista original
         }
-        return clon;
     }
+    return clon;
+}
 
     public Lista obtenerMultiplos(int num) {
         Lista clon = new Lista();

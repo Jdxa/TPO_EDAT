@@ -74,7 +74,7 @@ public class Habitacion {
         return "codigo: "+this.codigo+", nombre: "+this.nombre+", planta: "+this.planta+", metrosCuadrados: "+this.metrosCuadrados+", tieneSalida: "+this.tieneSalida+", desafios: "+mostrarSusDesafios();
     }
     public String mostrarSusDesafios(){
-        String res=" sus desafos son ";
+        String res="";
         Lista l=this.desafios.listar();
         if(this.desafios.esVacio()){
             res="no tiene desafios";
@@ -83,7 +83,7 @@ public class Habitacion {
             res+=((Desafio) l.recuperar(1)).toStringHabitacion()+" y ";
             l.eliminar(1);
         }
-            res = res.substring(0, res.length() - 3);
+            res = res.substring(0, res.length() - 3); //que es esto??
     }
     return res;
 }

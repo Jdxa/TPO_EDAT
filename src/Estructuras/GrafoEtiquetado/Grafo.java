@@ -210,7 +210,7 @@ public class Grafo {
 
         if (n.getElem().equals(dest)) {
             if (menor.esVacia() || actual.longitud() < menor.longitud()) {
-                menor = actual.clone();
+                menor = actual.clonar();
             }
         } else {
             NodoAdy ady = n.getPrimerAdy();
@@ -248,7 +248,7 @@ public class Grafo {
 
         if (n.getElem().equals(dest)) {
             if (mayor.esVacia() || actual.longitud() > mayor.longitud()) {
-                mayor = actual.clone();
+                mayor = actual.clonar();
             }
         } else {
             NodoAdy ady = n.getPrimerAdy();
@@ -487,7 +487,7 @@ public class Grafo {
 
             if (n.getElem().equals(dest)) {
                 // guardo el camino exitoso en la lista
-                caminosExitosos.insertar(caminoActual.clone(), caminosExitosos.longitud() + 1);
+                caminosExitosos.insertar(caminoActual.clonar(), caminosExitosos.longitud() + 1);
             } else {
                 // paso recursivo
                 NodoAdy ady = n.getPrimerAdy();
@@ -504,12 +504,12 @@ public class Grafo {
                     ady = ady.getSigAdyacente();
                 }
             }
-
+            // backtracking
+            caminoActual.eliminar(caminoActual.longitud());
         }
-        // backtracking
-        caminoActual.eliminar(caminoActual.longitud());
+        
     }
-
+    @Override
     public String toString() {
         String str = "";
         NodoVert aux = this.inicio;
