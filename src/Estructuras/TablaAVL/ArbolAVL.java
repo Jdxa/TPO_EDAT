@@ -290,20 +290,7 @@ public class ArbolAVL {
         return resultado;
     }
 
-    /*private Lista buscarDesafio(ArbolAVL desafiosHab, Lista clavesDesafio) {
-        Lista listaDesafiosCompletados = new Lista();
-        while (!clavesDesafio.esVacia()) {
-            int claveDesafio = (int) clavesDesafio.recuperar(1); // recupero la clave
-            Desafio des = (Desafio) desafiosHab.recuperar(claveDesafio); //busco un desafio con esa clave en el AVL
-            if (des != null) {
-                listaDesafiosCompletados.insertar(des, 1);
-            } else {
-                listaDesafiosCompletados.insertar("no existe", 1); //esto es para testeo
-            }
-            clavesDesafio.eliminar(1); // borro la clave q ya use
-        }
-        return listaDesafiosCompletados;
-    }
+    /*
     */
     public Lista listarMayores(Comparable min) {
         Lista listaResultado = new Lista();

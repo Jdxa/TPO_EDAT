@@ -439,7 +439,7 @@ public static void gestionConsultaDesafios(Scanner sc,Logica scapeRoom){
         case 2:
             System.out.println("Seleccionaste: mostrar desafios resueltos");
             System.out.println("Ingrese el nombre del equipo: ");
-            sc.nextLine();
+            // sc.nextLine();
             nombre = sc.nextLine();
             System.out.println(scapeRoom.mostrarDesafiosResueltos(nombre));
         break;

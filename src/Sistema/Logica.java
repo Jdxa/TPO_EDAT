@@ -1,12 +1,12 @@
 package Sistema;
 
-import java.util.HashMap;
-import java.util.Scanner;
-
 import Estructuras.GrafoEtiquetado.Grafo;
 import Estructuras.Lineales.Lista;
 import Estructuras.TablaAVL.ArbolAVL;
 import Modelo.*;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Scanner;
 
 public class Logica {
 
@@ -268,12 +268,12 @@ public class Logica {
         if(this.equipos.containsKey(nombre)){
             Equipo equipo= this.equipos.get(nombre);
             equipo.getDesafiosCompletados();
-            res = "El equipo " + nombre + " resolvio estos desafios: \n" + "";//listarDesafiosAUX(equipo);
+            res = "El equipo " + nombre + " resolvio estos desafios: \n" +listarDesafiosAUX(equipo);
         }
         return res;
     }
-    /* 
-    public String listarDesafiosAUX(Equipo eq) {
+
+    private String listarDesafiosAUX(Equipo eq) {
         String str = "{";
         if (eq != null) {
 
@@ -284,7 +284,7 @@ public class Logica {
                 Lista desafios = par.getValue();
                 //clono la lista para usarla como recorrido
                 Lista aux = desafios.clone();
-                Habitacion hab = (Habitacion) recuperar(codigoHabitacion); // busco la habitacion
+                Habitacion hab = (Habitacion) habitaciones.recuperar(codigoHabitacion); // busco la habitacion
                 ArbolAVL desafiosHab = hab.getDesafios(); // agarro el arbol de desafios de esa habitacion
                 Lista desafiosComp = buscarDesafio(desafiosHab, aux);
                 //concateno cada string resultante de buscarDesafio
@@ -294,7 +294,22 @@ public class Logica {
         str = str + "}";
         return str;
     }
-*/
+
+    private Lista buscarDesafio(ArbolAVL desafiosHab, Lista clavesDesafio) {
+        Lista listaDesafiosCompletados = new Lista();
+        while (!clavesDesafio.esVacia()) {
+            int claveDesafio = (int) clavesDesafio.recuperar(1); // recupero la clave
+            Desafio des = (Desafio) desafiosHab.recuperar(claveDesafio); //busco un desafio con esa clave en el AVL
+            if (des != null) {
+                listaDesafiosCompletados.insertar(des, 1);
+            } else {
+                listaDesafiosCompletados.insertar("no existe", 1); //esto es para testeo
+            }
+            clavesDesafio.eliminar(1); // borro la clave q ya use
+        }
+        return listaDesafiosCompletados;
+    }
+
     
     public String verificarDesafioResuelto(String nombre,int codigo, int puntaje) {
         String res="el equipo no existe";
@@ -315,12 +330,13 @@ public class Logica {
     }
     
     public String mostrarDesafiosPorTipo(int codigo,int a, int b,String x){
+        //me devuelve los desafios de la habitacion con codigo, que esten entre a y b y sean del tipo x
         String res = "no existe la habitacion";
         if (this.habitaciones.pertenece(codigo)) {
             Habitacion unaHab= (Habitacion) this.habitaciones.recuperar(codigo);
-            Lista l=unaHab.getDesafios().listarRango(a, b);
+            Lista l= unaHab.getDesafios().listarRango(a, b);
             if (!l.esVacia()) {
-                res+= "Los desafios del tipo "+x+ " en la habitacion "+codigo +" son los siguientes: \n";
+                res = "Los desafios del tipo "+x+ " en la habitacion "+codigo +" son los siguientes: \n";
                 res += filtrarPorTipo(l, x);
             }else{
                 res += "No hay desafios con esos filtros";
@@ -358,7 +374,7 @@ public class Logica {
             Equipo equipo=equipos.get(nombre);
             codActual=equipo.getCodigoHabitacionActual();
             if(this.planoCasa.existeArco(codActual,codigo)){
-                puntajeNecesario=this.planoCasa.caminoMenorCosto(codActual, codigo, null);
+                puntajeNecesario=this.planoCasa.caminoMenorCosto(codActual, codigo, new Lista()); //agrego una lista y no null asi no me rompe el metodo, aunque solo queremos el return
                 //obtengo el puntaje del camino mas corto que seria la etiqueta entre adyacentes
                 // y luego le resto el puntaje actual del equipo para obtener el valor que deberia
                 //buscar que tengas los desafios como minimo para que solo resolviendo uno puedan
