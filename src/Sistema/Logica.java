@@ -231,7 +231,15 @@ public class Logica {
         return str;
     }
     public String mostrarContiguas(int codigo){
-        return this.planoCasa.listarAdyacentesString(codigo);
+        Lista listaContiguas = this.planoCasa.listarAdyacentes(codigo);
+        String str;
+        if (!listaContiguas.esVacia()){
+            
+            str = "Habitaciones contiguas: "+listaContiguas.toString();
+        }else{
+            str = "No tiene contiguas";
+        }
+        return str;
     }
 
     public String minimoPuntaje(int hab1, int hab2){
