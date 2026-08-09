@@ -98,7 +98,7 @@ public class Lista {
 
     ////////////////////////////////////////////////////////////
     public Object recuperar(int pos) {
-        Object res = new Object(); // copia a retornar
+        Object res; // copia a retornar
         Nodo actual = this.cabecera; // nodo de recorrido
         for (int i = 1; i < pos; i++) {
             actual = actual.getEnlace(); // itero hasta pos asi actual es su enlace que es pos
