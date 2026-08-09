@@ -140,11 +140,19 @@ public class GestorArchivo {
     
     public static void registrarLog(String mensaje){
         try{
-            PrintWriter salida = new PrintWriter(new FileOutputStream("archivoTxt\\\\log.txt"));
+            PrintWriter salida = new PrintWriter(new FileOutputStream("archivoTxt/log.txt"));
             salida.println(mensaje);
             salida.close();
         }catch(IOException e){
             System.out.println("Ocurrio un error al escribir el log"+ e.getMessage());
+        }
+    }
+    public static void limpiarLog(){
+        try(PrintWriter writer = new PrintWriter(new FileOutputStream("archivoTxt/log.txt",false));
+            ){
+            
+        }catch(IOException e){
+            System.out.println("Error al limpiar el log: "+e.getMessage());
         }
     }
 

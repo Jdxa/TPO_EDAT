@@ -303,7 +303,7 @@ public class Logica {
     }
 
     private String listarDesafiosAUX(Equipo eq) {
-        String str = "{";
+        String str = "";
         if (eq != null) {
 
             HashMap<Integer, Lista> desafiosCompletados = eq.getDesafiosCompletados(); // mapa de desafios
@@ -317,10 +317,9 @@ public class Logica {
                 ArbolAVL desafiosHab = hab.getDesafios(); // agarro el arbol de desafios de esa habitacion
                 Lista desafiosComp = buscarDesafio(desafiosHab, aux);
                 //concateno cada string resultante de buscarDesafio
-                str = str + " Desafio: " + desafiosComp.toString();
+                str = str + " Desafio: " + desafiosComp.toString()+ "\n";
             }
         }
-        str = str + "}";
         return str;
     }
 
