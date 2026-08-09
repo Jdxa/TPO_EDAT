@@ -137,10 +137,7 @@ public class GestorArchivo {
         unPuntaje=Integer.parseInt(partes[3]);
         unGrafo.insertarArco(unInicio, unDestino, unPuntaje);
     }
-    public static void hola() {
-        System.out.println("hola");
-    }
-
+    
     public static void registrarLog(String mensaje){
         try{
             PrintWriter salida = new PrintWriter(new FileOutputStream("archivoTxt\\\\log.txt"));
