@@ -1,7 +1,5 @@
 package Estructuras.Lineales;
 
-// import static org.junit.Assert.*;
-
 public class Lista {
     private Nodo cabecera;
 

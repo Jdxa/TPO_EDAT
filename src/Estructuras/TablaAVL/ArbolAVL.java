@@ -2,7 +2,6 @@ package Estructuras.TablaAVL;
 
 import Estructuras.Lineales.*;
 
-
 public class ArbolAVL {
     private NodoAVL raiz;
 
