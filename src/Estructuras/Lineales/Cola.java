@@ -1,11 +1,7 @@
 package Estructuras.Lineales;
 
 public class Cola {
-        /************* Autores ***********
-    Joaquin Aguilera, Legajo FAI-4550
-    Lucas Peroni, Legajo FAI-5499
 
-*/
     private Nodo frente;
     private Nodo fin;
     
