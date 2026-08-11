@@ -1,10 +1,6 @@
 package Estructuras.Lineales;
 public class Pila {
-        /************* Autores ***********
-    Joaquin Aguilera, Legajo FAI-4550
-    Lucas Peroni, Legajo FAI-5499
-   
-*/
+
     private Nodo tope;
 
     public Pila(){
