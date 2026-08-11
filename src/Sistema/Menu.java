@@ -687,7 +687,8 @@ public static void gestionConsultaDesafios(Scanner sc,Logica scapeRoom){
         System.out.println("1. Modificar nombre de la habitación");
         System.out.println("2. Modificar planta de la habitación");
         System.out.println("3. Modificar medida de la habitación");
-        System.out.println("4. Salir");
+        System.out.println("4. Agregar camino entre habitaciones");
+        System.out.println("5. Salir");
         System.out.print("Introduce un numero para elegir una modificación: ");
     }
 
