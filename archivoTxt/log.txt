@@ -1,1 +1,3 @@
-Se creo un desafio con codigo 15 en la habitacion 12
+Se elimino la habitacion 25
+Se agrego una habitacion con el nombre: 2
+Se elimino la habitacion 25
