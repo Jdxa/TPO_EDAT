@@ -1,3 +1,0 @@
-Se elimino la habitacion 25
-Se agrego una habitacion con el nombre: 2
-Se elimino la habitacion 25

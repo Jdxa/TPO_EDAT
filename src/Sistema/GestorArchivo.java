@@ -8,6 +8,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class GestorArchivo {
@@ -145,6 +147,17 @@ public class GestorArchivo {
         }catch(IOException e){
             System.out.println("Ocurrio un error al escribir el log"+ e.getMessage());
         }
+    }
+
+    public static void iniciarLog(){
+         try (PrintWriter salida = new PrintWriter(new FileOutputStream("archivoTxt/log.txt"))){
+             LocalDateTime ahora = LocalDateTime.now();
+             DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy  HH:mm:ss");
+             String fechaHora = ahora.format(formato);
+             salida.println("========== INICIO DEL PROGRAMA: "+fechaHora+" ==========");
+         } catch (Exception e) {
+            System.out.println("Ocurrio un error al escribir el log"+e.getMessage());
+         }
     }
 
 }

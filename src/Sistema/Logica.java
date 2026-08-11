@@ -506,4 +506,7 @@ public class Logica {
     public String toStringHashMap(){
         return this.equipos.toString();
     }
+    public static void iniciarLog(){
+        GestorArchivo.iniciarLog();
+    }
 }
