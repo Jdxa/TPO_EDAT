@@ -7,12 +7,12 @@ H;12;Escalera;0;10;false
 H;13;Escritorio;1;15;false
 H;7;Comedor;0;20;false
 H;6;Cocina;0;15;false
-H;8;Depósito;-1;15;false
+H;8;Deposito;-1;15;false
 H;9;Despensa;0;10;false
 H;1;Altillo;2;20;true
 H;3;Biblioteca;1;25;true
 H;4;Bodega;-1;20;false
-H;11;Dormitorio de huéspedes;1;20;false
+H;11;Dormitorio de huespedes;1;20;false
 H;14;Gimnasio;0;30;false
 H;16;Lavadero;0;12;false
 H;17;Natatorio;0;50;true
@@ -20,33 +20,33 @@ H;18;Pasillo;0;10;false
 H;19;Quincho;0;35;false
 H;21;Sala de Estar;0;25;false
 H;22;Sala de Juegos;1;30;false
-H;23;Sala de Música;1;20;true
-H;24;Sótano;-1;40;false
-D;20;10;Acertijo del Cuadro;Lógico
+H;23;Sala de Musica;1;20;true
+H;24;Sotano;-1;40;false
+D;20;10;Acertijo del Cuadro;Logico
 D;30;10;Acertijo de robot;Busqueda
-D;30;5;Llave del Auto;Búsqueda
+D;30;5;Llave del Auto;Busqueda
 D;40;2;Fuga de Agua;Destreza
-D;50;15;Planta Carnívora;Ingenio
-D;30;20;Clave de Entrada;Matemático
+D;50;15;Planta Carnivora;Ingenio
+D;30;20;Clave de Entrada;Matematico
 D;25;12;Peldaño Roto;Destreza
-D;35;13;Código del Diario;Letras
-D;40;7;Cena Envenenada;Lógico
-D;20;6;Receta Secreta;Búsqueda
+D;35;13;Codigo del Diario;Letras
+D;40;7;Cena Envenenada;Logico
+D;20;6;Receta Secreta;Busqueda
 D;45;8;Cajas Pesadas;Destreza
-D;30;9;Ingrediente Faltante;Búsqueda
+D;30;9;Ingrediente Faltante;Busqueda
 D;50;1;Fantasma del Tejado;Ingenio
 D;40;3;Libro Antiguo;Letras
-D;35;4;Vino Correcto;Lógico
-D;25;11;Cama Deshecha;Búsqueda
-D;50;14;Pesas Equilibradas;Matemático
+D;35;4;Vino Correcto;Logico
+D;25;11;Cama Deshecha;Busqueda
+D;50;14;Pesas Equilibradas;Matematico
 D;20;16;Mancha Rebelde;Ingenio
 D;60;17;Buceo Profundo;Destreza
-D;15;18;Luz Parpadeante;Lógico
+D;15;18;Luz Parpadeante;Logico
 D;40;19;Fuego Perfecto;Ingenio
-D;30;21;Control Remoto;Búsqueda
-D;50;22;Rompecabezas;Matemático
+D;30;21;Control Remoto;Busqueda
+D;50;22;Rompecabezas;Matematico
 D;40;23;Nota Musical;Letras
-D;60;24;Caja Fuerte;Lógico
+D;60;24;Caja Fuerte;Logico
 E;Papus;0;70;1;50;(10,20);(1,50)
 E;Los Valientes;400;100;10;20;(10,20);(5,30);(15,50)
 E;Los Locos Adams;450;120;2;40;(2,40);(7,40);(6,20);(1,20)
