@@ -140,7 +140,7 @@ public class GestorArchivo {
     
     public static void registrarLog(String mensaje){
         try{
-            PrintWriter salida = new PrintWriter(new FileOutputStream("archivoTxt\\\\log.txt"));
+            PrintWriter salida = new PrintWriter(new FileOutputStream("archivoTxt/log.txt"));
             salida.println(mensaje);
             salida.close();
         }catch(IOException e){
