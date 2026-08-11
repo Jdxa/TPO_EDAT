@@ -1,8 +1,8 @@
 H;10;Dormitorio principal;1;30;false
-H;5;Cochera;0;25;true
+H;5;Cochera;0;25;false
 H;2;Baño;0;10;false
 H;15;Invernadero;0;40;true
-H;20;Recibidor;0;15;true
+H;20;Recibidor;0;15;false
 H;12;Escalera;0;10;false
 H;13;Escritorio;1;15;false
 H;7;Comedor;0;20;false
@@ -10,17 +10,17 @@ H;6;Cocina;0;15;false
 H;8;Depósito;-1;15;false
 H;9;Despensa;0;10;false
 H;1;Altillo;2;20;true
-H;3;Biblioteca;1;25;false
+H;3;Biblioteca;1;25;true
 H;4;Bodega;-1;20;false
 H;11;Dormitorio de huéspedes;1;20;false
 H;14;Gimnasio;0;30;false
 H;16;Lavadero;0;12;false
 H;17;Natatorio;0;50;true
 H;18;Pasillo;0;10;false
-H;19;Quincho;0;35;true
+H;19;Quincho;0;35;false
 H;21;Sala de Estar;0;25;false
 H;22;Sala de Juegos;1;30;false
-H;23;Sala de Música;1;20;false
+H;23;Sala de Música;1;20;true
 H;24;Sótano;-1;40;false
 D;20;10;Acertijo del Cuadro;Lógico
 D;30;10;Acertijo de robot;Busqueda
@@ -49,15 +49,15 @@ D;40;23;Nota Musical;Letras
 D;60;24;Caja Fuerte;Lógico
 E;Papus;0;70;1;50;(10,20);(1,50)
 E;Los Valientes;400;100;10;20;(10,20);(5,30);(15,50)
-E;Los Locos Adams;450;150;2;40;(2,40);(7,40);(6,20);(1,50)
+E;Los Locos Adams;450;120;2;40;(2,40);(7,40);(6,20);(1,20)
 E;Cazafantasmas;300;60;13;35;(12,25);(13,35)
-E;Misterio Inc;500;215;17;60;(20,30);(19,40);(18,15);(16,20);(14,50);(17,60)
-E;Sherlocks;400;160;3;40;(21,30);(22,50);(23,40);(3,40)
-E;Exploradores;350;140;24;60;(4,35);(8,45);(24,60)
-E;Escapistas;420;95;1;50;(1,50);(11,25);(10,20)
-E;Invencibles;600;160;14;50;(14,50);(17,60);(15,50)
-E;Detectives;380;90;6;20;(20,30);(7,40);(6,20)
-E;Geniuses;450;125;22;50;(13,35);(3,40);(22,50)
+E;Misterio Inc;500;200;17;60;(20,30);(19,40);(18,15);(16,20);(14,50);(17,45)
+E;Sherlocks;400;140;3;40;(21,30);(22,50);(23,40);(3,20)
+E;Exploradores;350;90;24;60;(4,35);(8,45);(24,10)
+E;Escapistas;420;110;1;50;(1,50);(11,25);(10,35)
+E;Invencibles;600;150;14;50;(14,50);(17,60);(15,40)
+E;Detectives;380;80;6;20;(20,30);(7,30);(6,20)
+E;Geniuses;450;130;22;50;(13,35);(3,40);(22,55)
 P;20;18;5
 P;18;20;5
 P;20;21;10

@@ -39,7 +39,7 @@ public class Logica {
         if (!this.habitaciones.pertenece(codigo)) {
         linea = "H;" + codigo+";" + nombre+";" + planta+ ";" + medida + ";false";
         GestorArchivo.cargarDatoLinea(linea, this.habitaciones,this.planoCasa, null);
-        GestorArchivo.registrarLog("Se agrego una habitacion con el nombre: "+nombre);
+        GestorArchivo.registrarLog("Se agrego la habitacion "+codigo+" con el nombre: "+nombre);
         res="Habitación creada exitosamente.";
         }
         return res;
@@ -504,5 +504,8 @@ public class Logica {
     }
     public String toStringHashMap(){
         return this.equipos.toString();
+    }
+    public static void iniciarLog(){
+        GestorArchivo.iniciarLog();
     }
 }

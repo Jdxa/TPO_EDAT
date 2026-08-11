@@ -8,7 +8,7 @@ public class Menu {
         Logica EscapeRoom=new Logica();
         Scanner sc = new Scanner(System.in);
         int numMenu;
-
+        Logica.iniciarLog();
         do {
             mostrarMenu();
             numMenu = sc.nextInt();
